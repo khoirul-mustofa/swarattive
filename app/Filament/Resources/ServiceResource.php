@@ -46,6 +46,8 @@ class ServiceResource extends Resource
                             ->maxLength(255),
                         \Filament\Forms\Components\Select::make('category_id')
                             ->relationship('category', 'name')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->required(),
                         \Filament\Forms\Components\TextInput::make('base_price')
                             ->numeric()
@@ -92,11 +94,11 @@ class ServiceResource extends Resource
                 \Filament\Tables\Filters\TernaryFilter::make('is_active'),
             ])
             ->actions([
-                \Filament\Tables\Actions\EditAction::make(),
-                \Filament\Tables\Actions\DeleteAction::make(),
+                \Filament\Actions\EditAction::make(),
+                \Filament\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                \Filament\Tables\Actions\DeleteBulkAction::make(),
+                \Filament\Actions\DeleteBulkAction::make(),
             ]);
     }
 

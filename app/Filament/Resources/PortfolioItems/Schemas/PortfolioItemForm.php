@@ -10,7 +10,7 @@ use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Set;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
@@ -43,6 +43,8 @@ class PortfolioItemForm
                             ->unique(ignoreRecord: true),
 
                         Select::make('category_id')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->label('Kategori')
                             ->helperText('Pilih jenis sesi foto, misal: Wedding, Prewedding, Maternity, dll.')
                             ->options(Category::query()->where('is_active', true)->pluck('name', 'id'))
@@ -58,6 +60,7 @@ class PortfolioItemForm
                         DatePicker::make('shoot_date')
                             ->label('Tanggal Pemotretan')
                             ->helperText('Tanggal sesi foto dilaksanakan.')
+                            ->native(false)
                             ->required()
                             ->columnSpan(1),
 

@@ -47,8 +47,11 @@ class ClientResource extends Resource
                             ->tel()
                             ->required()
                             ->maxLength(255),
-                        \Filament\Forms\Components\DatePicker::make('birth_date'),
+                        \Filament\Forms\Components\DatePicker::make('birth_date')
+                            ->native(false),
                         \Filament\Forms\Components\Select::make('gender')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->options([
                                 'male' => 'Male',
                                 'female' => 'Female',
@@ -84,11 +87,11 @@ class ClientResource extends Resource
                 //
             ])
             ->actions([
-                \Filament\Tables\Actions\EditAction::make(),
-                \Filament\Tables\Actions\DeleteAction::make(),
+                \Filament\Actions\EditAction::make(),
+                \Filament\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                \Filament\Tables\Actions\DeleteBulkAction::make(),
+                \Filament\Actions\DeleteBulkAction::make(),
             ]);
     }
 

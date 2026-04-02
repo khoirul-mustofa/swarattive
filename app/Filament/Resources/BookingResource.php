@@ -51,6 +51,8 @@ class BookingResource extends Resource
                     ->schema([
                         Select::make('client_id')
                             ->relationship('client', 'name')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->required()
                             ->searchable()
                             ->preload()

@@ -41,16 +41,23 @@ class PaymentResource extends Resource
                             ->searchable()
                             ->preload(),
                         \Filament\Forms\Components\Select::make('payment_method_id')
-                            ->relationship('paymentMethod', 'name')
+                        ->relationship('paymentMethod', 'name')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->required(),
                         \Filament\Forms\Components\TextInput::make('amount')
                             ->numeric()
                             ->required()
                             ->prefix('Rp'),
                         \Filament\Forms\Components\DateTimePicker::make('payment_date')
-                            ->required()
-                            ->default(now()),
+    ->native(false)
+    ->displayFormat('d M Y H:i')
+    ->required()
+    ->locale("id")
+    ->default(now()),
                         \Filament\Forms\Components\Select::make('status')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->options([
                                 'pending' => 'Pending',
                                 'completed' => 'Completed',
@@ -107,11 +114,11 @@ class PaymentResource extends Resource
                     ]),
             ])
             ->actions([
-                \Filament\Tables\Actions\EditAction::make(),
-                \Filament\Tables\Actions\DeleteAction::make(),
+                \Filament\Actions\EditAction::make(),
+                \Filament\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                \Filament\Tables\Actions\DeleteBulkAction::make(),
+                \Filament\Actions\DeleteBulkAction::make(),
             ]);
     }
 
