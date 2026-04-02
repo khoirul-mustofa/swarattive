@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SiteSetting extends Model
 {
@@ -29,6 +28,7 @@ class SiteSetting extends Model
     public static function getValue($key, $default = null)
     {
         $setting = static::where('key', $key)->first();
+
         return $setting ? $setting->value : $default;
     }
 

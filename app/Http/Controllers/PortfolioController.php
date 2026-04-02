@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\PortfolioItem;
+use App\Models\SiteSetting;
 
 class PortfolioController extends Controller
 {
@@ -15,7 +16,14 @@ class PortfolioController extends Controller
             ->orderBy('shoot_date', 'desc')
             ->paginate(12);
 
-        return view('portfolio.index', compact('categories', 'portfolioItems'));
+        $heroSettings = [
+            'image' => SiteSetting::getValue('portfolio_hero_image'),
+            'eyebrow' => SiteSetting::getValue('portfolio_hero_eyebrow', 'Our Work'),
+            'title' => SiteSetting::getValue('portfolio_hero_title', 'Portfolio'),
+            'subtitle' => SiteSetting::getValue('portfolio_hero_subtitle', 'Setiap karya adalah cerita — disimpan dalam satu bingkai.'),
+        ];
+
+        return view('portfolio.index', compact('categories', 'portfolioItems', 'heroSettings'));
     }
 
     public function show($slug)

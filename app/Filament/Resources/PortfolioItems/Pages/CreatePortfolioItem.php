@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Filament\Resources\PortfolioItems\Pages;
+
+use App\Filament\Resources\PortfolioItems\PortfolioItemResource;
+use Filament\Resources\Pages\CreateRecord;
+
+class CreatePortfolioItem extends CreateRecord
+{
+    protected static string $resource = PortfolioItemResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+}

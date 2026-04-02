@@ -1,13 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
-use App\Http\Controllers\PortfolioController;
-use App\Http\Controllers\BookingController;
-use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\ServiceController;
+use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::get('/', function () {
@@ -35,16 +34,6 @@ Route::post('/check-booking', [BookingController::class, 'checkStatus'])->name('
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-Route::middleware(['auth'])->group(function () {
-    Route::redirect('settings', 'settings/profile');
-
-    Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
-    Volt::route('settings/password', 'settings.password')->name('settings.password');
-    Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
-});
-
-require __DIR__.'/auth.php';
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
