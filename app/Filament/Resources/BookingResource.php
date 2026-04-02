@@ -16,9 +16,9 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -71,6 +71,8 @@ class BookingResource extends Resource
                         Select::make('service_id')
                             ->relationship('service', 'name')
                             ->required()
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->reactive()
                             ->afterStateUpdated(fn (callable $set) => $set('package_id', null)),
                         Select::make('package_id')
@@ -79,6 +81,8 @@ class BookingResource extends Resource
                             ->preload(),
                         Select::make('team_member_id')
                             ->relationship('teamMember', 'name')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->label('Photographer'),
                         TextInput::make('total_price')
                             ->numeric()
@@ -89,10 +93,14 @@ class BookingResource extends Resource
                     ->columns(2)
                     ->schema([
                         DatePicker::make('booking_date')
+                            ->native(false)
                             ->required(),
                         TimePicker::make('booking_time')
+                            ->native(false)
                             ->required(),
                         Select::make('location_type')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->options([
                                 'studio' => 'Studio',
                                 'outdoor' => 'Outdoor',
@@ -107,6 +115,8 @@ class BookingResource extends Resource
                     ->columns(2)
                     ->schema([
                         Select::make('status')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->options([
                                 'pending' => 'Pending',
                                 'confirmed' => 'Confirmed',
@@ -139,6 +149,8 @@ class BookingResource extends Resource
                     ->date()
                     ->sortable(),
                 SelectColumn::make('status')
+                    ->native(false)
+                    ->disablePlaceholderSelection()
                     ->options([
                         'pending' => 'Pending',
                         'confirmed' => 'Confirmed',
