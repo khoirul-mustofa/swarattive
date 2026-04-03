@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Service;
 
 use App\Filament\Resources\Service\Pages\CreateService;
 use App\Filament\Resources\Service\Pages\EditService;

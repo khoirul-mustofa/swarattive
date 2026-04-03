@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Payment;
 
 use App\Filament\Resources\Payment\Pages\CreatePayment;
 use App\Filament\Resources\Payment\Pages\EditPayment;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Client;
 
 use App\Filament\Resources\Client\Pages\CreateClient;
 use App\Filament\Resources\Client\Pages\EditClient;

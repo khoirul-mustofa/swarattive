@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\TeamMember;
 
-use App\Filament\Resources\Category\Pages\CreateCategory;
-use App\Filament\Resources\Category\Pages\EditCategory;
-use App\Filament\Resources\Category\Pages\ListCategories;
-use App\Models\Category;
+use App\Filament\Resources\TeamMember\Pages\CreateTeamMember;
+use App\Filament\Resources\TeamMember\Pages\EditTeamMember;
+use App\Filament\Resources\TeamMember\Pages\ListTeamMembers;
+use App\Models\TeamMember;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class CategoryResource extends Resource
+class TeamMemberResource extends Resource
 {
-    protected static ?string $model = Category::class;
+    protected static ?string $model = TeamMember::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
-    protected static ?string $navigationLabel = 'Categories';
+    protected static ?string $navigationLabel = 'Team Members';
 
-    protected static ?string $modelLabel = 'Category';
+    protected static ?string $modelLabel = 'Team Member';
 
-    protected static ?string $pluralModelLabel = 'Categories';
+    protected static ?string $pluralModelLabel = 'Team Members';
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 7;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -32,22 +32,25 @@ class CategoryResource extends Resource
     {
         return $schema
             ->components([
-                \Filament\Schemas\Components\Section::make('Category Detail')
+                \Filament\Schemas\Components\Section::make('Member Detail')
                     ->columns(2)
                     ->schema([
                         \Filament\Forms\Components\TextInput::make('name')
                             ->required()
-                            ->maxLength(255)
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', str($state)->slug())),
-                        \Filament\Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->unique(ignoreRecord: true)
                             ->maxLength(255),
+                        \Filament\Forms\Components\TextInput::make('role')
+                            ->required()
+                            ->maxLength(255),
+                        \Filament\Forms\Components\FileUpload::make('image_url')
+                            ->image()
+                            ->directory('team')
+                            ->label('Profile Picture'),
                         \Filament\Forms\Components\TextInput::make('sort_order')
                             ->numeric()
                             ->default(0),
-                        \Filament\Forms\Components\Textarea::make('description')
+                        \Filament\Forms\Components\KeyValue::make('social_links')
+                            ->columnSpanFull(),
+                        \Filament\Forms\Components\Textarea::make('bio')
                             ->columnSpanFull(),
                     ]),
             ]);
@@ -57,13 +60,14 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
+                \Filament\Tables\Columns\ImageColumn::make('image_url')
+                    ->circular()
+                    ->label('Photo'),
                 \Filament\Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                \Filament\Tables\Columns\TextColumn::make('slug')
-                    ->sortable(),
-                \Filament\Tables\Columns\TextColumn::make('services_count')
-                    ->counts('services')
+                \Filament\Tables\Columns\TextColumn::make('role')
+                    ->searchable()
                     ->sortable(),
                 \Filament\Tables\Columns\TextColumn::make('sort_order')
                     ->sortable(),
@@ -85,9 +89,9 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListCategories::route('/'),
-            'create' => CreateCategory::route('/create'),
-            'edit' => EditCategory::route('/{record}/edit'),
+            'index' => ListTeamMembers::route('/'),
+            'create' => CreateTeamMember::route('/create'),
+            'edit' => EditTeamMember::route('/{record}/edit'),
         ];
     }
 }

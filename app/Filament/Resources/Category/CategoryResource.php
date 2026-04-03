@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Category;
 
-use App\Filament\Resources\TeamMember\Pages\CreateTeamMember;
-use App\Filament\Resources\TeamMember\Pages\EditTeamMember;
-use App\Filament\Resources\TeamMember\Pages\ListTeamMembers;
-use App\Models\TeamMember;
+use App\Filament\Resources\Category\Pages\CreateCategory;
+use App\Filament\Resources\Category\Pages\EditCategory;
+use App\Filament\Resources\Category\Pages\ListCategories;
+use App\Models\Category;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
-class TeamMemberResource extends Resource
+class CategoryResource extends Resource
 {
-    protected static ?string $model = TeamMember::class;
+    protected static ?string $model = Category::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
 
-    protected static ?string $navigationLabel = 'Team Members';
+    protected static ?string $navigationLabel = 'Categories';
 
-    protected static ?string $modelLabel = 'Team Member';
+    protected static ?string $modelLabel = 'Category';
 
-    protected static ?string $pluralModelLabel = 'Team Members';
+    protected static ?string $pluralModelLabel = 'Categories';
 
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -32,25 +32,22 @@ class TeamMemberResource extends Resource
     {
         return $schema
             ->components([
-                \Filament\Schemas\Components\Section::make('Member Detail')
+                \Filament\Schemas\Components\Section::make('Category Detail')
                     ->columns(2)
                     ->schema([
                         \Filament\Forms\Components\TextInput::make('name')
                             ->required()
-                            ->maxLength(255),
-                        \Filament\Forms\Components\TextInput::make('role')
+                            ->maxLength(255)
+                            ->live(onBlur: true)
+                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', str($state)->slug())),
+                        \Filament\Forms\Components\TextInput::make('slug')
                             ->required()
+                            ->unique(ignoreRecord: true)
                             ->maxLength(255),
-                        \Filament\Forms\Components\FileUpload::make('image_url')
-                            ->image()
-                            ->directory('team')
-                            ->label('Profile Picture'),
                         \Filament\Forms\Components\TextInput::make('sort_order')
                             ->numeric()
                             ->default(0),
-                        \Filament\Forms\Components\KeyValue::make('social_links')
-                            ->columnSpanFull(),
-                        \Filament\Forms\Components\Textarea::make('bio')
+                        \Filament\Forms\Components\Textarea::make('description')
                             ->columnSpanFull(),
                     ]),
             ]);
@@ -60,14 +57,13 @@ class TeamMemberResource extends Resource
     {
         return $table
             ->columns([
-                \Filament\Tables\Columns\ImageColumn::make('image_url')
-                    ->circular()
-                    ->label('Photo'),
                 \Filament\Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                \Filament\Tables\Columns\TextColumn::make('role')
-                    ->searchable()
+                \Filament\Tables\Columns\TextColumn::make('slug')
+                    ->sortable(),
+                \Filament\Tables\Columns\TextColumn::make('services_count')
+                    ->counts('services')
                     ->sortable(),
                 \Filament\Tables\Columns\TextColumn::make('sort_order')
                     ->sortable(),
@@ -89,9 +85,9 @@ class TeamMemberResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListTeamMembers::route('/'),
-            'create' => CreateTeamMember::route('/create'),
-            'edit' => EditTeamMember::route('/{record}/edit'),
+            'index' => ListCategories::route('/'),
+            'create' => CreateCategory::route('/create'),
+            'edit' => EditCategory::route('/{record}/edit'),
         ];
     }
 }

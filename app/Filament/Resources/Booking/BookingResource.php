@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\Booking;
 
 use App\Filament\Resources\Booking\Pages\CreateBooking;
 use App\Filament\Resources\Booking\Pages\EditBooking;

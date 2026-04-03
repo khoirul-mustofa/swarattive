@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\ServicePackage;
 
 use App\Filament\Resources\ServicePackage\Pages\CreateServicePackage;
 use App\Filament\Resources\ServicePackage\Pages\EditServicePackage;
@@ -37,6 +37,8 @@ class ServicePackageResource extends Resource
                     ->schema([
                         \Filament\Forms\Components\Select::make('service_id')
                             ->relationship('service', 'name')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
                             ->required(),
                         \Filament\Forms\Components\TextInput::make('name')
                             ->required()
@@ -76,11 +78,11 @@ class ServicePackageResource extends Resource
                     ->relationship('service', 'name'),
             ])
             ->actions([
-                \Filament\Tables\Actions\EditAction::make(),
-                \Filament\Tables\Actions\DeleteAction::make(),
+                \Filament\Actions\EditAction::make(),
+                \Filament\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                \Filament\Tables\Actions\DeleteBulkAction::make(),
+                \Filament\Actions\DeleteBulkAction::make(),
             ]);
     }
 
