@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Booking\Pages;
 
-use App\Filament\Resources\BookingResource;
+use App\Filament\Resources\Booking\BookingResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
