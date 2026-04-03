@@ -56,6 +56,12 @@ class ServiceResource extends Resource
                         \Filament\Forms\Components\TextInput::make('duration_minutes')
                             ->numeric()
                             ->label('Duration (Minutes)'),
+                        \Filament\Forms\Components\FileUpload::make('image_url')
+                            ->image()
+                            ->disk('public')
+                            ->directory('services')
+                            ->label('Service Image')
+                            ->columnSpanFull(),
                         \Filament\Forms\Components\TextInput::make('sort_order')
                             ->numeric()
                             ->default(0),
@@ -72,6 +78,10 @@ class ServiceResource extends Resource
     {
         return $table
             ->columns([
+                \Filament\Tables\Columns\ImageColumn::make('image_url')
+                    ->label('Thumbnail')
+                    ->disk('public')
+                    ->square(),
                 \Filament\Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),

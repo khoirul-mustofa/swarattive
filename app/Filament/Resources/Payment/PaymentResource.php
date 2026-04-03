@@ -68,6 +68,7 @@ class PaymentResource extends Resource
                             ->default('pending'),
                         \Filament\Forms\Components\FileUpload::make('proof_image')
                             ->image()
+                            ->disk('public')
                             ->directory('payments/proofs')
                             ->columnSpanFull(),
                         \Filament\Forms\Components\Textarea::make('notes')

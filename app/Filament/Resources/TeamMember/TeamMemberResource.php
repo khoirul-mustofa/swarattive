@@ -43,6 +43,7 @@ class TeamMemberResource extends Resource
                             ->maxLength(255),
                         \Filament\Forms\Components\FileUpload::make('image_url')
                             ->image()
+                            ->disk('public')
                             ->directory('team')
                             ->label('Profile Picture'),
                         \Filament\Forms\Components\TextInput::make('sort_order')
@@ -62,6 +63,7 @@ class TeamMemberResource extends Resource
             ->columns([
                 \Filament\Tables\Columns\ImageColumn::make('image_url')
                     ->circular()
+                    ->disk('public')
                     ->label('Photo'),
                 \Filament\Tables\Columns\TextColumn::make('name')
                     ->searchable()

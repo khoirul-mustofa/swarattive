@@ -187,6 +187,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        $this->call(AboutSeeder::class);
+
         $this->command->info('Database seeded successfully!');
     }
 }

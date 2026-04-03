@@ -91,7 +91,7 @@ class PortfolioSettings extends Page implements HasSchemas
             ->statePath('data');
     }
 
-    protected function getFormActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Action::make('save')
