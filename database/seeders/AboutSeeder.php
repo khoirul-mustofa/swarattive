@@ -2,12 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-
-use App\Models\About;
 use App\Enums\PageStatusEnum;
-use App\Enums\BtsStageEnum;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AboutSeeder extends Seeder
 {
@@ -16,34 +13,39 @@ class AboutSeeder extends Seeder
      */
     public function run(): void
     {
-        About::updateOrCreate(
-            ['id' => 1],
-            [
-                'status' => PageStatusEnum::PUBLISHED,
-                'page_banner_image_url' => null, // Provide default or leave null, user will upload
-                'story_title' => 'Our Story',
-                'story_content' => '<p>SWARATTIVE Photography lahir dari hasrat mendalam untuk mengabadikan keindahan dalam setiap momen kehidupan. Dimulai dari sebuah kamera sederhana dan mimpi besar, kami tumbuh menjadi studio fotografi yang dipercaya oleh ratusan pasangan dan brand.</p><p>Dengan pengalaman lebih dari 8 tahun di industri fotografi, kami memahami bahwa setiap klien memiliki cerita unik yang layak diabadikan dengan cara yang istimewa. Kami menggabungkan seni visual dengan teknologi terkini untuk menciptakan karya yang timeless.</p><p>Filosofi kami sederhana: setiap foto harus mampu membangkitkan emosi dan menceritakan kisah yang tak terlupakan.</p>',
-                'story_image_url' => null,
-                'bts_title' => 'Behind The Scenes',
-                'bts_subtitle' => 'Proses kreatif di balik setiap sesi foto kami.',
-                'bts_items' => [
-                    [
-                        'stage' => BtsStageEnum::PRE_PRODUCTION->value,
-                        'image_url' => null,
-                        'description' => 'Concept & Planning',
-                    ],
-                    [
-                        'stage' => BtsStageEnum::ON_LOCATION->value,
-                        'image_url' => null,
-                        'description' => 'Shooting Day',
-                    ],
-                    [
-                        'stage' => BtsStageEnum::POST_PRODUCTION->value,
-                        'image_url' => null,
-                        'description' => 'Editing & Delivery',
-                    ],
+        DB::table('abouts')->truncate();
+
+        DB::table('abouts')->insert([
+            'status' => PageStatusEnum::PUBLISHED->value,
+            'page_banner_image_url' => 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&q=80&w=1920',
+            'story_title' => 'Keaslian di Balik Lensa',
+            'story_content' => '
+                <p>Di Swarattive, kami percaya bahwa setiap detik memiliki frekuensi dan narasinya sendiri. Nama "Swarattive" berasal dari gabungan "Swara" (suara/jiwa) dan "Narrative" (cerita). Kami tidak hanya mengambil gambar; kami menangkap getaran emosi, kerling mata yang jujur, dan gelak tawa yang tak tertahankan.</p>
+                <p>Berawal dari obsesi untuk membekukan keindahan yang fana, kami kini berkembang menjadi kolektif kreatif yang mendedikasikan diri untuk merayakan perjalanan hidup setiap pasangan dan individu. Pendekatan kami adalah <i>artistic-documentary</i>—di mana kejujuran momen bertemu dengan estetika sinematik yang elegan.</p>
+                <p>Kami memahami bahwa kenyamanan adalah kunci dari hasil foto yang natural. Oleh karena itu, tim kami bekerja dengan pendekatan yang personal dan intim, memastikan setiap subjek merasa bebas untuk menjadi diri mereka sendiri di depan kamera.</p>
+            ',
+            'story_image_url' => 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?auto=format&fit=crop&q=80&w=1200',
+            'bts_title' => 'Di Balik Layar',
+            'bts_subtitle' => 'Proses kreatif kami dalam menciptakan keabadian.',
+            'bts_items' => json_encode([
+                [
+                    'title' => 'Perencanaan Konsep',
+                    'description' => 'Kami mendengarkan cerita Anda untuk menyusun konsep visual yang personal dan unik.',
+                    'image_url' => 'https://images.unsplash.com/photo-1493723843671-1d655e7d98f0?auto=format&fit=crop&q=80&w=600'
+                ],
+                [
+                    'title' => 'Sesi Dokumentasi',
+                    'description' => 'Menggunakan peralatan kelas atas dengan teknik pencahayaan yang dramatis namun natural.',
+                    'image_url' => 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=600'
+                ],
+                [
+                    'title' => 'Proses Kurasi & Edit',
+                    'description' => 'Setiap foto melalui proses pewarnaan tangan (hand-colored) untuk mencapai estetika emosional.',
+                    'image_url' => 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=600'
                 ]
-            ]
-        );
+            ]),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

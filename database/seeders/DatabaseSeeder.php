@@ -3,11 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,19 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create admin user
+        // Admin
         User::factory()->create([
-            'name' => 'Admin Swarattive',
+            'name' => 'Swarattive Admin',
             'email' => 'admin@swarattive.com',
             'password' => Hash::make('password'),
         ]);
 
-        // Seed categories
+        // Kategori
         $categories = [
-            ['name' => 'Wedding Photography', 'slug' => 'wedding-photography', 'description' => 'Professional wedding photography services', 'sort_order' => 1],
-            ['name' => 'Pre-Wedding', 'slug' => 'pre-wedding', 'description' => 'Pre-wedding photo sessions', 'sort_order' => 2],
-            ['name' => 'Portrait', 'slug' => 'portrait', 'description' => 'Professional portrait photography', 'sort_order' => 3],
-            ['name' => 'Commercial', 'slug' => 'commercial', 'description' => 'Commercial and product photography', 'sort_order' => 4],
+            ['name' => 'Pernikahan', 'slug' => 'pernikahan', 'description' => 'Abadikan hari sakral Anda dengan keindahan yang abadi dan penuh emosi.', 'sort_order' => 1],
+            ['name' => 'Pre-Wedding', 'slug' => 'pre-wedding', 'description' => 'Ceritakan kisah cinta Anda melalui sesi foto artistik yang eksklusif.', 'sort_order' => 2],
+            ['name' => 'Potret', 'slug' => 'potret', 'description' => 'Fotografi potret profesional untuk identitas diri dan keluarga.', 'sort_order' => 3],
+            ['name' => 'Komersial', 'slug' => 'komersial', 'description' => 'Layanan fotografi profesional untuk produk, korporat, dan kebutuhan industri.', 'sort_order' => 4],
         ];
 
         foreach ($categories as $category) {
@@ -39,32 +37,32 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Seed services
+        // Layanan
         $services = [
             [
                 'category_id' => 1,
-                'name' => 'Wedding Package Premium',
-                'slug' => 'wedding-package-premium',
-                'description' => 'Complete wedding photography package with premium features',
-                'base_price' => 15000000,
-                'duration_minutes' => 480,
+                'name' => 'Paket Pernikahan Eksklusif',
+                'slug' => 'pernikahan-eksklusif',
+                'description' => 'Dokumentasi pernikahan menyeluruh dengan teknik sinematik dan artistik terbaik di kelasnya.',
+                'base_price' => 18500000,
+                'duration_minutes' => 600,
                 'sort_order' => 1,
             ],
             [
                 'category_id' => 2,
-                'name' => 'Pre-Wedding Studio',
+                'name' => 'Sesi Pre-Wedding Studio',
                 'slug' => 'pre-wedding-studio',
-                'description' => 'Studio pre-wedding photography session',
-                'base_price' => 3500000,
+                'description' => 'Sesi foto intim di studio dengan berbagai konsep kreatif yang dirancang khusus untuk Anda.',
+                'base_price' => 5500000,
                 'duration_minutes' => 180,
                 'sort_order' => 1,
             ],
             [
                 'category_id' => 3,
-                'name' => 'Portrait Session',
-                'slug' => 'portrait-session',
-                'description' => 'Professional portrait photography session',
-                'base_price' => 2000000,
+                'name' => 'Potret Personal & Keluarga',
+                'slug' => 'potret-personal-keluarga',
+                'description' => 'Abadikan karakter dan kehangatan keluarga dalam sesi foto berkualitas tinggi.',
+                'base_price' => 2500000,
                 'duration_minutes' => 120,
                 'sort_order' => 1,
             ],
@@ -78,22 +76,37 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Seed service packages
+        // Paket Layanan
         $packages = [
             [
                 'service_id' => 1,
-                'name' => 'Basic Package',
-                'description' => '8 hours coverage, 200 edited photos',
-                'price' => 15000000,
-                'features' => json_encode(['8 hours coverage', '200 edited photos', 'Online gallery', 'All raw files']),
+                'name' => 'Magnolia Package',
+                'description' => 'Ideal untuk acara intim. Dokumentasi berkualitas tinggi dengan sentuhan personal.',
+                'price' => 18500000,
+                'features' => json_encode([
+                    '8 Jam Dokumentasi Hari-H',
+                    '2 Fotografer Profesional',
+                    '250++ Foto Hasil Kurasi & Edit',
+                    '1 Album Kolase Eksklusif (20x30 cm)',
+                    'Semua File Digital via Cloud Storage',
+                    'Kotak USB Berbahan Kayu Mewah'
+                ]),
                 'is_featured' => true,
             ],
             [
                 'service_id' => 1,
-                'name' => 'Premium Package',
-                'description' => '12 hours coverage, 400 edited photos, video',
-                'price' => 25000000,
-                'features' => json_encode(['12 hours coverage', '400 edited photos', 'Video highlight', 'Album', 'Online gallery']),
+                'name' => 'Royal Orchid Package',
+                'description' => 'Paket terlengkap untuk momen sekali seumur hidup yang tak terlupakan.',
+                'price' => 35000000,
+                'features' => json_encode([
+                    'Dokumentasi Seharian Penuh',
+                    '3 Fotografer & 1 Videografer',
+                    'Video Cinematic Highlight (3-5 Menit)',
+                    '500++ Foto Hasil Kurasi & Edit',
+                    '2 Album Kolase Premium (30x40 cm)',
+                    '2 Cetak Kanvas Besar dengan Bingkai Mewah',
+                    'Kotak Presentasi Khusus & USB Flashdisk'
+                ]),
                 'is_featured' => false,
             ],
         ];
@@ -106,30 +119,30 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Seed team members
+        // Tim
         $teamMembers = [
             [
-                'name' => 'Andi Prasetyo',
-                'role' => 'Lead Photographer',
-                'bio' => 'Professional photographer with 10+ years of experience',
-                'image_url' => 'images/team/andi.jpg',
-                'social_links' => json_encode(['instagram' => '@andiprasetyo', 'facebook' => 'andi.prasetyo']),
+                'name' => 'Adi Santoso',
+                'role' => 'Lead Photographer / Founder',
+                'bio' => 'Berpengalaman lebih dari 12 tahun di dunia fotografi pernikahan dan komersial dengan penghargaan internasional.',
+                'image_url' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
+                'social_links' => json_encode(['instagram' => '@adi_swarattive', 'facebook' => 'adi.santoso.photo']),
                 'sort_order' => 1,
             ],
             [
-                'name' => 'Dewi Kusuma',
-                'role' => 'Creative Director',
-                'bio' => 'Creative director specializing in wedding photography',
-                'image_url' => 'images/team/dewi.jpg',
-                'social_links' => json_encode(['instagram' => '@dewikusuma']),
+                'name' => 'Maya Indrawati',
+                'role' => 'Creative & Digital Editor',
+                'bio' => 'Seniman digital dengan mata tajam untuk pewarnaan dan komposisi, memastikan setiap foto memiliki jiwa dan estetika yang konsisten.',
+                'image_url' => 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400',
+                'social_links' => json_encode(['instagram' => '@maya_editor']),
                 'sort_order' => 2,
             ],
             [
-                'name' => 'Rina Wulandari',
-                'role' => 'Photo Editor',
-                'bio' => 'Expert photo editor with attention to detail',
-                'image_url' => 'images/team/rina.jpg',
-                'social_links' => json_encode(['instagram' => '@rinawulandari']),
+                'name' => 'Dimas Prayoga',
+                'role' => 'Senior Portrait Photographer',
+                'bio' => 'Spesialis fotografi potret dan kecantikan yang mampu menangkap sisi terbaik dan emosi paling jujur dari setiap subjek.',
+                'image_url' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400',
+                'social_links' => json_encode(['instagram' => '@dimas_portraits']),
                 'sort_order' => 3,
             ],
         ];
@@ -142,22 +155,17 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Seed payment methods
+        // Pembayaran
         $paymentMethods = [
+            [
+                'name' => 'Bank Central Asia (BCA)',
+                'type' => 'bank',
+                'details' => json_encode(['account_number' => '8720-xxxx-xxxx', 'account_name' => 'Adi Santoso (SWARATTIVE)']),
+            ],
             [
                 'name' => 'Bank Mandiri',
                 'type' => 'bank',
-                'details' => json_encode(['account_number' => '123-456-789-0', 'account_name' => 'PT Swarattive Photography']),
-            ],
-            [
-                'name' => 'BCA',
-                'type' => 'bank',
-                'details' => json_encode(['account_number' => '098-765-432-1', 'account_name' => 'PT Swarattive Photography']),
-            ],
-            [
-                'name' => 'OVO / DANA',
-                'type' => 'ewallet',
-                'details' => json_encode(['phone_number' => '0812-3456-7890', 'account_name' => 'Swarattive Photography']),
+                'details' => json_encode(['account_number' => '123-00-xxxx-xxxx', 'account_name' => 'Adi Santoso (SWARATTIVE)']),
             ],
         ];
 
@@ -169,14 +177,15 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // Seed site settings
+        // Pengaturan Situs
         $siteSettings = [
             ['key' => 'site_name', 'value' => json_encode('Swarattive Photography'), 'type' => 'text', 'group' => 'general'],
-            ['key' => 'site_description', 'value' => json_encode('Professional photography services for your special moments'), 'type' => 'text', 'group' => 'general'],
-            ['key' => 'contact_phone', 'value' => json_encode('+62 812 3456 7890'), 'type' => 'text', 'group' => 'contact'],
-            ['key' => 'contact_email', 'value' => json_encode('hello@swarattive.com'), 'type' => 'text', 'group' => 'contact'],
-            ['key' => 'contact_address', 'value' => json_encode('Jakarta, Indonesia'), 'type' => 'text', 'group' => 'contact'],
-            ['key' => 'social_links', 'value' => json_encode(['instagram' => '@swarattive', 'facebook' => 'swarattive.official']), 'type' => 'json', 'group' => 'social'],
+            ['key' => 'site_tagline', 'value' => json_encode('Setiap Detik Memiliki Kisah Sendiri'), 'type' => 'text', 'group' => 'general'],
+            ['key' => 'site_description', 'value' => json_encode('Studio fotografi eksklusif di Jakarta yang berfokus pada dokumentasi pernikahan, pre-wedding, dan potret dengan pendekatan artistik dan sinematik.'), 'type' => 'text', 'group' => 'general'],
+            ['key' => 'contact_phone', 'value' => json_encode('+62 812-9900-xxxx'), 'type' => 'text', 'group' => 'contact'],
+            ['key' => 'contact_email', 'value' => json_encode('info@swarattive.com'), 'type' => 'text', 'group' => 'contact'],
+            ['key' => 'contact_address', 'value' => json_encode('Kemang Raya No. 45, Jakarta Selatan, 12730'), 'type' => 'text', 'group' => 'contact'],
+            ['key' => 'social_links', 'value' => json_encode(['instagram' => '@swarattive', 'facebook' => 'swarattive.photography']), 'type' => 'json', 'group' => 'social'],
         ];
 
         foreach ($siteSettings as $setting) {
@@ -191,8 +200,9 @@ class DatabaseSeeder extends Seeder
             AboutSeeder::class,
             ContactSettingSeeder::class,
             BlogPostSeeder::class,
+            PortfolioItemSeeder::class,
         ]);
 
-        $this->command->info('Database seeded successfully!');
+        $this->command->info('Database telah diisi dengan data standar produksi!');
     }
 }

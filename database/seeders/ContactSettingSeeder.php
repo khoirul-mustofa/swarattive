@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\ContactSetting;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ContactSettingSeeder extends Seeder
 {
@@ -12,15 +12,16 @@ class ContactSettingSeeder extends Seeder
      */
     public function run(): void
     {
-        ContactSetting::updateOrCreate(
-            ['id' => 1],
-            [
-                'office_name' => 'Office Space',
-                'address' => "Jakarta SCBD Area, Sudirman St. 123\nMetropolitan District, ID 12190",
-                'email' => 'hello@swarattive.com',
-                'phone' => '+62 812 3456 7890',
-                'map_coordinates' => '-2.6219595688745705, 101.35777227479358',
-            ]
-        );
+        DB::table('contact_settings')->truncate();
+
+        DB::table('contact_settings')->insert([
+            'office_name' => 'Swarattive Studio Kemang',
+            'phone' => '+62 812-9900-8822',
+            'email' => 'info@swarattive.com',
+            'address' => 'Jl. Kemang Raya No. 45, Kemang, Jakarta Selatan, 12730',
+            'map_coordinates' => '-6.2731, 106.8123',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
