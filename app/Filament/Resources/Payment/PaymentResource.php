@@ -24,7 +24,8 @@ class PaymentResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Payments';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?string $navigationGroup = 'Operasional Bisnis';
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $recordTitleAttribute = 'payment_code';
 

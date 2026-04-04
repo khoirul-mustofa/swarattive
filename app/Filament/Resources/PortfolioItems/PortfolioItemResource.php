@@ -26,6 +26,7 @@ class PortfolioItemResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Portfolio Items';
 
+    protected static ?string $navigationGroup = 'Manajemen Konten';
     protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'title';

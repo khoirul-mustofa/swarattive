@@ -21,10 +21,8 @@ class ContactSettingResource extends Resource
     protected static ?string $model = ContactSetting::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhone;
-    public static function getNavigationGroup(): ?string
-    {
-        return 'Pengaturan';
-    }
+    protected static ?string $navigationGroup = 'Pengaturan Sistem';
+    protected static ?int $navigationSort = 1;
     public static function form(Schema $schema): Schema
     {
         return ContactSettingForm::configure($schema);

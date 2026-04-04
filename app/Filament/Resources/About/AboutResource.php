@@ -22,7 +22,8 @@ class AboutResource extends Resource
 
     protected static ?string $modelLabel = 'About Information';
 
-    protected static ?int $navigationSort = 10;
+    protected static ?string $navigationGroup = 'Profil Perusahaan';
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'story_title';
 
