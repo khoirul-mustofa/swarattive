@@ -21,7 +21,6 @@ class PortfolioItemsTable
             ->columns([
                 ImageColumn::make('image_url')
                     ->label('Foto')
-                    ->disk('public')
                     ->square()
                     ->size(60),
 

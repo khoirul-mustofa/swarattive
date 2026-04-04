@@ -10,7 +10,7 @@ use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Utilities\Set;
+use Filament\Forms\Set;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
@@ -31,9 +31,7 @@ class PortfolioItemForm
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(function (Set $set, ?string $state) {
-                                $set('slug', Str::slug($state));
-                            }),
+                            ->afterStateUpdated(fn ($set, ?string $state) => $set('slug', Str::slug($state))),
 
                         TextInput::make('slug')
                             ->label('Slug')
@@ -89,6 +87,7 @@ class PortfolioItemForm
                                 'upload' => 'Upload Gambar (Produksi)',
                                 'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
                             ])
+                            ->native(false)
                             ->default(fn ($get) => $get('image_path') ? 'upload' : 'url')
                             ->live()
                             ->dehydrated(false),
@@ -116,6 +115,7 @@ class PortfolioItemForm
                                 'upload' => 'Upload Galeri (Produksi)',
                                 'url' => 'URL JSON Eksternal (Seeded)',
                             ])
+                            ->native(false)
                             ->default(fn ($get) => $get('gallery_image_paths') ? 'upload' : 'url')
                             ->live()
                             ->dehydrated(false)

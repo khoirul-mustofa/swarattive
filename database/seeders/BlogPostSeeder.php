@@ -52,7 +52,7 @@ class BlogPostSeeder extends Seeder
                     <blockquote>"Fotografi bukan tentang apa yang kita lihat, tapi tentang apa yang kita rasakan."</blockquote>
                     <p>Di Swarattive, kami selalu mengedepankan kualitas daripada kuantitas. Kami percaya bahwa satu foto yang memiliki jiwa jauh lebih berharga daripada ribuan foto yang hanya menampilkan wajah tanpa ekspresi.</p>
                 ',
-                'image_url' => 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1200',
+                'image_url' => 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=1200',
                 'tags' => ['Pernikahan', 'Tren', 'Inspirasi'],
             ],
             [
@@ -76,7 +76,7 @@ class BlogPostSeeder extends Seeder
                     <p>Kita hidup di dunia visual di mana kesan pertama sering kali terbentuk dalam hitungan detik melalui layar smartphone. Sebuah potret atau "headshot" profesional bukan sekadar foto untuk LinkedIn; itu adalah investasi pada reputasi Anda.</p>
                     <p>Potret yang baik harus menonjolkan profesionalisme sekaligus aksesibilitas. Teknik pencahayaan yang tepat dan arahan pose yang natural dari Swarattive akan membantu Anda terlihat percaya diri tanpa terlihat kaku atau berlebihan.</p>
                 ',
-                'image_url' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1200',
+                'image_url' => 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=1200',
                 'tags' => ['Potret', 'Bisnis', 'Personal Branding'],
             ],
             [
@@ -86,7 +86,7 @@ class BlogPostSeeder extends Seeder
                     <p>Foto hitam putih memiliki keajaiban tersendiri. Dengan menghilangkan distraksi warna, kita dipaksa untuk fokus pada bentuk, kontras, bayangan, dan yang terpenting: emosi.</p>
                     <p>Sering kali, momen-momen yang paling emosional di pernikahan terlihat jauh lebih kuat dalam format monokrom. Ini adalah teknik klasik yang takkan pernah terlihat kuno.</p>
                 ',
-                'image_url' => 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=1200',
+                'image_url' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1200',
                 'tags' => ['Inspirasi', 'Seni', 'Teknik'],
             ],
         ];

@@ -36,11 +36,15 @@ class CategoryResource extends Resource
                     ->columns(2)
                     ->schema([
                         \Filament\Forms\Components\TextInput::make('name')
+                            ->label('Nama Kategori')
+                            ->helperText('Contoh: Wedding, Portrait, Commercial, dll.')
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', str($state)->slug())),
+                            ->afterStateUpdated(fn ($set, $state) => $set('slug', \Illuminate\Support\Str::slug($state))),
                         \Filament\Forms\Components\TextInput::make('slug')
+                            ->label('Slug / URL')
+                            ->helperText('Akan terisi otomatis dari nama kategori.')
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255),
@@ -49,10 +53,12 @@ class CategoryResource extends Resource
                             ->default(0),
                         \Filament\Forms\Components\Select::make('image_source')
                             ->label('Sumber Gambar')
+                            ->helperText('Pilih asal gambar untuk kategori ini.')
                             ->options([
                                 'upload' => 'Upload Gambar (Produksi)',
                                 'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
                             ])
+                            ->native(false)
                             ->default(fn ($get) => $get('image_path') ? 'upload' : 'url')
                             ->live()
                             ->dehydrated(false),
@@ -71,6 +77,8 @@ class CategoryResource extends Resource
                             ->visible(fn ($get) => $get('image_source') === 'url')
                             ->required(fn ($get) => $get('image_source') === 'url'),
                         \Filament\Forms\Components\Textarea::make('description')
+                            ->label('Deskripsi')
+                            ->helperText('Penjelasan singkat mengenai kategori ini.')
                             ->columnSpanFull(),
                     ]),
             ]);
@@ -81,8 +89,7 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 \Filament\Tables\Columns\ImageColumn::make('image_url')
-                    ->label('Thumbnail')
-                    ->disk('public'),
+                    ->label('Thumbnail'),
                 \Filament\Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),

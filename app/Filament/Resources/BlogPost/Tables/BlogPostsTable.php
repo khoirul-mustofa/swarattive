@@ -8,6 +8,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -17,7 +18,12 @@ class BlogPostsTable
     {
         return $table
             ->columns([
+                ImageColumn::make('image_url')
+                    ->label('Thumbnail')
+                    ->square()
+                    ->size(50),
                 TextColumn::make('title')
+                    ->label('Judul')
                     ->searchable()
                     ->sortable()
                     ->limit(50),
@@ -26,6 +32,7 @@ class BlogPostsTable
                     ->boolean()
                     ->sortable(),
                 TextColumn::make('published_at')
+                    ->label('Tgl Terbit')
                     ->dateTime()
                     ->sortable()
                     ->placeholder('-'),

@@ -36,32 +36,44 @@ class ServiceResource extends Resource
                     ->columns(2)
                     ->schema([
                         \Filament\Forms\Components\TextInput::make('name')
+                            ->label('Nama Layanan')
+                            ->helperText('Contoh: Foto Pernikahan Paket Gold, Sesi Potret Wisuda, dll.')
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', str($state)->slug())),
+                            ->afterStateUpdated(fn ($set, $state) => $set('slug', \Illuminate\Support\Str::slug($state))),
                         \Filament\Forms\Components\TextInput::make('slug')
+                            ->label('Slug / URL')
+                            ->helperText('Slug otomatis dari nama, digunakan untuk URL layanan.')
                             ->required()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255),
                         \Filament\Forms\Components\Select::make('category_id')
+                            ->label('Kategori')
+                            ->helperText('Pilih kategori besar untuk layanan ini.')
                             ->relationship('category', 'name')
                             ->native(false)
                             ->disablePlaceholderSelection()
                             ->required(),
                         \Filament\Forms\Components\TextInput::make('base_price')
+                            ->label('Harga Dasar')
+                            ->helperText('Harga awal untuk layanan ini.')
                             ->numeric()
                             ->required()
                             ->prefix('Rp'),
                         \Filament\Forms\Components\TextInput::make('duration_minutes')
+                            ->label('Durasi (Menit)')
+                            ->helperText('Estimasi waktu pengerjaan atau sesi foto.')
                             ->numeric()
                             ->label('Duration (Minutes)'),
                         \Filament\Forms\Components\Select::make('image_source')
                             ->label('Sumber Gambar')
+                            ->helperText('Pilih metode pengisian gambar layanan.')
                             ->options([
                                 'upload' => 'Upload Gambar (Produksi)',
                                 'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
                             ])
+                            ->native(false)
                             ->default(fn ($get) => $get('image_path') ? 'upload' : 'url')
                             ->live()
                             ->dehydrated(false)
@@ -100,7 +112,6 @@ class ServiceResource extends Resource
             ->columns([
                 \Filament\Tables\Columns\ImageColumn::make('image_url')
                     ->label('Thumbnail')
-                    ->disk('public')
                     ->square(),
                 \Filament\Tables\Columns\TextColumn::make('name')
                     ->searchable()

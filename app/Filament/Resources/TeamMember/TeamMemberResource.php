@@ -36,17 +36,23 @@ class TeamMemberResource extends Resource
                     ->columns(2)
                     ->schema([
                         \Filament\Forms\Components\TextInput::make('name')
+                            ->label('Nama Lengkap')
+                            ->helperText('Masukkan nama lengkap anggota tim.')
                             ->required()
                             ->maxLength(255),
                         \Filament\Forms\Components\TextInput::make('role')
+                            ->label('Jabatan / Peran')
+                            ->helperText('Contoh: Lead Photographer, Editor, Videographer.')
                             ->required()
                             ->maxLength(255),
                         \Filament\Forms\Components\Select::make('image_source')
                             ->label('Sumber Foto')
+                            ->helperText('Pilih asal foto profil anggota tim.')
                             ->options([
                                 'upload' => 'Upload Gambar (Produksi)',
                                 'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
                             ])
+                            ->native(false)
                             ->default(fn ($get) => $get('image_path') ? 'upload' : 'url')
                             ->live()
                             ->dehydrated(false),
@@ -81,7 +87,6 @@ class TeamMemberResource extends Resource
             ->columns([
                 \Filament\Tables\Columns\ImageColumn::make('image_url')
                     ->circular()
-                    ->disk('public')
                     ->label('Photo'),
                 \Filament\Tables\Columns\TextColumn::make('name')
                     ->searchable()

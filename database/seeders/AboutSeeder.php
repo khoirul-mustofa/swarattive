@@ -17,14 +17,14 @@ class AboutSeeder extends Seeder
 
         DB::table('abouts')->insert([
             'status' => PageStatusEnum::PUBLISHED->value,
-            'page_banner_image_url' => 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&q=80&w=1920',
+            'page_banner_image_url' => 'https://images.unsplash.com/photo-1492691523567-6170c2465fb7?auto=format&fit=crop&q=80&w=1920',
             'story_title' => 'Keaslian di Balik Lensa',
             'story_content' => '
                 <p>Di Swarattive, kami percaya bahwa setiap detik memiliki frekuensi dan narasinya sendiri. Nama "Swarattive" berasal dari gabungan "Swara" (suara/jiwa) dan "Narrative" (cerita). Kami tidak hanya mengambil gambar; kami menangkap getaran emosi, kerling mata yang jujur, dan gelak tawa yang tak tertahankan.</p>
                 <p>Berawal dari obsesi untuk membekukan keindahan yang fana, kami kini berkembang menjadi kolektif kreatif yang mendedikasikan diri untuk merayakan perjalanan hidup setiap pasangan dan individu. Pendekatan kami adalah <i>artistic-documentary</i>—di mana kejujuran momen bertemu dengan estetika sinematik yang elegan.</p>
                 <p>Kami memahami bahwa kenyamanan adalah kunci dari hasil foto yang natural. Oleh karena itu, tim kami bekerja dengan pendekatan yang personal dan intim, memastikan setiap subjek merasa bebas untuk menjadi diri mereka sendiri di depan kamera.</p>
             ',
-            'story_image_url' => 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?auto=format&fit=crop&q=80&w=1200',
+            'story_image_url' => 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=1200',
             'bts_title' => 'Di Balik Layar',
             'bts_subtitle' => 'Proses kreatif kami dalam menciptakan keabadian.',
             'bts_items' => json_encode([
@@ -41,7 +41,7 @@ class AboutSeeder extends Seeder
                 [
                     'stage' => \App\Enums\BtsStageEnum::POST_PRODUCTION->value,
                     'description' => 'Proses Kurasi & Edit: Setiap foto melalui proses pewarnaan tangan (hand-colored) untuk mencapai estetika emosional.',
-                    'image_url' => 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=600'
+                    'image_url' => 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&q=80&w=600'
                 ]
             ]),
             'created_at' => now(),
