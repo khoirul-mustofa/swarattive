@@ -83,26 +83,61 @@ class PortfolioItemForm
                     ->description('Foto utama dan galeri karya')
                     ->columns(2)
                     ->schema([
-                        FileUpload::make('image_url')
-                            ->label('Foto Utama')
-                            ->helperText('Foto terbaik yang mewakili karya ini. Akan ditampilkan sebagai thumbnail di halaman portfolio.')
+                        Select::make('image_source')
+                            ->label('Sumber Foto Utama')
+                            ->options([
+                                'upload' => 'Upload Gambar (Produksi)',
+                                'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
+                            ])
+                            ->default(fn ($get) => $get('image_path') ? 'upload' : 'url')
+                            ->live()
+                            ->dehydrated(false),
+                            
+                        FileUpload::make('image_path')
+                            ->label('Foto Utama (Local)')
+                            ->helperText('Foto terbaik yang mewakili karya ini.')
                             ->image()
-                            ->disk('public')
-                            ->directory('images')
                             ->imageEditor()
-                            ->required()
+                            ->optimize('webp')
+                            ->disk('public')
+                            ->directory('portfolio')
+                            ->visible(fn ($get) => $get('image_source') === 'upload')
+                            ->required(fn ($get) => $get('image_source') === 'upload'),
+                            
+                        TextInput::make('image_url')
+                            ->label('Foto Utama (External URL)')
+                            ->url()
+                            ->visible(fn ($get) => $get('image_source') === 'url')
+                            ->required(fn ($get) => $get('image_source') === 'url'),
+
+                        Select::make('gallery_source')
+                            ->label('Sumber Galeri Foto')
+                            ->options([
+                                'upload' => 'Upload Galeri (Produksi)',
+                                'url' => 'URL JSON Eksternal (Seeded)',
+                            ])
+                            ->default(fn ($get) => $get('gallery_image_paths') ? 'upload' : 'url')
+                            ->live()
+                            ->dehydrated(false)
                             ->columnSpanFull(),
 
-                        FileUpload::make('gallery_images')
-                            ->label('Galeri Foto')
-                            ->helperText('Upload beberapa foto tambahan untuk galeri karya ini. Bisa diurutkan ulang dengan drag & drop.')
+                        FileUpload::make('gallery_image_paths')
+                            ->label('Galeri Foto (Local)')
+                            ->helperText('Upload beberapa foto tambahan.')
                             ->image()
-                            ->disk('public')
-                            ->directory('images')
                             ->multiple()
                             ->reorderable()
-                            ->nullable()
-                            ->columnSpanFull(),
+                            ->disk('public')
+                            ->directory('portfolio/gallery')
+                            ->visible(fn ($get) => $get('gallery_source') === 'upload')
+                            ->nullable(),
+
+                        TagsInput::make('gallery_images')
+                            ->label('Galeri Foto (External URLs)')
+                            ->helperText('Masukkan kumpulan URL gambar eksternal (Pisahkan dengan Enter).')
+                            ->placeholder('https://example.com/photo1.jpg')
+                            ->visible(fn ($get) => $get('gallery_source') === 'url')
+                            ->nullable(),
                     ]),
 
                 Section::make('Status')

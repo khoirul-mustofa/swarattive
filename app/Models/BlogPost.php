@@ -16,11 +16,20 @@ class BlogPost extends Model
         'excerpt',
         'content',
         'image_url',
+        'image_path',
         'tags',
         'is_published',
         'published_at',
         'author_id',
     ];
+
+    public function getImageUrlAttribute($value)
+    {
+        if ($this->image_path) {
+            return \Illuminate\Support\Facades\Storage::url($this->image_path);
+        }
+        return $value;
+    }
 
     protected $casts = [
         'tags' => 'array',

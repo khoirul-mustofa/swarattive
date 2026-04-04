@@ -33,6 +33,7 @@
                         <div class="relative h-56 overflow-hidden">
                             <img src="{{ $post->image_url }}"
                                 alt="{{ $post->title }}"
+                                loading="lazy" decoding="async"
                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
                         <div class="p-6 flex flex-col flex-grow">

@@ -8,7 +8,9 @@
     <div class="relative w-full h-[50vh] min-h-[400px] flex items-end overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0 z-0">
-            <img src="{{ $blogPost->image_url }}" alt="{{ $blogPost->title }}" class="w-full h-full object-cover">
+            <img src="{{ $blogPost->image_url }}" alt="{{ $blogPost->title }}" 
+                decoding="async" 
+                class="w-full h-full object-cover">
         </div>
         <!-- Gradient Overlay -->
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10"></div>
@@ -80,7 +82,9 @@
                     @foreach($relatedPosts as $post)
                         <article class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
                             <div class="relative h-48 overflow-hidden">
-                                <img src="{{ $post->image_url }}" alt="{{ $post->title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                                <img src="{{ $post->image_url }}" alt="{{ $post->title }}" 
+                                    loading="lazy" decoding="async"
+                                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
                             <div class="p-6 flex flex-col flex-grow">
                                 <div class="text-xs font-semibold text-amber-600 tracking-wide uppercase mb-2">

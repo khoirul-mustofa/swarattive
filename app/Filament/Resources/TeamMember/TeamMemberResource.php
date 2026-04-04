@@ -41,11 +41,29 @@ class TeamMemberResource extends Resource
                         \Filament\Forms\Components\TextInput::make('role')
                             ->required()
                             ->maxLength(255),
-                        \Filament\Forms\Components\FileUpload::make('image_url')
+                        \Filament\Forms\Components\Select::make('image_source')
+                            ->label('Sumber Foto')
+                            ->options([
+                                'upload' => 'Upload Gambar (Produksi)',
+                                'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
+                            ])
+                            ->default(fn ($get) => $get('image_path') ? 'upload' : 'url')
+                            ->live()
+                            ->dehydrated(false),
+                        \Filament\Forms\Components\FileUpload::make('image_path')
+                            ->label('Profile Picture (Local)')
                             ->image()
+                            ->imageEditor()
+                            ->optimize('webp')
                             ->disk('public')
                             ->directory('team')
-                            ->label('Profile Picture'),
+                            ->visible(fn ($get) => $get('image_source') === 'upload')
+                            ->required(fn ($get) => $get('image_source') === 'upload'),
+                        \Filament\Forms\Components\TextInput::make('image_url')
+                            ->label('Profile Picture (External URL)')
+                            ->url()
+                            ->visible(fn ($get) => $get('image_source') === 'url')
+                            ->required(fn ($get) => $get('image_source') === 'url'),
                         \Filament\Forms\Components\TextInput::make('sort_order')
                             ->numeric()
                             ->default(0),

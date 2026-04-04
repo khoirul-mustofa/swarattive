@@ -29,12 +29,31 @@ class AboutForm
 
                 Section::make('Header / Page Banner')
                     ->schema([
-                        FileUpload::make('page_banner_image_url')
-                            ->label('Banner Image')
+                        Select::make('page_banner_image_source')
+                            ->label('Sumber Banner')
+                            ->options([
+                                'upload' => 'Upload Gambar (Produksi)',
+                                'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
+                            ])
+                            ->default(fn ($get) => $get('page_banner_image_path') ? 'upload' : 'url')
+                            ->live()
+                            ->dehydrated(false),
+
+                        FileUpload::make('page_banner_image_path')
+                            ->label('Banner Image (Local)')
                             ->image()
+                            ->imageEditor()
+                            ->optimize('webp')
                             ->disk('public')
                             ->directory('abouts')
-                            ->columnSpanFull(),
+                            ->visible(fn ($get) => $get('page_banner_image_source') === 'upload')
+                            ->required(fn ($get) => $get('page_banner_image_source') === 'upload'),
+
+                        TextInput::make('page_banner_image_url')
+                            ->label('Banner Image (External URL)')
+                            ->url()
+                            ->visible(fn ($get) => $get('page_banner_image_source') === 'url')
+                            ->required(fn ($get) => $get('page_banner_image_source') === 'url'),
                     ]),
 
                 Section::make('Our Story')
@@ -47,12 +66,32 @@ class AboutForm
                         RichEditor::make('story_content')
                             ->required()
                             ->columnSpanFull(),
-                        FileUpload::make('story_image_url')
-                            ->label('Story Image')
+                        
+                        Select::make('story_image_source')
+                            ->label('Sumber Gambar Cerita')
+                            ->options([
+                                'upload' => 'Upload Gambar (Produksi)',
+                                'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
+                            ])
+                            ->default(fn ($get) => $get('story_image_path') ? 'upload' : 'url')
+                            ->live()
+                            ->dehydrated(false),
+
+                        FileUpload::make('story_image_path')
+                            ->label('Story Image (Local)')
                             ->image()
+                            ->imageEditor()
+                            ->optimize('webp')
                             ->disk('public')
                             ->directory('abouts')
-                            ->columnSpanFull(),
+                            ->visible(fn ($get) => $get('story_image_source') === 'upload')
+                            ->required(fn ($get) => $get('story_image_source') === 'upload'),
+
+                        TextInput::make('story_image_url')
+                            ->label('Story Image (External URL)')
+                            ->url()
+                            ->visible(fn ($get) => $get('story_image_source') === 'url')
+                            ->required(fn ($get) => $get('story_image_source') === 'url'),
                     ]),
 
                 Section::make('Behind The Scenes')
@@ -69,11 +108,29 @@ class AboutForm
                                     ->required()
                                     ->native(false)
                                     ->options(BtsStageEnum::class),
-                                FileUpload::make('image_url')
-                                    ->label('Image')
+                                
+                                Select::make('image_source')
+                                    ->label('Sumber Gambar')
+                                    ->options([
+                                        'upload' => 'Upload',
+                                        'url' => 'URL',
+                                    ])
+                                    ->default('url')
+                                    ->live()
+                                    ->dehydrated(false),
+
+                                FileUpload::make('image_path')
+                                    ->label('Image Upload')
                                     ->image()
                                     ->disk('public')
-                                    ->directory('abouts'),
+                                    ->directory('abouts')
+                                    ->visible(fn ($get) => $get('image_source') === 'upload'),
+
+                                TextInput::make('image_url')
+                                    ->label('External URL')
+                                    ->url()
+                                    ->visible(fn ($get) => $get('image_source') === 'url'),
+
                                 Textarea::make('description')
                                     ->maxLength(65535)
                                     ->columnSpanFull(),

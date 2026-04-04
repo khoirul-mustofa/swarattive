@@ -56,11 +56,31 @@ class ServiceResource extends Resource
                         \Filament\Forms\Components\TextInput::make('duration_minutes')
                             ->numeric()
                             ->label('Duration (Minutes)'),
-                        \Filament\Forms\Components\FileUpload::make('image_url')
+                        \Filament\Forms\Components\Select::make('image_source')
+                            ->label('Sumber Gambar')
+                            ->options([
+                                'upload' => 'Upload Gambar (Produksi)',
+                                'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
+                            ])
+                            ->default(fn ($get) => $get('image_path') ? 'upload' : 'url')
+                            ->live()
+                            ->dehydrated(false)
+                            ->columnSpanFull(),
+                        \Filament\Forms\Components\FileUpload::make('image_path')
+                            ->label('Service Image (Local)')
                             ->image()
+                            ->imageEditor()
+                            ->optimize('webp')
                             ->disk('public')
                             ->directory('services')
-                            ->label('Service Image')
+                            ->visible(fn ($get) => $get('image_source') === 'upload')
+                            ->required(fn ($get) => $get('image_source') === 'upload')
+                            ->columnSpanFull(),
+                        \Filament\Forms\Components\TextInput::make('image_url')
+                            ->label('Service Image (External URL)')
+                            ->url()
+                            ->visible(fn ($get) => $get('image_source') === 'url')
+                            ->required(fn ($get) => $get('image_source') === 'url')
                             ->columnSpanFull(),
                         \Filament\Forms\Components\TextInput::make('sort_order')
                             ->numeric()

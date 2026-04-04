@@ -5,6 +5,7 @@ namespace App\Filament\Resources\BlogPost\Schemas;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -41,14 +42,31 @@ class BlogPostForm
 
                 Section::make('Media & Tags')
                     ->schema([
-                        FileUpload::make('image_url')
-                            ->label('Thumbnail Image')
+                        Select::make('image_source')
+                            ->label('Sumber Gambar')
+                            ->options([
+                                'upload' => 'Upload Gambar (Produksi)',
+                                'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
+                            ])
+                            ->default(fn ($get) => $get('image_path') ? 'upload' : 'url')
+                            ->live()
+                            ->dehydrated(false),
+                        FileUpload::make('image_path')
+                            ->label('Thumbnail Image (Local)')
                             ->image()
+                            ->imageEditor()
+                            ->optimize('webp')
                             ->disk('public')
                             ->directory('blog')
-                            ->required(),
+                            ->visible(fn ($get) => $get('image_source') === 'upload')
+                            ->required(fn ($get) => $get('image_source') === 'upload'),
+                        TextInput::make('image_url')
+                            ->label('Thumbnail Image (External URL)')
+                            ->url()
+                            ->visible(fn ($get) => $get('image_source') === 'url')
+                            ->required(fn ($get) => $get('image_source') === 'url'),
                         TagsInput::make('tags')
-                            ->placeholder('New tag')
+                            ->placeholder('Tambah tag baru')
                             ->separator(','),
                     ])->columns(2),
 

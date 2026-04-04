@@ -15,7 +15,9 @@
                 <div class="group" x-data="{ hovered: false }" @mouseenter="hovered = true" @mouseleave="hovered = false">
                     <div class="relative mb-6 overflow-hidden aspect-square rounded-3xl">
                         @if($member->image_url)
-                            <img src="{{ asset('storage/' . $member->image_url) }}" alt="{{ $member->name }}" class="w-full h-full object-cover transition-all duration-700" :class="hovered ? 'scale-110 blur-[2px]' : 'scale-100'">
+                            <img src="{{ $member->image_url }}" alt="{{ $member->name }}" 
+                                loading="lazy" decoding="async"
+                                class="w-full h-full object-cover transition-all duration-700" :class="hovered ? 'scale-110 blur-[2px]' : 'scale-100'">
                         @else
                             <div class="w-full h-full bg-amber-50 flex items-center justify-center text-amber-200 text-5xl font-bold font-serif">
                                 {{ substr($member->name, 0, 1) }}

@@ -95,6 +95,7 @@
                 @forelse($portfolioItems as $item)
                     <div class="group relative overflow-hidden rounded-lg shadow-lg aspect-square">
                         <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
+                            loading="lazy" decoding="async"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -142,6 +143,7 @@
                             class="group relative bg-white border border-gray-100 rounded-2xl p-4 hover:shadow-2xl transition-all duration-300">
                             <div class="relative h-48 mb-6 overflow-hidden rounded-xl">
                                 <img src="{{ $post->image_url }}" alt="{{ $post->title }}"
+                                    loading="lazy" decoding="async"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
                             <div class="px-2">

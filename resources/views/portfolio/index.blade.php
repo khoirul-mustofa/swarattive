@@ -56,9 +56,9 @@
 
                                 {{-- Gambar --}}
                                 <div class="relative overflow-hidden">
-                                    <img src="{{ asset('storage/' . $item->image_url) }}"
+                                    <img src="{{ $item->image_url }}"
                                          alt="{{ $item->title }}"
-                                         loading="lazy"
+                                         loading="lazy" decoding="async"
                                          class="w-full object-cover transition-transform duration-700 group-hover:scale-105">
 
                                     {{-- Overlay gradient --}}

@@ -17,7 +17,9 @@ class PortfolioItem extends Model
         'slug',
         'description',
         'image_url',
+        'image_path',
         'gallery_images',
+        'gallery_image_paths',
         'tags',
         'is_featured',
         'is_active',
@@ -25,8 +27,25 @@ class PortfolioItem extends Model
         'client_name',
     ];
 
+    public function getImageUrlAttribute($value)
+    {
+        if ($this->image_path) {
+            return \Illuminate\Support\Facades\Storage::url($this->image_path);
+        }
+        return $value;
+    }
+
+    public function getGalleryImagesAttribute($value)
+    {
+        if ($this->gallery_image_paths) {
+            return collect($this->gallery_image_paths)->map(fn($path) => \Illuminate\Support\Facades\Storage::url($path))->toArray();
+        }
+        return is_array($value) ? $value : json_decode($value, true);
+    }
+
     protected $casts = [
         'gallery_images' => 'array',
+        'gallery_image_paths' => 'array',
         'tags' => 'array',
         'is_featured' => 'boolean',
         'is_active' => 'boolean',
