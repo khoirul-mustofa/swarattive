@@ -5,8 +5,8 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="relative h-screen bg-cover bg-center"
-        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');">
+    <section class="relative h-screen bg-cover bg-center bg-neutral-900"
+        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ asset('images/hero-fallback.jpg') }}');">
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-center text-white px-4">
                 <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in">

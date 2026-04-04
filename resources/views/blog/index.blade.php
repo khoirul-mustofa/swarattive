@@ -7,8 +7,7 @@
     <div class="relative w-full h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&q=80&w=1920"
-                alt="Blog Banner Background" class="w-full h-full object-cover">
+            <x-image-placeholder class="w-full h-full" />
         </div>
         <!-- Dark Overlay -->
         <div class="absolute inset-0 bg-black/60 z-10"></div>

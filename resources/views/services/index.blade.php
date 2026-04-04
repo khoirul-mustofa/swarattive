@@ -5,7 +5,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative h-[60vh] lg:h-[70vh] bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ $hero['image'] ? (str_starts_with($hero['image'], 'http') ? $hero['image'] : asset('storage/' . $hero['image'])) : 'https://images.unsplash.com/photo-1554046920-90dc2c6b12a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80' }}');">
+<section class="relative h-[60vh] lg:h-[70vh] bg-cover bg-center bg-neutral-900" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ $hero['image'] ? (str_starts_with($hero['image'], 'http') ? $hero['image'] : asset('storage/' . $hero['image'])) : asset('images/services-hero-fallback.jpg') }}');">
     <div class="absolute inset-0 flex items-center justify-center">
         <div class="text-center text-white px-4">
             <h1 class="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 animate-fade-in drop-shadow-lg">
@@ -46,10 +46,14 @@
                             @foreach($categoryServices as $service)
                                 <div class="bg-white rounded-2xl shadow-sm border border-[#ede8e3] overflow-hidden flex flex-col lg:flex-row transition-all hover:shadow-xl group">
                                     <div class="relative w-full lg:w-5/12 aspect-[4/3] lg:aspect-auto lg:h-auto overflow-hidden flex-shrink-0">
-                                        <img src="{{ $service->image_url ?? 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&w=800&q=80' }}" 
-                                            alt="{{ $service->name }}" 
-                                            loading="lazy" decoding="async"
-                                            class="w-full h-full object-cover lg:absolute lg:inset-0 group-hover:scale-105 transition-transform duration-700 ease-in-out">
+                                        @if($service->image_url)
+                                            <img src="{{ $service->image_url }}" 
+                                                alt="{{ $service->name }}" 
+                                                loading="lazy" decoding="async"
+                                                class="w-full h-full object-cover lg:absolute lg:inset-0 group-hover:scale-105 transition-transform duration-700 ease-in-out">
+                                        @else
+                                            <x-image-placeholder class="w-full h-full lg:absolute lg:inset-0" />
+                                        @endif
                                         <div class="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-[#3d2b1f] shadow-sm">
                                             {{ $service->duration_minutes }} Menit
                                         </div>

@@ -11,7 +11,7 @@
             class="absolute inset-0 w-full h-full object-cover">
     @else
         <div class="absolute inset-0 bg-neutral-900">
-            <img src="https://images.unsplash.com/photo-1492691523567-6170c2465fb7?auto=format&fit=crop&q=80&w=1920" alt="Default Banner" class="w-full h-full object-cover opacity-50">
+            <x-image-placeholder class="w-full h-full opacity-50" />
         </div>
     @endif
     <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
@@ -36,7 +36,7 @@
                             loading="lazy" decoding="async"
                             class="w-full h-full object-cover">
                     @else
-                        <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=1000" alt="Default Story Image" class="w-full h-full object-cover">
+                        <x-image-placeholder class="w-full h-full object-cover" />
                     @endif
                 </div>
                 <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl -z-10"></div>
@@ -74,13 +74,11 @@
                     <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-neutral-200 h-full flex flex-col hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
                         <div class="relative h-64 overflow-hidden">
                             @if(isset($item['image_url']))
-                                <img src="{{ $item['image_url'] }}" alt="{{ $item['stage'] }}" 
+                                <img src="{{ $item['image_url'] }}" alt="{{ $item['stage'] ?? $item['title'] ?? 'Tahapan' }}" 
                                     loading="lazy" decoding="async"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                             @else
-                                <div class="w-full h-full bg-neutral-200 flex items-center justify-center">
-                                    <svg class="w-12 h-12 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                </div>
+                                <x-image-placeholder class="w-full h-full" />
                             @endif
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
                                 <span class="bg-amber-500 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">Stage {{ $index + 1 }}</span>
@@ -88,7 +86,7 @@
                         </div>
                         <div class="p-8 flex-1 flex flex-col">
                             <h4 class="text-xl font-bold text-neutral-900 mb-3 capitalize">
-                                {{ str_replace('_', ' ', $item['stage']) }}
+                                {{ str_replace('_', ' ', $item['stage'] ?? $item['title'] ?? 'Tahapan') }}
                             </h4>
                             <p class="text-neutral-600 leading-relaxed italic">
                                 "{{ $item['description'] }}"

@@ -29,18 +29,18 @@ class AboutSeeder extends Seeder
             'bts_subtitle' => 'Proses kreatif kami dalam menciptakan keabadian.',
             'bts_items' => json_encode([
                 [
-                    'title' => 'Perencanaan Konsep',
-                    'description' => 'Kami mendengarkan cerita Anda untuk menyusun konsep visual yang personal dan unik.',
+                    'stage' => \App\Enums\BtsStageEnum::PRE_PRODUCTION->value,
+                    'description' => 'Perencanaan Konsep: Kami mendengarkan cerita Anda untuk menyusun konsep visual yang personal dan unik.',
                     'image_url' => 'https://images.unsplash.com/photo-1493723843671-1d655e7d98f0?auto=format&fit=crop&q=80&w=600'
                 ],
                 [
-                    'title' => 'Sesi Dokumentasi',
-                    'description' => 'Menggunakan peralatan kelas atas dengan teknik pencahayaan yang dramatis namun natural.',
+                    'stage' => \App\Enums\BtsStageEnum::ON_LOCATION->value,
+                    'description' => 'Sesi Dokumentasi: Menggunakan peralatan kelas atas dengan teknik pencahayaan yang dramatis namun natural.',
                     'image_url' => 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=600'
                 ],
                 [
-                    'title' => 'Proses Kurasi & Edit',
-                    'description' => 'Setiap foto melalui proses pewarnaan tangan (hand-colored) untuk mencapai estetika emosional.',
+                    'stage' => \App\Enums\BtsStageEnum::POST_PRODUCTION->value,
+                    'description' => 'Proses Kurasi & Edit: Setiap foto melalui proses pewarnaan tangan (hand-colored) untuk mencapai estetika emosional.',
                     'image_url' => 'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=600'
                 ]
             ]),
