@@ -32,6 +32,7 @@ Route::post('/check-booking', [BookingController::class, 'checkStatus'])->name('
 // About and Contact
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

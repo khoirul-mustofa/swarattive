@@ -187,7 +187,10 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        $this->call(AboutSeeder::class);
+        $this->call([
+            AboutSeeder::class,
+            ContactSettingSeeder::class,
+        ]);
 
         $this->command->info('Database seeded successfully!');
     }
