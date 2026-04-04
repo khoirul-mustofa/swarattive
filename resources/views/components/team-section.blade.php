@@ -19,9 +19,8 @@
                                 loading="lazy" decoding="async"
                                 class="w-full h-full object-cover transition-all duration-700" :class="hovered ? 'scale-110 blur-[2px]' : 'scale-100'">
                         @else
-                            <div class="w-full h-full bg-amber-50 flex items-center justify-center text-amber-200 text-5xl font-bold font-serif">
-                                {{ substr($member->name, 0, 1) }}
-                            </div>
+                            <img src="{{ asset('images/default-avatar.png') }}" alt="{{ $member->name }}" 
+                                class="w-full h-full object-cover transition-all duration-700" :class="hovered ? 'scale-110 blur-[2px]' : 'scale-100'">
                         @endif
                         
                         <div class="absolute inset-0 bg-amber-900/60 flex flex-col items-center justify-center p-6 text-center transition-all duration-500" :class="hovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'">

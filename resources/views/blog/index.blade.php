@@ -7,7 +7,11 @@
     <div class="relative w-full h-[40vh] min-h-[300px] flex items-center justify-center overflow-hidden">
         <!-- Background Image -->
         <div class="absolute inset-0 z-0">
-            <x-image-placeholder class="w-full h-full" />
+            @if(file_exists(public_path('images/blog-hero-fallback.jpg')))
+                <img src="{{ asset('images/blog-hero-fallback.jpg') }}" class="w-full h-full object-cover">
+            @else
+                <x-image-placeholder class="w-full h-full" />
+            @endif
         </div>
         <!-- Dark Overlay -->
         <div class="absolute inset-0 bg-black/60 z-10"></div>

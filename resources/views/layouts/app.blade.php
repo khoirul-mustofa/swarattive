@@ -20,7 +20,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <a href="{{ route('home') }}" class="flex items-center">
+                    <a href="{{ route('home') }}" class="flex items-center gap-2">
+                        @if(file_exists(public_path('images/logo-primary.png')))
+                            <img src="{{ asset('images/logo-primary.png') }}" alt="Swarattive" class="h-8 w-auto">
+                        @endif
                         <span class="text-2xl font-bold text-amber-600">Swarattive</span>
                     </a>
                 </div>

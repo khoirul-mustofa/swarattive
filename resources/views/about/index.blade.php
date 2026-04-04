@@ -11,7 +11,11 @@
             class="absolute inset-0 w-full h-full object-cover">
     @else
         <div class="absolute inset-0 bg-neutral-900">
-            <x-image-placeholder class="w-full h-full opacity-50" />
+            @if(file_exists(public_path('images/about-hero-fallback.jpg')))
+                <img src="{{ asset('images/about-hero-fallback.jpg') }}" class="w-full h-full object-cover">
+            @else
+                <x-image-placeholder class="w-full h-full opacity-50" />
+            @endif
         </div>
     @endif
     <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
@@ -36,7 +40,11 @@
                             loading="lazy" decoding="async"
                             class="w-full h-full object-cover">
                     @else
-                        <x-image-placeholder class="w-full h-full object-cover" />
+                        @if(file_exists(public_path('images/about-story-fallback.jpg')))
+                            <img src="{{ asset('images/about-story-fallback.jpg') }}" class="w-full h-full object-cover">
+                        @else
+                            <x-image-placeholder class="w-full h-full object-cover" />
+                        @endif
                     @endif
                 </div>
                 <div class="absolute -bottom-8 -right-8 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl -z-10"></div>
