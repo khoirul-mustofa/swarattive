@@ -39,7 +39,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        {{ $blogPost->reading_time }} min read
+                        {{ $blogPost->reading_time }} menit baca
                     </span>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                Back to Blog
+                Kembali ke Daftar Artikel
             </a>
 
             <!-- Content Area -->
@@ -70,11 +70,11 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-end mb-12">
                     <div>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-2">Related Articles</h2>
-                        <p class="text-gray-600">More stories and tips you might like</p>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-2">Artikel Terkait</h2>
+                        <p class="text-gray-600">Lebih banyak cerita dan tips untuk Anda</p>
                     </div>
                     <a href="{{ route('blog.index') }}" class="hidden md:block text-amber-600 hover:text-amber-700 font-semibold">
-                        View All Posts &rarr;
+                        Lihat Semua Artikel &rarr;
                     </a>
                 </div>
 
@@ -94,7 +94,7 @@
                                     {{ $post->title }}
                                 </h3>
                                 <a href="{{ route('blog.show', $post->slug) }}" class="inline-flex items-center text-sm font-semibold text-amber-600 hover:text-amber-700 transition-colors mt-auto">
-                                    Read More &rarr;
+                                    Baca Selengkapnya &rarr;
                                 </a>
                             </div>
                         </article>

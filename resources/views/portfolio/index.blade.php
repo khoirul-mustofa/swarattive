@@ -99,7 +99,7 @@
                                 <div class="absolute top-3 left-3 right-3 flex justify-between items-start pointer-events-none">
                                     @if($item->is_featured)
                                         <span class="bg-[#f0c27f] text-[#3d2b1f] text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full shadow">
-                                            ★ Featured
+                                            ★ Unggulan
                                         </span>
                                     @else
                                         <span></span>

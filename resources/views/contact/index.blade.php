@@ -19,13 +19,13 @@
         <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
             <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 tracking-tight" x-data
                 x-intersect="$el.classList.add('animate-slide-up')">
-                Let's <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600 italic pr-2">Create</span>
-                Together
+                Mari <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600 italic pr-2">Berkarya</span>
+                Bersama
             </h1>
             <p class="text-neutral-400 text-lg md:text-2xl font-light max-w-2xl mx-auto italic leading-relaxed" x-data
                 x-intersect="$el.classList.add('animate-slide-up')" style="animation-delay: 200ms;">
-                "We believe every frame tells a story. Tell us yours."
+                "Kami percaya setiap bingkai punya cerita. Ceritakan milik Anda."
             </p>
         </div>
     </section>
@@ -37,7 +37,7 @@
 
                 <div class="w-full lg:w-3/5 p-8 sm:p-12 lg:p-20">
                     <div class="mb-10 lg:mb-12">
-                        <h2 class="text-3xl lg:text-4xl font-serif font-bold text-neutral-900 mb-4">Send a Message</h2>
+                        <h2 class="text-3xl lg:text-4xl font-serif font-bold text-neutral-900 mb-4">Kirim Pesan</h2>
                         <div class="w-16 h-1.5 bg-amber-500 rounded-full"></div>
                     </div>
 
@@ -48,8 +48,8 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label
-                                        class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Your
-                                        Name</label>
+                                        class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Nama
+                                        Lengkap</label>
                                     <input type="text" name="name" value="{{ old('name') }}" placeholder="John Doe" required
                                         class="w-full px-5 py-4 bg-neutral-50/50 border {{ $errors->has('name') ? 'border-red-500' : 'border-neutral-200' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 placeholder:text-neutral-300">
                                     @error('name')
@@ -58,8 +58,8 @@
                                 </div>
                                 <div>
                                     <label
-                                        class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Email
-                                        Address</label>
+                                        class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Alamat
+                                        Email</label>
                                     <input type="email" name="email" value="{{ old('email') }}"
                                         placeholder="john@example.com" required
                                         class="w-full px-5 py-4 bg-neutral-50/50 border {{ $errors->has('email') ? 'border-red-500' : 'border-neutral-200' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 placeholder:text-neutral-300">
@@ -71,15 +71,15 @@
 
                             <div>
                                 <label
-                                    class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Interested
-                                    In</label>
+                                    class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Tertarik
+                                    Pada</label>
                                 <div class="relative">
                                     <select name="interest"
                                         class="w-full px-5 py-4 bg-neutral-50/50 border {{ $errors->has('interest') ? 'border-red-500' : 'border-neutral-200' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 appearance-none cursor-pointer">
-                                        <option value="Wedding & Engagement" {{ old('interest') == 'Wedding & Engagement' ? 'selected' : '' }}>Wedding & Engagement</option>
-                                        <option value="Portrait & Lifestyle" {{ old('interest') == 'Portrait & Lifestyle' ? 'selected' : '' }}>Portrait & Lifestyle</option>
-                                        <option value="Commercial & Branding" {{ old('interest') == 'Commercial & Branding' ? 'selected' : '' }}>Commercial & Branding</option>
-                                        <option value="Other Projects" {{ old('interest') == 'Other Projects' ? 'selected' : '' }}>Other Projects</option>
+                                        <option value="Wedding & Engagement" {{ old('interest') == 'Wedding & Engagement' ? 'selected' : '' }}>Pernikahan & Tunangan</option>
+                                        <option value="Portrait & Lifestyle" {{ old('interest') == 'Portrait & Lifestyle' ? 'selected' : '' }}>Potret & Gaya Hidup</option>
+                                        <option value="Commercial & Branding" {{ old('interest') == 'Commercial & Branding' ? 'selected' : '' }}>Komersial & Branding</option>
+                                        <option value="Other Projects" {{ old('interest') == 'Other Projects' ? 'selected' : '' }}>Proyek Lainnya</option>
                                     </select>
                                     @error('interest')
                                         <p class="text-red-500 text-xs mt-1 ml-1">{{ $message }}</p>
@@ -96,8 +96,8 @@
 
                             <div>
                                 <label
-                                    class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Message</label>
-                                <textarea name="message" rows="4" placeholder="Tell us more about your ideas..." required
+                                    class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Pesan</label>
+                                <textarea name="message" rows="4" placeholder="Ceritakan ide atau keinginan Anda..." required
                                     class="w-full px-5 py-4 bg-neutral-50/50 border {{ $errors->has('message') ? 'border-red-500' : 'border-neutral-200' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 resize-none placeholder:text-neutral-300">{{ old('message') }}</textarea>
                                 @error('message')
                                     <p class="text-red-500 text-xs mt-1 ml-1">{{ $message }}</p>
@@ -108,7 +108,7 @@
                         <button type="submit" :disabled="loading"
                             class="group relative w-full sm:w-auto px-10 py-4 bg-neutral-900 text-white rounded-full font-bold tracking-widest uppercase text-[11px] overflow-hidden transition-all hover:pr-14 active:scale-[0.98] shadow-lg hover:shadow-neutral-900/30 inline-flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed">
                             <span class="relative z-10 transition-transform"
-                                x-text="loading ? 'Sending...' : 'Shoot the Message'">Shoot the Message</span>
+                                x-text="loading ? 'Mengirim...' : 'Kirim Pesan Sekarang'">Kirim Pesan Sekarang</span>
                             <div class="absolute inset-0 bg-amber-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 -z-0"
                                 :class="loading ? 'scale-x-100' : ''">
                             </div>
@@ -155,7 +155,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-white text-xs mb-1.5 uppercase tracking-widest">Location</h4>
+                                    <h4 class="font-bold text-white text-xs mb-1.5 uppercase tracking-widest">Lokasi Kami</h4>
                                     <p class="text-neutral-400 font-light leading-relaxed text-sm">
                                         {!! nl2br(e($settings->address ?? "Jakarta SCBD Area,\nSudirman St. 123\nMetropolitan District, ID 12190")) !!}
                                     </p>
@@ -172,7 +172,7 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-white text-xs mb-1.5 uppercase tracking-widest">Email Inquiry
+                                    <h4 class="font-bold text-white text-xs mb-1.5 uppercase tracking-widest">Pertanyaan Email
                                     </h4>
                                     <p
                                         class="text-neutral-400 font-light leading-relaxed text-sm hover:text-amber-400 transition-colors cursor-pointer">
@@ -209,7 +209,7 @@
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                 <a href="https://www.google.com/maps?q={{ str_replace(' ', '', $settings->map_coordinates ?? '-2.6219595688745705,101.35777227479358') }}" target="_blank"
                     class="px-8 py-4 bg-white/90 backdrop-blur-sm text-neutral-900 text-[11px] font-black uppercase tracking-widest rounded-full shadow-2xl hover:bg-amber-500 hover:text-white transition-all duration-300 transform hover:-translate-y-1 inline-block">
-                    Open in Maps
+                    Buka di Maps
                 </a>
             </div>
 
@@ -228,7 +228,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
             </svg>
         </div>
-        <span class="font-bold tracking-widest uppercase text-[11px]">Message Received. Talk soon!</span>
+        <span class="font-bold tracking-widest uppercase text-[11px]">Pesan Terkirim. Kami akan segera menghubungi Anda!</span>
     </div>
 @endsection
 

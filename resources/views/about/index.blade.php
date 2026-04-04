@@ -44,7 +44,7 @@
             
             <div class="space-y-8" x-data x-intersect="$el.classList.add('animate-fade-in-right')">
                 <div class="inline-block px-4 py-1.5 bg-amber-100 text-amber-700 rounded-full text-sm font-bold tracking-widest uppercase mb-4">
-                    Our Story
+                    Cerita Kami
                 </div>
                 <h2 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 leading-tight">
                     Mengabadikan <span class="text-amber-600 italic">Momen</span> Abadi Melalui Lensa
@@ -81,7 +81,7 @@
                                 <x-image-placeholder class="w-full h-full" />
                             @endif
                             <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent flex items-end p-6 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                                <span class="bg-amber-500 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">Stage {{ $index + 1 }}</span>
+                                <span class="bg-amber-500 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">Tahap {{ $index + 1 }}</span>
                             </div>
                         </div>
                         <div class="p-8 flex-1 flex flex-col">

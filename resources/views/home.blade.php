@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Welcome to Swarattive Photography')
-@section('description', 'Professional photography services for your special moments')
+@section('title', 'Selamat Datang di Swarattive Photography')
+@section('description', 'Layanan fotografi profesional untuk mengabadikan momen berharga Anda')
 
 @section('content')
     <!-- Hero Section -->
@@ -9,8 +9,8 @@
         style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ asset('images/hero-fallback.jpg') }}');">
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-center text-white px-4">
-                <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in">
-                    Welcome to<br>
+                <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in text-center">
+                    Selamat Datang di<br>
                     <span class="text-amber-400">Swarattive</span><br>
                     Photography
                 </h1>
@@ -19,12 +19,12 @@
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
                     <a href="{{ route('portfolio.index') }}"
-                        class="bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors">
-                        View Portfolio
+                        class="bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors shadow-lg">
+                        Lihat Portofolio
                     </a>
                     <a href="{{ route('booking.index') }}"
                         class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors">
-                        Book Now
+                        Pesan Sekarang
                     </a>
                 </div>
             </div>
@@ -35,8 +35,8 @@
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-4">Our Services</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Professional photography services tailored to your needs
+                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-4">Layanan Kami</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Layanan fotografi profesional yang disesuaikan dengan kebutuhan Anda
                 </p>
             </div>
 
@@ -87,8 +87,8 @@
     <section class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-4">Recent Work</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Explore our latest photography projects</p>
+                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-4">Karya Terbaru</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Jelajahi proyek fotografi terbaru kami</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -117,7 +117,7 @@
             <div class="text-center mt-16 font-semibold">
                 <a href="{{ route('portfolio.index') }}"
                     class="group inline-flex items-center text-amber-600 text-lg hover:text-amber-700 transition-colors">
-                    View Full Portfolio
+                    Lihat Semua Karya
                     <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3">
@@ -133,7 +133,7 @@
         <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-serif font-bold text-gray-900 mb-4">Latest Stories</h2>
+                    <h2 class="text-4xl font-serif font-bold text-gray-900 mb-4">Artikel Terbaru</h2>
                     <p class="text-xl text-gray-600 max-w-2xl mx-auto">Inspirasi dan tips seputar dunia fotografi</p>
                 </div>
 
@@ -156,7 +156,7 @@
                                 </h3>
                                 <a href="{{ route('blog.show', $post->slug) }}"
                                     class="text-sm font-bold text-gray-400 group-hover:text-amber-600 transition-colors uppercase tracking-widest">
-                                    Read Story &rarr;
+                                    Baca Artikel &rarr;
                                 </a>
                             </div>
                         </article>
@@ -170,12 +170,12 @@
     <section class="py-20 bg-amber-600 relative overflow-hidden">
         <div class="absolute inset-0 bg-black/10"></div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Ready to Capture Your Moments?</h2>
-            <p class="text-xl md:text-2xl text-amber-100 mb-10">Let's create beautiful memories together. Book your session
-                today!</p>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Siap Mengabadikan Momen Anda?</h2>
+            <p class="text-xl md:text-2xl text-amber-100 mb-10">Mari ciptakan kenangan indah bersama. Pesan sesi Anda
+                hari ini!</p>
             <a href="{{ route('booking.index') }}"
                 class="bg-white text-amber-600 px-10 py-4 rounded-xl font-bold text-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                Book Your Session Now
+                Pesan Sesi Sekarang
             </a>
         </div>
     </section>

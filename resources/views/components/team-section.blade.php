@@ -4,7 +4,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div class="max-w-2xl">
-                <h2 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 mb-4">Meet The <span class="text-amber-600 italic">Creative</span> Minds</h2>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 mb-4">Kenali Para <span class="text-amber-600 italic">Kreator</span> Kami</h2>
                 <p class="text-neutral-500 text-lg">Tim profesional kami siap mengabadikan setiap momen spesial Anda dengan perspektif unik dan penuh dedikasi.</p>
             </div>
             <div class="w-16 h-16 border-t-4 border-r-4 border-amber-500 rounded-tr-3xl hidden md:block opacity-30"></div>
@@ -26,7 +26,7 @@
                         
                         <div class="absolute inset-0 bg-amber-900/60 flex flex-col items-center justify-center p-6 text-center transition-all duration-500" :class="hovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'">
                             <p class="text-white text-sm leading-relaxed mb-6 font-light italic overflow-hidden line-clamp-4">
-                                {{ $member->bio ?? 'Creative individual with a passion for excellence.' }}
+                                {{ $member->bio ?? 'Individu kreatif dengan dedikasi tinggi untuk memberikan hasil terbaik.' }}
                             </p>
                             @if($member->social_links)
                                 <div class="flex space-x-4">

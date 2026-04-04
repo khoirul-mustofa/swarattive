@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Blog - Photography')
+@section('title', 'Artikel & Inspirasi - Swarattive Photography')
 
 @section('content')
     <!-- PAGE BANNER -->
@@ -36,9 +36,10 @@
                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
-                            <div class="text-sm font-semibold text-amber-600 tracking-wide uppercase mb-2">
-                                {{ $post->tags[0] ?? 'Photography' }} &bull; {{ $post->published_at->format('d M Y') }}
-                            </div>
+                                <div class="text-[10px] font-bold text-amber-600 tracking-widest uppercase mb-3">
+                                    {{ $post->tags[0] ?? 'Fotografi' }} &bull; {{ $post->published_at->translatedFormat('d F Y') }}
+                                </div>
+                           
                             <h3
                                 class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-amber-600 transition-colors">
                                 {{ $post->title }}</h3>
@@ -46,7 +47,7 @@
                                 {{ $post->excerpt }}</p>
                             <a href="{{ route('blog.show', $post->slug) }}"
                                 class="inline-flex items-center text-sm font-semibold text-amber-600 hover:text-amber-800 transition-colors mt-auto">
-                                Read More
+                                Baca Selengkapnya
                                 <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

@@ -12,12 +12,11 @@
                     <div class="flex flex-col md:flex-row items-center gap-3 mb-2">
                         <h1 class="text-white font-serif font-bold text-2xl md:text-3xl">Status Pesanan</h1>
                         <span class="px-4 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest shadow-sm
-                            @if($booking->status == 'pending') bg-amber-500 text-white
-                            @elseif($booking->status == 'confirmed') bg-blue-500 text-white
-                            @elseif($booking->status == 'completed') bg-green-500 text-white
-                            @elseif($booking->status == 'cancelled') bg-red-500 text-white
-                            @endif">
-                            {{ $booking->status }}
+                            @if($booking->status == 'pending') Menunggu Pembayaran
+                            @elseif($booking->status == 'confirmed') Dikonfirmasi
+                            @elseif($booking->status == 'completed') Selesai
+                            @elseif($booking->status == 'cancelled') Dibatalkan
+                            @endif
                         </span>
                     </div>
                     <p class="text-white/60 font-mono text-sm tracking-widest uppercase">Kode Booking: {{ $booking->booking_code }}</p>
