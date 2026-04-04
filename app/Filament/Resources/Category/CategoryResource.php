@@ -63,7 +63,7 @@ class CategoryResource extends Resource
                             ->live()
                             ->dehydrated(false),
                         \Filament\Forms\Components\FileUpload::make('image_path')
-                            ->label('Thumbnail (Local)')
+                            ->label('Foto Kategori (Local)')
                             ->image()
                             ->imageEditor()
                             ->optimize('webp')
@@ -72,7 +72,7 @@ class CategoryResource extends Resource
                             ->visible(fn ($get) => $get('image_source') === 'upload')
                             ->required(fn ($get) => $get('image_source') === 'upload'),
                         \Filament\Forms\Components\TextInput::make('image_url')
-                            ->label('Thumbnail (External URL)')
+                            ->label('Foto Kategori (External URL)')
                             ->url()
                             ->visible(fn ($get) => $get('image_source') === 'url')
                             ->required(fn ($get) => $get('image_source') === 'url'),
@@ -89,7 +89,7 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 \Filament\Tables\Columns\ImageColumn::make('image_url')
-                    ->label('Thumbnail'),
+                    ->label('Foto Kategori'),
                 \Filament\Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),

@@ -41,27 +41,9 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                @php
-                    $serviceIcons = [
-                        'Wedding Photography' => 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
-                        'Pre-Wedding' => 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
-                        'Portrait' => 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z',
-                        'Commercial' => 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
-                    ];
-                @endphp
-
                 @forelse($services as $service)
                     @php
-                        $icon = 'M12 4v16m8-8H4'; // default
-                        if (Str::contains($service->name, ['Wedding', 'Menikah'], true)) {
-                            $icon = $serviceIcons['Wedding Photography'];
-                        } elseif (Str::contains($service->name, ['Pre-Wedding', 'Prewedding'], true)) {
-                            $icon = $serviceIcons['Pre-Wedding'];
-                        } elseif (Str::contains($service->name, ['Portrait', 'Wajah'], true)) {
-                            $icon = $serviceIcons['Portrait'];
-                        } elseif (Str::contains($service->name, ['Commercial', 'Produk'], true)) {
-                            $icon = $serviceIcons['Commercial'];
-                        }
+                        $icon = $service->icon ?: 'M12 4v16m8-8H4'; // fallback default icon
                     @endphp
                     <div class="text-center group">
                         <div

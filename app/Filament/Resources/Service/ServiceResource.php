@@ -101,6 +101,11 @@ class ServiceResource extends Resource
                             ->required()
                             ->default(true),
                         \Filament\Forms\Components\Textarea::make('description')
+                            ->label('Deskripsi')
+                            ->columnSpanFull(),
+                        \Filament\Forms\Components\TextInput::make('icon')
+                            ->label('Ikon (SVG Path)')
+                            ->helperText('Masukkan kode path SVG untuk ikon layanan (tanpa tag <svg>).')
                             ->columnSpanFull(),
                     ]),
             ]);
@@ -111,7 +116,7 @@ class ServiceResource extends Resource
         return $table
             ->columns([
                 \Filament\Tables\Columns\ImageColumn::make('image_url')
-                    ->label('Thumbnail')
+                    ->label('Gambar')
                     ->square(),
                 \Filament\Tables\Columns\TextColumn::make('name')
                     ->searchable()

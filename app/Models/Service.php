@@ -16,6 +16,7 @@ class Service extends Model
         'name',
         'slug',
         'description',
+        'icon',
         'base_price',
         'duration_minutes',
         'image_url',

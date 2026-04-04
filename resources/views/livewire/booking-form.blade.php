@@ -175,7 +175,7 @@
                                 <input type="radio" name="selectedTeamMember" wire:model.live="selectedTeamMember"
                                     value="{{ $member->id }}" class="sr-only">
                                 <div class="flex items-center gap-3 w-full">
-                                    <img src="{{ $member->image_url ? asset('storage/' . $member->image_url) : 'https://ui-avatars.com/api/?name=' . urlencode($member->name) }}"
+                                    <img src="{{ str_starts_with($member->image_url, 'http') ? $member->image_url : asset('storage/' . $member->image_url) }}"
                                         class="w-12 h-12 rounded-full object-cover">
                                     <div class="flex-1">
                                         <span class="block text-sm font-bold text-[#3d2b1f]">{{ $member->name }}</span>

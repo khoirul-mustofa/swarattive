@@ -63,7 +63,7 @@ class BlogPostForm
                             ->live()
                             ->dehydrated(false),
                         FileUpload::make('image_path')
-                            ->label('Thumbnail Image (Local)')
+                            ->label('Gambar Artikel (Local)')
                             ->helperText('Unggah gambar thumbnail artikel. Format yang disarankan: .jpg, .webp (Maks 2MB).')
                             ->image()
                             ->imageEditor()
@@ -73,7 +73,7 @@ class BlogPostForm
                             ->visible(fn ($get) => $get('image_source') === 'upload')
                             ->required(fn ($get) => $get('image_source') === 'upload'),
                         TextInput::make('image_url')
-                            ->label('Thumbnail Image (External URL)')
+                            ->label('Gambar Artikel (External URL)')
                             ->helperText('Masukkan tautan langsung gambar (Contoh: https://images.unsplash.com/...)')
                             ->url()
                             ->visible(fn ($get) => $get('image_source') === 'url')

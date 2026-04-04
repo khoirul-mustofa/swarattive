@@ -19,7 +19,7 @@ class BlogPostsTable
         return $table
             ->columns([
                 ImageColumn::make('image_url')
-                    ->label('Thumbnail')
+                    ->label('Gambar')
                     ->square()
                     ->size(50),
                 TextColumn::make('title')
