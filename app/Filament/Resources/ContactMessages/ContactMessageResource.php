@@ -21,7 +21,7 @@ class ContactMessageResource extends Resource
     protected static ?string $model = ContactMessage::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
-    protected static ?string $navigationGroup = 'Profil Perusahaan';
+    protected static string|\UnitEnum|null $navigationGroup = 'Profil Perusahaan';
     protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema

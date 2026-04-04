@@ -37,7 +37,7 @@ class BookingResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Bookings';
 
-    protected static ?string $navigationGroup = 'Operasional Bisnis';
+    protected static string|\UnitEnum|null $navigationGroup = 'Operasional Bisnis';
     protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'booking_code';

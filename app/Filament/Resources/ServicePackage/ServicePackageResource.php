@@ -24,7 +24,7 @@ class ServicePackageResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Service Packages';
 
-    protected static ?string $navigationGroup = 'Manajemen Layanan';
+    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Layanan';
     protected static ?int $navigationSort = 2;
 
     protected static ?string $recordTitleAttribute = 'name';

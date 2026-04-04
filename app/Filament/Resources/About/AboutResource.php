@@ -7,6 +7,7 @@ use App\Filament\Resources\About\Pages\ListAbout;
 use App\Filament\Resources\About\Schemas\AboutForm;
 use App\Models\About;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -22,7 +23,7 @@ class AboutResource extends Resource
 
     protected static ?string $modelLabel = 'About Information';
 
-    protected static ?string $navigationGroup = 'Profil Perusahaan';
+    protected static string|UnitEnum|null $navigationGroup = 'Profil Perusahaan';
     protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'story_title';

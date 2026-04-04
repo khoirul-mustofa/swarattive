@@ -24,7 +24,7 @@ class CategoryResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Categories';
 
-    protected static ?string $navigationGroup = 'Manajemen Layanan';
+    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Layanan';
     protected static ?int $navigationSort = 3;
 
     protected static ?string $recordTitleAttribute = 'name';

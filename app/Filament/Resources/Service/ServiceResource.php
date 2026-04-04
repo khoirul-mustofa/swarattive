@@ -24,7 +24,7 @@ class ServiceResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Services';
 
-    protected static ?string $navigationGroup = 'Manajemen Layanan';
+    protected static string|\UnitEnum|null $navigationGroup = 'Manajemen Layanan';
     protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'name';
