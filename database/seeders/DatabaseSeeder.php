@@ -190,6 +190,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AboutSeeder::class,
             ContactSettingSeeder::class,
+            BlogPostSeeder::class,
         ]);
 
         $this->command->info('Database seeded successfully!');
