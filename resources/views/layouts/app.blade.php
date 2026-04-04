@@ -29,19 +29,20 @@
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('home') }}" class="text-gray-700 hover:text-amber-600 transition-colors">Home</a>
+                    <a href="{{ route('home') }}"
+                        class="{{ request()->routeIs('home') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Home</a>
                     <a href="{{ route('portfolio.index') }}"
-                        class="text-gray-700 hover:text-amber-600 transition-colors">Portfolio</a>
+                        class="{{ request()->routeIs('portfolio.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Portfolio</a>
                     <a href="{{ route('services.index') }}"
-                        class="text-gray-700 hover:text-amber-600 transition-colors">Services</a>
+                        class="{{ request()->routeIs('services.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Services</a>
                     <a href="{{ route('about.index') }}"
-                        class="text-gray-700 hover:text-amber-600 transition-colors">About</a>
+                        class="{{ request()->routeIs('about.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">About</a>
                     <a href="{{ route('blog.index') }}"
-                        class="text-gray-700 hover:text-amber-600 transition-colors">Blog</a>
+                        class="{{ request()->routeIs('blog.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Blog</a>
                     <a href="{{ route('contact.index') }}"
-                        class="text-gray-700 hover:text-amber-600 transition-colors">Contact</a>
+                        class="{{ request()->routeIs('contact.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Contact</a>
                     <a href="{{ route('booking.index') }}"
-                        class="bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition-colors">
+                        class="bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition-colors {{ request()->routeIs('booking.*') ? 'ring-2 ring-amber-600 ring-offset-2' : '' }}">
                         Booking
                     </a>
                 </div>
@@ -60,18 +61,20 @@
         <!-- Mobile menu -->
         <div x-show="open" x-transition class="md:hidden bg-white border-t">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="{{ route('home') }}" class="block px-3 py-2 text-gray-700 hover:text-amber-600">Home</a>
+                <a href="{{ route('home') }}"
+                    class="block px-3 py-2 {{ request()->routeIs('home') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Home</a>
                 <a href="{{ route('portfolio.index') }}"
-                    class="block px-3 py-2 text-gray-700 hover:text-amber-600">Portfolio</a>
+                    class="block px-3 py-2 {{ request()->routeIs('portfolio.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Portfolio</a>
                 <a href="{{ route('services.index') }}"
-                    class="block px-3 py-2 text-gray-700 hover:text-amber-600">Services</a>
+                    class="block px-3 py-2 {{ request()->routeIs('services.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Services</a>
                 <a href="{{ route('about.index') }}"
-                    class="block px-3 py-2 text-gray-700 hover:text-amber-600">About</a>
-                <a href="{{ route('blog.index') }}" class="block px-3 py-2 text-gray-700 hover:text-amber-600">Blog</a>
+                    class="block px-3 py-2 {{ request()->routeIs('about.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">About</a>
+                <a href="{{ route('blog.index') }}"
+                    class="block px-3 py-2 {{ request()->routeIs('blog.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Blog</a>
                 <a href="{{ route('contact.index') }}"
-                    class="block px-3 py-2 text-gray-700 hover:text-amber-600">Contact</a>
+                    class="block px-3 py-2 {{ request()->routeIs('contact.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Contact</a>
                 <a href="{{ route('booking.index') }}"
-                    class="block px-3 py-2 bg-amber-600 text-white rounded-lg">Booking</a>
+                    class="block px-3 py-2 {{ request()->routeIs('booking.*') ? 'bg-amber-600 text-white' : 'bg-amber-500 text-white' }} rounded-lg font-bold">Booking</a>
             </div>
         </div>
     </nav>
