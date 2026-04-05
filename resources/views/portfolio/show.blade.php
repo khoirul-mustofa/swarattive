@@ -7,7 +7,7 @@
 
     {{-- ===================== HERO ===================== --}}
     <div class="relative h-[360px] md:h-[480px] overflow-hidden">
-        <img src="{{ asset('storage/' . $portfolioItem->image_url) }}"
+        <img src="{{ str_starts_with($portfolioItem->image_url, 'http') ? $portfolioItem->image_url : asset('storage/' . $portfolioItem->image_url) }}"
              alt="{{ $portfolioItem->title }}"
              class="absolute inset-0 w-full h-full object-cover scale-105">
         <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80"></div>
@@ -48,7 +48,7 @@
 
                     {{-- Foto Utama --}}
                     <div class="rounded-2xl overflow-hidden shadow-lg mb-8">
-                        <img src="{{ asset('storage/' . $portfolioItem->image_url) }}"
+                        <img src="{{ str_starts_with($portfolioItem->image_url, 'http') ? $portfolioItem->image_url : asset('storage/' . $portfolioItem->image_url) }}"
                              alt="{{ $portfolioItem->title }}"
                              class="w-full object-cover">
                     </div>
@@ -69,9 +69,9 @@
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                                 @foreach($portfolioItem->gallery_images as $gImg)
                                     <button type="button"
-                                            onclick="openLightbox('{{ asset('storage/' . $gImg) }}')"
+                                            onclick="openLightbox('{{ str_starts_with($gImg, 'http') ? $gImg : asset('storage/' . $gImg) }}')"
                                             class="group relative overflow-hidden rounded-xl aspect-square cursor-zoom-in shadow-sm hover:shadow-md transition-shadow">
-                                        <img src="{{ asset('storage/' . $gImg) }}"
+                                        <img src="{{ str_starts_with($gImg, 'http') ? $gImg : asset('storage/' . $gImg) }}"
                                              alt="Galeri"
                                              loading="lazy"
                                              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
@@ -195,7 +195,7 @@
                     @foreach($relatedItems->take(3) as $related)
                         <a href="{{ route('portfolio.show', $related->slug) }}"
                            class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 aspect-[4/3] block bg-gray-100">
-                            <img src="{{ asset('storage/' . $related->image_url) }}"
+                            <img src="{{ str_starts_with($related->image_url, 'http') ? $related->image_url : asset('storage/' . $related->image_url) }}"
                                  alt="{{ $related->title }}"
                                  loading="lazy"
                                  class="w-full h-full object-cover transition-transform duration-600 group-hover:scale-105">

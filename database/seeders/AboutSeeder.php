@@ -17,7 +17,7 @@ class AboutSeeder extends Seeder
 
         DB::table('abouts')->insert([
             'status' => PageStatusEnum::PUBLISHED->value,
-            'page_banner_image_url' => 'https://images.unsplash.com/photo-1492691523567-6170c2465fb7?auto=format&fit=crop&q=80&w=1920',
+            'page_banner_image_url' => 'https://images.unsplash.com/photo-1554048612-b6a482bc67e5?auto=format&fit=crop&q=80&w=1920',
             'story_title' => 'Keaslian di Balik Lensa',
             'story_content' => '
                 <p>Di Swarattive, kami percaya bahwa setiap detik memiliki frekuensi dan narasinya sendiri. Nama "Swarattive" berasal dari gabungan "Swara" (suara/jiwa) dan "Narrative" (cerita). Kami tidak hanya mengambil gambar; kami menangkap getaran emosi, kerling mata yang jujur, dan gelak tawa yang tak tertahankan.</p>
@@ -31,7 +31,7 @@ class AboutSeeder extends Seeder
                 [
                     'stage' => \App\Enums\BtsStageEnum::PRE_PRODUCTION->value,
                     'description' => 'Perencanaan Konsep: Kami mendengarkan cerita Anda untuk menyusun konsep visual yang personal dan unik.',
-                    'image_url' => 'https://images.unsplash.com/photo-1493723843671-1d655e7d98f0?auto=format&fit=crop&q=80&w=600'
+                    'image_url' => 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=600'
                 ],
                 [
                     'stage' => \App\Enums\BtsStageEnum::ON_LOCATION->value,

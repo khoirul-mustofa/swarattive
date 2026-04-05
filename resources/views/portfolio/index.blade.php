@@ -8,7 +8,7 @@
     {{-- ===================== HERO BANNER ===================== --}}
     <div class="relative h-[320px] md:h-[400px] overflow-hidden">
         @if($heroSettings['image'])
-            <img src="{{ asset('storage/' . $heroSettings['image']) }}" alt="Portfolio Hero"
+            <img src="{{ str_starts_with($heroSettings['image'], 'http') ? $heroSettings['image'] : asset('storage/' . $heroSettings['image']) }}" alt="Portfolio Hero"
                  class="absolute inset-0 w-full h-full object-cover">
         @else
             <div class="absolute inset-0 bg-[#3d2b1f]"></div>
