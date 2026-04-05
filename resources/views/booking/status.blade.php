@@ -12,11 +12,20 @@
                     <div class="flex flex-col md:flex-row items-center gap-3 mb-2">
                         <h1 class="text-white font-serif font-bold text-2xl md:text-3xl">Status Pesanan</h1>
                         <span class="px-4 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest shadow-sm
-                            @if($booking->status == 'pending') Menunggu Pembayaran
-                            @elseif($booking->status == 'confirmed') Dikonfirmasi
-                            @elseif($booking->status == 'completed') Selesai
-                            @elseif($booking->status == 'cancelled') Dibatalkan
-                            @endif
+                            @if($booking->status == 'pending') bg-amber-500 text-white
+                            @elseif($booking->status == 'confirmed') bg-green-500 text-white
+                            @elseif($booking->status == 'completed') bg-blue-500 text-white
+                            @elseif($booking->status == 'cancelled') bg-red-500 text-white
+                            @endif">
+                            {{ $booking->status }}
+                        </span>
+                        <span class="px-4 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest shadow-sm
+                            @if($booking->payment_status == 'unpaid') bg-gray-200 text-gray-700
+                            @elseif($booking->payment_status == 'dp_paid') bg-blue-100 text-blue-700
+                            @elseif($booking->payment_status == 'fully_paid') bg-green-100 text-green-700
+                            @elseif($booking->payment_status == 'expired' || $booking->payment_status == 'failed') bg-red-100 text-red-700
+                            @endif">
+                            Pembayaran: {{ $booking->payment_status }}
                         </span>
                     </div>
                     <p class="text-white/60 font-mono text-sm tracking-widest uppercase">Kode Booking: {{ $booking->booking_code }}</p>
@@ -124,26 +133,52 @@
                         </div>
                     </div>
 
-                    @if($booking->status == 'pending')
+                    @if($booking->payment_status == 'unpaid')
                     <div class="bg-amber-50 rounded-2xl p-6 border border-amber-100 space-y-4">
                         <h4 class="text-sm font-bold text-amber-800 flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             Selesaikan Pembayaran
                         </h4>
-                        <p class="text-xs text-amber-700 leading-relaxed">Harap selesaikan pembayaran DP sebesar **Rp {{ number_format($booking->total_price * 0.3, 0, ',', '.') }}** (30% dari total biaya) untuk mengunci jadwal pemotretan Anda.</p>
-                        <div class="pt-2">
-                            <button onclick="window.open('https://wa.me/6281234567890?text=Halo%20Swarattive,%20saya%20ingin%20konfirmasi%20pembayaran%20untuk%20booking%20{{ $booking->booking_code }}', '_blank')" 
-                                class="w-full bg-[#3d2b1f] text-white py-3 rounded-xl text-xs font-bold uppercase tracking-widest hover:shadow-lg transition-all flex items-center justify-center gap-2">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                                Konfirmasi Pembayaran
-                            </button>
-                        </div>
+                        @php
+                            $pendingPayment = $booking->payments()->where('status', 'pending')->first();
+                        @endphp
+                        
+                        @if($pendingPayment)
+                            <p class="text-xs text-amber-700 leading-relaxed">
+                                Harap selesaikan pembayaran {{ $pendingPayment->payment_type == 'down_payment' ? 'Uang Muka (DP)' : 'Lunas' }} 
+                                sebesar **Rp {{ number_format($pendingPayment->amount, 0, ',', '.') }}** untuk mengunci jadwal pemotretan Anda.
+                            </p>
+                            <div class="pt-2">
+                                <button id="pay-button" data-snap="{{ $pendingPayment->snap_token }}"
+                                    class="w-full bg-[#3d2b1f] text-white py-3 rounded-xl text-xs font-bold uppercase tracking-widest hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                                    Bayar Sekarang
+                                </button>
+                            </div>
+                        @else
+                            <p class="text-xs text-red-700 italic">Terjadi kesalahan pada data pembayaran. Silakan hubungi admin.</p>
+                        @endif
                     </div>
-                    @else
+                    @elseif($booking->payment_status == 'dp_paid')
+                    <div class="bg-blue-50 rounded-2xl p-6 border border-blue-100 text-center">
+                        <p class="text-xs text-blue-700 font-bold mb-1 italic">DP Berhasil Dibayar!</p>
+                        <p class="text-[10px] text-blue-600">Jadwal Anda telah terkunci. Pelunasan dapat dilakukan sebelum sesi dimulai.</p>
+                    </div>
+                    @elseif($booking->payment_status == 'fully_paid')
+                    <div class="bg-green-50 rounded-2xl p-6 border border-green-100 text-center">
+                        <p class="text-xs text-green-700 font-bold mb-1 italic">Pembayaran Lunas!</p>
+                        <p class="text-[10px] text-green-600">Terima kasih. Sampai jumpa di hari sesi pemotretan.</p>
+                    </div>
+                    @elseif($booking->payment_status == 'expired')
+                    <div class="bg-red-50 rounded-2xl p-6 border border-red-100 text-center">
+                        <p class="text-xs text-red-700 font-bold mb-1 italic">Booking Kedaluwarsa</p>
+                        <p class="text-[10px] text-red-600">Waktu pembayaran telah habis. Silakan buat pesanan baru.</p>
+                        <a href="{{ route('booking.index') }}" class="mt-3 inline-block text-xs font-bold text-[#3d2b1f] border-b border-[#3d2b1f]">Pesan Ulang</a>
+                    </div>
+                    @endif
                     <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 italic text-center">
                         <p class="text-xs text-[#9a8b7d]">Terima kasih telah mempercayakan momen Anda kepada Swarattive!</p>
                     </div>
-                    @endif
                 </div>
             </div>
         </div>
@@ -152,3 +187,29 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+<script>
+    const payButton = document.getElementById('pay-button');
+    if (payButton) {
+        payButton.onclick = function() {
+            snap.pay(payButton.dataset.snap, {
+                onSuccess: function(result) {
+                    window.location.reload();
+                },
+                onPending: function(result) {
+                    window.location.reload();
+                },
+                onError: function(result) {
+                    alert("Pembayaran gagal!");
+                    console.log(result);
+                },
+                onClose: function() {
+                    console.log('customer closed the popup without finishing the payment');
+                }
+            });
+        };
+    }
+</script>
+@endpush

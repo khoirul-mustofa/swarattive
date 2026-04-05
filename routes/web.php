@@ -25,6 +25,7 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 // Booking routes
 Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+Route::get('/booking/status/{booking_code}', [BookingController::class, 'show'])->name('booking.status');
 Route::get('/check-booking', [BookingController::class, 'check'])->name('booking.check');
 Route::post('/check-booking', [BookingController::class, 'checkStatus'])->name('booking.check.status');
 

@@ -24,7 +24,7 @@ Swarattive adalah platform manajemen studio fotografi profesional yang dirancang
 Platform ini dibangun menggunakan teknologi mutakhir dalam ekosistem PHP dan JavaScript:
 
 - **Framework**: [Laravel 12.x](https://laravel.com)
-- **Admin Panel**: [Filament PHP v3](https://filamentphp.com) (TALL Stack: Tailwind, Alpine, Laravel, Livewire)
+- **Admin Panel**: [Filament PHP v5](https://filamentphp.com) (TALL Stack: Tailwind, Alpine, Laravel, Livewire)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com)
 - **Frontend Interactivity**: [Alpine.js](https://alpinejs.dev) & [Livewire v3](https://livewire.laravel.com)
 - **Database**: MySQL / MariaDB

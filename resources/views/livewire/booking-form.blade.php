@@ -281,24 +281,59 @@
                     </div>
                     <div class="p-6 space-y-4">
                         @if($selectedServiceName)
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-start">
-                                    <span class="text-xs text-[#7a6b5d]">Layanan:</span>
-                                    <span
-                                        class="text-sm font-bold text-[#3d2b1f] text-right">{{ $selectedServiceName }}</span>
-                                </div>
-                                @if($selectedPackageName)
+                            <div class="space-y-4">
+                                <div class="space-y-3">
                                     <div class="flex justify-between items-start">
-                                        <span class="text-xs text-[#7a6b5d]">Paket:</span>
+                                        <span class="text-xs text-[#7a6b5d]">Layanan:</span>
                                         <span
-                                            class="text-sm font-medium text-[#3d2b1f] text-right">{{ $selectedPackageName }}</span>
+                                            class="text-sm font-bold text-[#3d2b1f] text-right">{{ $selectedServiceName }}</span>
                                     </div>
-                                @endif
-                                <div class="border-t border-dashed border-gray-200 pt-3">
+                                    @if($selectedPackageName)
+                                        <div class="flex justify-between items-start">
+                                            <span class="text-xs text-[#7a6b5d]">Paket:</span>
+                                            <span
+                                                class="text-sm font-medium text-[#3d2b1f] text-right">{{ $selectedPackageName }}</span>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <div class="pt-4 border-t border-[#f0ece7] space-y-4">
+                                    <label class="block text-xs font-bold text-[#3d2b1f] uppercase tracking-widest">Metode Pembayaran</label>
+                                    <div class="space-y-2">
+                                        <label class="relative flex cursor-pointer items-center gap-3 p-3 rounded-xl border {{ $paymentType === 'full_payment' ? 'border-[#3d2b1f] bg-[#fdfaf8]' : 'border-gray-100 hover:border-[#d4c9bb]' }}">
+                                            <input type="radio" wire:model.live="paymentType" value="full_payment" class="sr-only">
+                                            <div class="w-4 h-4 rounded-full border-2 border-[#3d2b1f] flex items-center justify-center p-0.5">
+                                                @if($paymentType === 'full_payment') <div class="w-full h-full rounded-full bg-[#3d2b1f]"></div> @endif
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-bold text-[#3d2b1f]">Bayar Lunas</p>
+                                                <p class="text-[10px] text-[#7a6b5d]">Dapatkan prioritas penjadwalan</p>
+                                            </div>
+                                        </label>
+
+                                        <label class="relative flex cursor-pointer items-center gap-3 p-3 rounded-xl border {{ $paymentType === 'down_payment' ? 'border-[#3d2b1f] bg-[#fdfaf8]' : 'border-gray-100 hover:border-[#d4c9bb]' }}">
+                                            <input type="radio" wire:model.live="paymentType" value="down_payment" class="sr-only">
+                                            <div class="w-4 h-4 rounded-full border-2 border-[#3d2b1f] flex items-center justify-center p-0.5">
+                                                @if($paymentType === 'down_payment') <div class="w-full h-full rounded-full bg-[#3d2b1f]"></div> @endif
+                                            </div>
+                                            <div class="flex-1">
+                                                <p class="text-sm font-bold text-[#3d2b1f]">Down Payment (30%)</p>
+                                                <p class="text-[10px] text-[#7a6b5d]">Kunci jadwal dengan DP</p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="border-t border-dashed border-gray-200 pt-4">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-xs text-[#7a6b5d]">Total Biaya</span>
+                                        <span class="text-sm font-bold text-[#3d2b1f]">Rp {{ number_format($totalAmount, 0, ',', '.') }}</span>
+                                    </div>
                                     <div class="flex justify-between items-center">
-                                        <span class="text-sm text-[#3d2b1f]">Total Estimasi</span>
-                                        <span class="text-xl font-bold text-[#3d2b1f]">Rp
-                                            {{ number_format($totalAmount, 0, ',', '.') }}</span>
+                                        <span class="text-sm text-[#3d2b1f] font-bold">Harus Dibayar</span>
+                                        <span class="text-2xl font-serif font-bold text-[#3d2b1f]">
+                                            Rp {{ number_format($paymentType === 'down_payment' ? $totalAmount * 0.3 : $totalAmount, 0, ',', '.') }}
+                                        </span>
                                     </div>
                                 </div>
                             </div>

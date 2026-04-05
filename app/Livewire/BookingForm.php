@@ -8,7 +8,11 @@ use App\Models\ServicePackage;
 use App\Models\TeamMember;
 use App\Models\Client;
 use App\Models\Booking;
+use App\Models\Payment;
+use App\Services\MidtransService;
+use App\Jobs\ExpireBookingJob;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class BookingForm extends Component
 {
@@ -27,6 +31,7 @@ class BookingForm extends Component
     public $clientEmail = '';
     public $clientPhone = '';
     public $notes = '';
+    public $paymentType = 'full_payment'; // full_payment or down_payment
 
     // Computed / Dynamic
     public $availablePackages = [];
@@ -102,29 +107,71 @@ class BookingForm extends Component
             ]
         );
 
-        // Generate booking code
-        $date = Carbon::now()->format('Ymd');
-        $count = Booking::whereDate('created_at', today())->count() + 1;
-        $bookingCode = 'SWR-' . $date . '-' . str_pad($count, 3, '0', STR_PAD_LEFT);
+        // Start Transaction with Locking
+        return DB::transaction(function () use ($client) {
+            // Check for double booking with lock
+            $existing = Booking::where('booking_date', $this->bookingDate)
+                ->where('booking_time', $this->bookingTime)
+                ->whereIn('status', [Booking::STATUS_PENDING, Booking::STATUS_CONFIRMED])
+                ->lockForUpdate()
+                ->first();
 
-        // Create booking
-        $booking = Booking::create([
-            'booking_code' => $bookingCode,
-            'client_id' => $client->id,
-            'service_id' => $this->selectedService,
-            'package_id' => $this->selectedPackage ?: null,
-            'team_member_id' => $this->selectedTeamMember ?: null,
-            'booking_date' => $this->bookingDate,
-            'booking_time' => $this->bookingTime,
-            'location_type' => $this->locationType,
-            'location_address' => $this->locationAddress ?: null,
-            'total_price' => $this->totalAmount,
-            'status' => 'pending',
-            'notes' => $this->notes ?: null,
-        ]);
+            if ($existing) {
+                $this->addError('bookingTime', 'Maaf, slot waktu ini sudah terisi. Silakan pilih waktu lain.');
+                return;
+            }
 
-        return redirect()->route('booking.check')
-            ->with('success', 'Booking created successfully! Your booking code is: ' . $bookingCode);
+            // Generate booking code
+            $date = Carbon::now()->format('Ymd');
+            $count = Booking::whereDate('created_at', today())->count() + 1;
+            $bookingCode = 'SWR-' . $date . '-' . str_pad($count, 3, '0', STR_PAD_LEFT);
+
+            // Create booking
+            $booking = Booking::create([
+                'booking_code' => $bookingCode,
+                'client_id' => $client->id,
+                'service_id' => $this->selectedService,
+                'package_id' => $this->selectedPackage ?: null,
+                'team_member_id' => $this->selectedTeamMember ?: null,
+                'booking_date' => $this->bookingDate,
+                'booking_time' => $this->bookingTime,
+                'location_type' => $this->locationType,
+                'location_address' => $this->locationAddress ?: null,
+                'total_price' => $this->totalAmount,
+                'status' => Booking::STATUS_PENDING,
+                'payment_status' => Booking::PAYMENT_UNPAID,
+                'notes' => $this->notes ?: null,
+            ]);
+
+            // Calculate payment amount (DP is 30%)
+            $payableAmount = ($this->paymentType === 'down_payment') 
+                ? ($this->totalAmount * 0.3) 
+                : $this->totalAmount;
+
+            // Create Payment Record
+            $paymentId = 'PAY-' . $bookingCode . '-' . ($this->paymentType === 'down_payment' ? 'DP' : 'FULL');
+            $payment = Payment::create([
+                'booking_id' => $booking->id,
+                'external_id' => $paymentId,
+                'amount' => $payableAmount,
+                'payment_type' => $this->paymentType,
+                'status' => Payment::STATUS_PENDING,
+            ]);
+
+            // Generate Snap Token
+            $midtrans = new MidtransService();
+            $snapToken = $midtrans->createSnapToken($booking, $payment);
+
+            if ($snapToken) {
+                $payment->update(['snap_token' => $snapToken]);
+            }
+
+            // Dispatch Expiration Job (60 minutes)
+            ExpireBookingJob::dispatch($booking->id)->delay(now()->addMinutes(60));
+
+            return redirect()->route('booking.status', $booking->booking_code)
+                ->with('success', 'Booking created! Please complete your payment.');
+        });
     }
 
     public function render()

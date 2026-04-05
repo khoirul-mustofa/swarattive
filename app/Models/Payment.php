@@ -11,9 +11,21 @@ class Payment extends Model
 {
     use HasFactory;
 
+    const TYPE_DP = 'down_payment';
+    const TYPE_FULL = 'full_payment';
+    const TYPE_REMAINING = 'remaining';
+
+    const STATUS_PENDING = 'pending';
+    const STATUS_PAID = 'paid';
+    const STATUS_FAILED = 'failed';
+    const STATUS_REFUNDED = 'refunded';
+
     protected $fillable = [
         'booking_id',
         'payment_method_id',
+        'external_id',
+        'snap_token',
+        'payment_url',
         'amount',
         'payment_type',
         'status',

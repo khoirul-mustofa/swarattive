@@ -25,12 +25,8 @@ class BookingController extends Controller
         return view('booking.check');
     }
 
-    public function checkStatus(Request $request)
+    public function show($booking_code)
     {
-        $validated = $request->validate([
-            'booking_code' => 'required|string|max:20',
-        ]);
-
         $booking = Booking::with([
             'client',
             'service.category',
@@ -38,9 +34,14 @@ class BookingController extends Controller
             'teamMember',
             'payments.paymentMethod'
         ])
-        ->where('booking_code', $validated['booking_code'])
+        ->where('booking_code', $booking_code)
         ->firstOrFail();
 
         return view('booking.status', compact('booking'));
+    }
+
+    public function checkStatus(Request $request)
+    {
+        return $this->show($request->booking_code);
     }
 }

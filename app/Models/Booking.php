@@ -10,6 +10,18 @@ class Booking extends Model
 {
     use HasFactory;
 
+    const STATUS_PENDING = 'pending';
+    const STATUS_CONFIRMED = 'confirmed';
+    const STATUS_IN_PROGRESS = 'in_progress';
+    const STATUS_COMPLETED = 'completed';
+    const STATUS_CANCELLED = 'cancelled';
+
+    const PAYMENT_UNPAID = 'unpaid';
+    const PAYMENT_DP_PAID = 'dp_paid';
+    const PAYMENT_FULLY_PAID = 'fully_paid';
+    const PAYMENT_EXPIRED = 'expired';
+    const PAYMENT_FAILED = 'failed';
+
     protected $fillable = [
         'booking_code',
         'client_id',
@@ -22,6 +34,7 @@ class Booking extends Model
         'location_address',
         'total_price',
         'status',
+        'payment_status',
         'notes',
         'confirmed_at',
         'completed_at',
