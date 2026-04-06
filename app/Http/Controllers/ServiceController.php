@@ -7,17 +7,27 @@ use App\Models\Service;
 use App\Models\ServicePackage;
 use App\Models\TeamMember;
 use App\Models\SiteSetting;
+use Illuminate\Support\Facades\Cache;
+
 
 class ServiceController extends Controller
 {
     public function index()
     {
-        $categories = Category::active()->ordered()->get();
-        $services = Service::with(['category', 'packages'])
-            ->active()
-            ->ordered()
-            ->get();
-        $teamMembers = TeamMember::active()->ordered()->get();
+        $categories = Cache::remember('service_categories', now()->addHour(), function () {
+            return Category::active()->ordered()->get();
+        });
+
+        $services = Cache::remember('service_list', now()->addHour(), function () {
+            return Service::with(['category', 'packages'])
+                ->active()
+                ->ordered()
+                ->get();
+        });
+
+        $teamMembers = Cache::remember('team_members', now()->addHour(), function () {
+            return TeamMember::active()->ordered()->get();
+        });
 
         $hero = [
             'image' => SiteSetting::getValue('service_hero_image'),
@@ -27,4 +37,5 @@ class ServiceController extends Controller
 
         return view('services.index', compact('categories', 'services', 'teamMembers', 'hero'));
     }
+
 }

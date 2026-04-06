@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
+
 
 class SiteSetting extends Model
 {
@@ -27,14 +29,17 @@ class SiteSetting extends Model
 
     public static function getValue($key, $default = null)
     {
-        $setting = static::where('key', $key)->first();
+        return Cache::remember("site_setting_{$key}", now()->addHours(24), function () use ($key, $default) {
+            $setting = static::where('key', $key)->first();
 
-        return $setting ? $setting->value : $default;
+            return $setting ? $setting->value : $default;
+        });
     }
+
 
     public static function setValue($key, $value, $type = 'text', $group = 'general')
     {
-        return static::updateOrCreate(
+        $setting = static::updateOrCreate(
             ['key' => $key],
             [
                 'value' => is_array($value) ? $value : $value,
@@ -42,5 +47,10 @@ class SiteSetting extends Model
                 'group' => $group,
             ]
         );
+
+        Cache::forget("site_setting_{$key}");
+
+        return $setting;
     }
+
 }
