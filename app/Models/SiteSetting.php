@@ -49,6 +49,8 @@ class SiteSetting extends Model
         );
 
         Cache::forget("site_setting_{$key}");
+        Cache::forget("footer_settings");
+
 
         return $setting;
     }

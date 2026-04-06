@@ -96,10 +96,10 @@ class PaymentResource extends Resource
                 \Filament\Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'pending' => 'warning',
-                        'completed' => 'success',
-                        'failed' => 'danger',
-                        'refunded' => 'gray',
+                        Payment::STATUS_PENDING => 'warning',
+                        Payment::STATUS_PAID => 'success',
+                        Payment::STATUS_FAILED => 'danger',
+                        Payment::STATUS_REFUNDED => 'gray',
                     })
                     ->sortable(),
                 \Filament\Tables\Columns\TextColumn::make('payment_date')
@@ -109,10 +109,10 @@ class PaymentResource extends Resource
             ->filters([
                 \Filament\Tables\Filters\SelectFilter::make('status')
                     ->options([
-                        'pending' => 'Pending',
-                        'completed' => 'Completed',
-                        'failed' => 'Failed',
-                        'refunded' => 'Refunded',
+                        Payment::STATUS_PENDING => 'Pending',
+                        Payment::STATUS_PAID => 'Completed',
+                        Payment::STATUS_FAILED => 'Failed',
+                        Payment::STATUS_REFUNDED => 'Refunded',
                     ]),
             ])
             ->actions([

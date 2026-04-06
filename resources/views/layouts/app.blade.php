@@ -95,21 +95,20 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-4 text-amber-400">Swarattive</h3>
-                    <p class="text-gray-300">Layanan fotografi profesional untuk setiap momen berharga Anda.</p>
+                    <h3 class="text-xl font-bold mb-4 text-amber-400">{{ config('app.name', 'Swarattive') }}</h3>
+                    <p class="text-gray-300">{{ $footerSettings['description'] }}</p>
                 </div>
+
 
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Layanan</h4>
                     <ul class="space-y-2 text-gray-300">
-                        <li><a href="{{ route('services.index') }}" class="hover:text-amber-400">Fotografi
-                                Pernikahan</a>
-                        </li>
-                        <li><a href="{{ route('services.index') }}" class="hover:text-amber-400">Pre-Wedding</a></li>
-                        <li><a href="{{ route('services.index') }}" class="hover:text-amber-400">Potret</a></li>
-                        <li><a href="{{ route('services.index') }}" class="hover:text-amber-400">Komersial</a></li>
+                        @foreach($footerSettings['categories'] as $cat)
+                            <li><a href="{{ route('services.index') }}#{{ $cat->slug }}" class="hover:text-amber-400">{{ $cat->name }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
+
 
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Tautan Cepat</h4>
@@ -124,11 +123,12 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Kontak</h4>
                     <ul class="space-y-2 text-gray-300">
-                        <li>+62 812 3456 7890</li>
-                        <li>hello@swarattive.com</li>
-                        <li>Jakarta, Indonesia</li>
+                        <li>{{ $footerSettings['phone'] }}</li>
+                        <li>{{ $footerSettings['email'] }}</li>
+                        <li>{!! nl2br(e($footerSettings['address'])) !!}</li>
                     </ul>
                 </div>
+
             </div>
 
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
