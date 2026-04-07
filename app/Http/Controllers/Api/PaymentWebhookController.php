@@ -62,24 +62,16 @@ class PaymentWebhookController extends Controller
     protected function markAsPaid(Payment $payment)
     {
         $payment->update([
-            'status' => Payment::STATUS_PAID,
+            'status' => Payment::STATUS_SETTLEMENT,
             'paid_at' => now(),
         ]);
 
         $booking = $payment->booking;
         
-        if ($payment->payment_type === Payment::TYPE_DP) {
-            $booking->update([
-                'payment_status' => Booking::PAYMENT_DP_PAID,
-                'status' => Booking::STATUS_CONFIRMED,
-                'confirmed_at' => now(),
-            ]);
-        } else {
-            $booking->update([
-                'payment_status' => Booking::PAYMENT_FULLY_PAID,
-                'status' => Booking::STATUS_CONFIRMED,
-                'confirmed_at' => now(),
-            ]);
-        }
+        $booking->update([
+            'payment_status' => Booking::PAYMENT_SETTLEMENT,
+            'status' => Booking::STATUS_CONFIRMED,
+            'confirmed_at' => now(),
+        ]);
     }
 }

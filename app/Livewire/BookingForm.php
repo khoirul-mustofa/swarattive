@@ -26,12 +26,10 @@ class BookingForm extends Component
     public $bookingTime = '';
     public $locationType = 'studio';
     public $locationAddress = '';
-    public $selectedTeamMember = null;
     public $clientName = '';
     public $clientEmail = '';
     public $clientPhone = '';
     public $notes = '';
-    public $paymentType = 'full_payment'; // full_payment or down_payment
 
     // Computed / Dynamic
     public $availablePackages = [];
@@ -87,7 +85,6 @@ class BookingForm extends Component
         $validated = $this->validate([
             'selectedService' => 'required|exists:services,id',
             'selectedPackage' => 'nullable|exists:service_packages,id',
-            'selectedTeamMember' => 'nullable|exists:team_members,id',
             'bookingDate' => 'required|date|after_or_equal:today',
             'bookingTime' => 'required',
             'locationType' => 'required|in:studio,outdoor,venue,custom',
@@ -132,7 +129,6 @@ class BookingForm extends Component
                 'client_id' => $client->id,
                 'service_id' => $this->selectedService,
                 'package_id' => $this->selectedPackage ?: null,
-                'team_member_id' => $this->selectedTeamMember ?: null,
                 'booking_date' => $this->bookingDate,
                 'booking_time' => $this->bookingTime,
                 'location_type' => $this->locationType,
@@ -143,19 +139,17 @@ class BookingForm extends Component
                 'notes' => $this->notes ?: null,
             ]);
 
-            // Calculate payment amount (DP is 30%)
-            $payableAmount = ($this->paymentType === 'down_payment') 
-                ? ($this->totalAmount * 0.3) 
-                : $this->totalAmount;
+            // Calculate payment amount (Always full payment now)
+            $payableAmount = $this->totalAmount;
 
             // Create Payment Record
-            $paymentId = 'PAY-' . $bookingCode . '-' . ($this->paymentType === 'down_payment' ? 'DP' : 'FULL');
+            $paymentId = 'PAY-' . $bookingCode . '-FULL';
             $payment = Payment::create([
                 'booking_id' => $booking->id,
                 'external_id' => $paymentId,
                 'amount' => $payableAmount,
-                'payment_type' => $this->paymentType,
-                'status' => Payment::STATUS_PENDING,
+                'payment_type' => 'full_payment', // Set to full_payment implicitly
+                'status' => 'pending', // We will update Payment model separately
             ]);
 
             // Generate Snap Token

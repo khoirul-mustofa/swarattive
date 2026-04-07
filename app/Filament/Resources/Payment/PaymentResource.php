@@ -61,8 +61,10 @@ class PaymentResource extends Resource
                             ->disablePlaceholderSelection()
                             ->options([
                                 'pending' => 'Pending',
-                                'completed' => 'Completed',
+                                'settlement' => 'Settlement',
                                 'failed' => 'Failed',
+                                'expire' => 'Expire',
+                                'cancel' => 'Cancel',
                                 'refunded' => 'Refunded',
                             ])
                             ->required()
@@ -97,8 +99,10 @@ class PaymentResource extends Resource
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         Payment::STATUS_PENDING => 'warning',
-                        Payment::STATUS_PAID => 'success',
+                        Payment::STATUS_SETTLEMENT => 'success',
                         Payment::STATUS_FAILED => 'danger',
+                        Payment::STATUS_EXPIRE => 'danger',
+                        Payment::STATUS_CANCEL => 'danger',
                         Payment::STATUS_REFUNDED => 'gray',
                     })
                     ->sortable(),
@@ -110,8 +114,10 @@ class PaymentResource extends Resource
                 \Filament\Tables\Filters\SelectFilter::make('status')
                     ->options([
                         Payment::STATUS_PENDING => 'Pending',
-                        Payment::STATUS_PAID => 'Completed',
+                        Payment::STATUS_SETTLEMENT => 'Settlement',
                         Payment::STATUS_FAILED => 'Failed',
+                        Payment::STATUS_EXPIRE => 'Expire',
+                        Payment::STATUS_CANCEL => 'Cancel',
                         Payment::STATUS_REFUNDED => 'Refunded',
                     ]),
             ])

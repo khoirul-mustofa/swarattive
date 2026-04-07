@@ -35,7 +35,13 @@ class HomeController extends Controller
                 ->get();
         });
 
-        return view('home', compact('services', 'portfolioItems', 'latestBlogPosts'));
+        $heroSlides = Cache::remember('home_hero_slides', now()->addHour(), function () {
+            return \App\Models\HeroSlide::where('is_active', true)
+                ->orderBy('order')
+                ->get();
+        });
+
+        return view('home', compact('services', 'portfolioItems', 'latestBlogPosts', 'heroSlides'));
     }
 
 }

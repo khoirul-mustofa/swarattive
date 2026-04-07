@@ -158,73 +158,14 @@
                 </div>
             </div>
 
-            {{-- 3. Pilih Fotografer --}}
+
+
+            {{-- 3. Data Diri --}}
             <div class="bg-white rounded-2xl shadow-sm border border-[#ede8e3] overflow-hidden">
                 <div class="bg-[#3d2b1f] px-6 py-4">
                     <h3 class="text-white font-serif font-semibold text-lg flex items-center gap-2">
                         <span
                             class="bg-[#f0c27f] text-[#3d2b1f] w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span>
-                        Pilih Fotografer
-                    </h3>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        @foreach($teamMembers as $member)
-                            <label
-                                class="relative flex cursor-pointer rounded-xl border p-4 shadow-sm focus:outline-none transition-all duration-200 {{ $selectedTeamMember == $member->id ? 'border-[#3d2b1f] ring-2 ring-[#3d2b1f] ring-opacity-10 bg-[#fdfaf8]' : 'border-gray-200 hover:border-[#d4c9bb]' }}">
-                                <input type="radio" name="selectedTeamMember" wire:model.live="selectedTeamMember"
-                                    value="{{ $member->id }}" class="sr-only">
-                                <div class="flex items-center gap-3 w-full">
-                                    <img src="{{ str_starts_with($member->image_url, 'http') ? $member->image_url : asset('storage/' . $member->image_url) }}"
-                                        class="w-12 h-12 rounded-full object-cover">
-                                    <div class="flex-1">
-                                        <span class="block text-sm font-bold text-[#3d2b1f]">{{ $member->name }}</span>
-                                        <span class="block text-xs text-[#7a6b5d]">{{ $member->role }}</span>
-                                    </div>
-                                    <svg class="h-5 w-5 text-[#3d2b1f] {{ $selectedTeamMember == $member->id ? '' : 'hidden' }}"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </label>
-                        @endforeach
-                        <label
-                            class="relative flex cursor-pointer rounded-xl border p-4 shadow-sm focus:outline-none transition-all duration-200 {{ empty($selectedTeamMember) ? 'border-[#3d2b1f] ring-2 ring-[#3d2b1f] ring-opacity-10 bg-[#fdfaf8]' : 'border-gray-200 hover:border-[#d4c9bb]' }}">
-                            <input type="radio" name="selectedTeamMember" wire:model.live="selectedTeamMember" value=""
-                                class="sr-only">
-                            <div class="flex items-center gap-3 w-full">
-                                <div
-                                    class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-1">
-                                    <span class="block text-sm font-bold text-[#3d2b1f]">Acak / Terserah</span>
-                                    <span class="block text-xs text-[#7a6b5d]">Biarkan kami memilihkan fotografer
-                                        terbaik</span>
-                                </div>
-                                <svg class="h-5 w-5 text-[#3d2b1f] {{ empty($selectedTeamMember) ? '' : 'hidden' }}"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            {{-- 4. Data Diri --}}
-            <div class="bg-white rounded-2xl shadow-sm border border-[#ede8e3] overflow-hidden">
-                <div class="bg-[#3d2b1f] px-6 py-4">
-                    <h3 class="text-white font-serif font-semibold text-lg flex items-center gap-2">
-                        <span
-                            class="bg-[#f0c27f] text-[#3d2b1f] w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
                         Informasi Kontak
                     </h3>
                 </div>
@@ -297,32 +238,7 @@
                                     @endif
                                 </div>
 
-                                <div class="pt-4 border-t border-[#f0ece7] space-y-4">
-                                    <label class="block text-xs font-bold text-[#3d2b1f] uppercase tracking-widest">Metode Pembayaran</label>
-                                    <div class="space-y-2">
-                                        <label class="relative flex cursor-pointer items-center gap-3 p-3 rounded-xl border {{ $paymentType === 'full_payment' ? 'border-[#3d2b1f] bg-[#fdfaf8]' : 'border-gray-100 hover:border-[#d4c9bb]' }}">
-                                            <input type="radio" wire:model.live="paymentType" value="full_payment" class="sr-only">
-                                            <div class="w-4 h-4 rounded-full border-2 border-[#3d2b1f] flex items-center justify-center p-0.5">
-                                                @if($paymentType === 'full_payment') <div class="w-full h-full rounded-full bg-[#3d2b1f]"></div> @endif
-                                            </div>
-                                            <div class="flex-1">
-                                                <p class="text-sm font-bold text-[#3d2b1f]">Bayar Lunas</p>
-                                                <p class="text-[10px] text-[#7a6b5d]">Dapatkan prioritas penjadwalan</p>
-                                            </div>
-                                        </label>
 
-                                        <label class="relative flex cursor-pointer items-center gap-3 p-3 rounded-xl border {{ $paymentType === 'down_payment' ? 'border-[#3d2b1f] bg-[#fdfaf8]' : 'border-gray-100 hover:border-[#d4c9bb]' }}">
-                                            <input type="radio" wire:model.live="paymentType" value="down_payment" class="sr-only">
-                                            <div class="w-4 h-4 rounded-full border-2 border-[#3d2b1f] flex items-center justify-center p-0.5">
-                                                @if($paymentType === 'down_payment') <div class="w-full h-full rounded-full bg-[#3d2b1f]"></div> @endif
-                                            </div>
-                                            <div class="flex-1">
-                                                <p class="text-sm font-bold text-[#3d2b1f]">Down Payment (30%)</p>
-                                                <p class="text-[10px] text-[#7a6b5d]">Kunci jadwal dengan DP</p>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
 
                                 <div class="border-t border-dashed border-gray-200 pt-4">
                                     <div class="flex justify-between items-center mb-1">
@@ -332,7 +248,7 @@
                                     <div class="flex justify-between items-center">
                                         <span class="text-sm text-[#3d2b1f] font-bold">Harus Dibayar</span>
                                         <span class="text-2xl font-serif font-bold text-[#3d2b1f]">
-                                            Rp {{ number_format($paymentType === 'down_payment' ? $totalAmount * 0.3 : $totalAmount, 0, ',', '.') }}
+                                            Rp {{ number_format($totalAmount, 0, ',', '.') }}
                                         </span>
                                     </div>
                                 </div>
@@ -371,7 +287,7 @@
                         Informasi Penting
                     </h4>
                     <ul class="text-xs text-[#7a6b5d] space-y-2 list-disc pl-4">
-                        <li>Pembayaran uang muka (DP) minimal 30% diperlukan untuk konfirmasi jadwal.</li>
+                        <li>Pembayaran wajib dilunaskan untuk mengonfirmasi jadwal.</li>
                         <li>Pembatalan < 3 hari sebelum sesi akan dikenakan biaya administrasi.</li>
                         <li>Hasil edit foto akan selesai dalam 7-14 hari kerja.</li>
                     </ul>

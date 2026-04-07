@@ -37,6 +37,8 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('footerSettings', $footerSettings);
         });
+
+        \App\Models\Booking::observe(\App\Observers\BookingObserver::class);
     }
 
 }

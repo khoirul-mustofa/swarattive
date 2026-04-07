@@ -11,13 +11,13 @@ class Payment extends Model
 {
     use HasFactory;
 
-    const TYPE_DP = 'down_payment';
     const TYPE_FULL = 'full_payment';
-    const TYPE_REMAINING = 'remaining';
 
     const STATUS_PENDING = 'pending';
-    const STATUS_PAID = 'paid';
+    const STATUS_SETTLEMENT = 'settlement';
     const STATUS_FAILED = 'failed';
+    const STATUS_EXPIRE = 'expire';
+    const STATUS_CANCEL = 'cancel';
     const STATUS_REFUNDED = 'refunded';
 
     protected $fillable = [
@@ -48,9 +48,9 @@ class Payment extends Model
         return $this->belongsTo(PaymentMethod::class);
     }
 
-    public function scopePaid($query)
+    public function scopeSettlement($query)
     {
-        return $query->where('status', 'paid');
+        return $query->where('status', self::STATUS_SETTLEMENT);
     }
 
     public function scopePending($query)

@@ -20,21 +20,28 @@
                             {{ $booking->status }}
                         </span>
                         <span class="px-4 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest shadow-sm
-                            @if($booking->payment_status == 'unpaid') bg-gray-200 text-gray-700
-                            @elseif($booking->payment_status == 'dp_paid') bg-blue-100 text-blue-700
-                            @elseif($booking->payment_status == 'fully_paid') bg-green-100 text-green-700
-                            @elseif($booking->payment_status == 'expired' || $booking->payment_status == 'failed') bg-red-100 text-red-700
+                            @if(in_array($booking->payment_status, ['unpaid', 'pending'])) bg-gray-200 text-gray-700
+                            @elseif(in_array($booking->payment_status, ['settlement', 'fully_paid'])) bg-green-100 text-green-700
+                            @elseif(in_array($booking->payment_status, ['expire', 'failed', 'cancel', 'expired'])) bg-red-100 text-red-700
+                            @else bg-blue-100 text-blue-700
                             @endif">
-                            Pembayaran: {{ $booking->payment_status }}
+                            Pembayaran: 
+                            @if(in_array($booking->payment_status, ['unpaid', 'pending'])) Belum Dibayar
+                            @elseif(in_array($booking->payment_status, ['settlement', 'fully_paid'])) Lunas
+                            @elseif(in_array($booking->payment_status, ['expire', 'failed', 'cancel', 'expired'])) Gagal
+                            @else {{ $booking->payment_status }}
+                            @endif
                         </span>
                     </div>
                     <p class="text-white/60 font-mono text-sm tracking-widest uppercase">Kode Booking: {{ $booking->booking_code }}</p>
                 </div>
                 <div class="flex justify-center md:justify-end gap-3">
+                    @if(in_array($booking->payment_status, ['settlement', 'fully_paid']))
                     <a href="{{ route('booking.index') }}" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest transition-all">Pesan Lagi</a>
                     <a href="{{ route('booking.invoice.download', $booking->booking_code) }}" class="p-3 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all" title="Download Invoice">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 00-2 2h2m2 4h10a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 00-2 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
                     </a>
+                    @endif
                 </div>
             </div>
 
@@ -133,7 +140,7 @@
                         </div>
                     </div>
 
-                    @if($booking->payment_status == 'unpaid')
+                    @if(in_array($booking->payment_status, ['unpaid', 'pending']))
                     <div class="bg-amber-50 rounded-2xl p-6 border border-amber-100 space-y-4">
                         <h4 class="text-sm font-bold text-amber-800 flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -145,13 +152,12 @@
                         
                         @if($pendingPayment)
                             <p class="text-xs text-amber-700 leading-relaxed">
-                                Harap selesaikan pembayaran {{ $pendingPayment->payment_type == 'down_payment' ? 'Uang Muka (DP)' : 'Lunas' }} 
-                                sebesar **Rp {{ number_format($pendingPayment->amount, 0, ',', '.') }}** untuk mengunci jadwal pemotretan Anda.
+                                Harap selesaikan pembayaran sebesar **Rp {{ number_format($pendingPayment->amount, 0, ',', '.') }}** untuk mengunci jadwal pemotretan Anda.
                             </p>
                             <div class="pt-2">
                                 <button id="pay-button" data-snap="{{ $pendingPayment->snap_token }}"
-                                    class="w-full bg-[#3d2b1f] text-white py-3 rounded-xl text-xs font-bold uppercase tracking-widest hover:shadow-lg transition-all flex items-center justify-center gap-2">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                                    class="w-full bg-[#3d2b1f] text-white py-3 rounded-xl text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform duration-300 shadow-md flex items-center justify-center gap-2 group">
+                                    <svg class="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
                                     Bayar Sekarang
                                 </button>
                             </div>
@@ -159,20 +165,15 @@
                             <p class="text-xs text-red-700 italic">Terjadi kesalahan pada data pembayaran. Silakan hubungi admin.</p>
                         @endif
                     </div>
-                    @elseif($booking->payment_status == 'dp_paid')
-                    <div class="bg-blue-50 rounded-2xl p-6 border border-blue-100 text-center">
-                        <p class="text-xs text-blue-700 font-bold mb-1 italic">DP Berhasil Dibayar!</p>
-                        <p class="text-[10px] text-blue-600">Jadwal Anda telah terkunci. Pelunasan dapat dilakukan sebelum sesi dimulai.</p>
-                    </div>
-                    @elseif($booking->payment_status == 'fully_paid')
+                    @elseif(in_array($booking->payment_status, ['settlement', 'fully_paid']))
                     <div class="bg-green-50 rounded-2xl p-6 border border-green-100 text-center">
                         <p class="text-xs text-green-700 font-bold mb-1 italic">Pembayaran Lunas!</p>
                         <p class="text-[10px] text-green-600">Terima kasih. Sampai jumpa di hari sesi pemotretan.</p>
                     </div>
-                    @elseif($booking->payment_status == 'expired')
+                    @elseif(in_array($booking->payment_status, ['expire', 'failed', 'cancel', 'expired']))
                     <div class="bg-red-50 rounded-2xl p-6 border border-red-100 text-center">
                         <p class="text-xs text-red-700 font-bold mb-1 italic">Booking Kedaluwarsa</p>
-                        <p class="text-[10px] text-red-600">Waktu pembayaran telah habis. Silakan buat pesanan baru.</p>
+                        <p class="text-[10px] text-red-600">Waktu pembayaran telah habis atau transaksi gagal. Silakan buat pesanan baru.</p>
                         <a href="{{ route('booking.index') }}" class="mt-3 inline-block text-xs font-bold text-[#3d2b1f] border-b border-[#3d2b1f]">Pesan Ulang</a>
                     </div>
                     @endif

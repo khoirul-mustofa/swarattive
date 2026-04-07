@@ -42,8 +42,7 @@
                     <a href="{{ route('contact.index') }}"
                         class="{{ request()->routeIs('contact.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Kontak</a>
                     <a href="{{ route('booking.check') }}"
-                        class="{{ request()->routeIs('booking.check') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Cek
-                        Booking</a>
+                        class="{{ request()->routeIs('booking.check') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Cek Pesanan</a>
                     <a href="{{ route('booking.index') }}"
                         class="bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition-colors {{ request()->routeIs('booking.*') ? 'ring-2 ring-amber-600 ring-offset-2' : '' }}">
                         Pemesanan
@@ -77,8 +76,7 @@
                 <a href="{{ route('contact.index') }}"
                     class="block px-3 py-2 {{ request()->routeIs('contact.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Kontak</a>
                 <a href="{{ route('booking.check') }}"
-                    class="block px-3 py-2 {{ request()->routeIs('booking.check') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Cek
-                    Booking</a>
+                    class="block px-3 py-2 {{ request()->routeIs('booking.check') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Cek Pesanan</a>
                 <a href="{{ route('booking.index') }}"
                     class="block px-3 py-2 {{ request()->routeIs('booking.*') ? 'bg-amber-600 text-white' : 'bg-amber-500 text-white' }} rounded-lg font-bold text-center">Pemesanan</a>
             </div>

@@ -4,32 +4,80 @@
 @section('description', 'Layanan fotografi profesional untuk mengabadikan momen berharga Anda')
 
 @section('content')
-    <!-- Hero Section -->
-    <section class="relative h-screen bg-cover bg-center bg-neutral-900"
-        style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ asset('images/hero-fallback.jpg') }}');">
-        <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-center text-white px-4">
-                <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 animate-fade-in text-center">
-                    Selamat Datang di<br>
-                    <span class="text-amber-400">Swarattive</span><br>
-                    Photography
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto animate-slide-up">
-                    Mengabadikan momen terindah dalam hidup Anda dengan sentuhan seni dan keindahan abadi.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-                    <a href="{{ route('portfolio.index') }}"
-                        class="bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors shadow-lg">
-                        Lihat Portofolio
-                    </a>
-                    <a href="{{ route('booking.index') }}"
-                        class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors">
-                        Pesan Sekarang
-                    </a>
+    <!-- Hero Slider Section -->
+    @if(isset($heroSlides) && $heroSlides->count() > 0)
+        <section x-data="{ currentSlide: 0, slides: {{ $heroSlides->count() }}, init() { setInterval(() => { this.currentSlide = (this.currentSlide + 1) % this.slides }, 5000) } }" class="relative h-screen bg-neutral-900 overflow-hidden">
+            @foreach($heroSlides as $index => $slide)
+                <div x-show="currentSlide === {{ $index }}"
+                     x-transition:enter="transition ease-out duration-1000"
+                     x-transition:enter-start="opacity-0 scale-105"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-1000"
+                     x-transition:leave-start="opacity-100 scale-100"
+                     x-transition:leave-end="opacity-0 scale-105"
+                     class="absolute inset-0 bg-cover bg-center"
+                     style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ str_starts_with($slide->image, 'http') ? $slide->image : asset('storage/' . $slide->image) }}');">
+                    <div class="absolute inset-0 flex items-center justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-left text-white max-w-2xl px-4">
+                            <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
+                                {{ $slide->title }}
+                            </h1>
+                            <p class="text-xl md:text-2xl mb-8 text-gray-200">
+                                {{ $slide->description }}
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4 justify-start">
+                                <a href="{{ $slide->button_url }}"
+                                   class="bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors shadow-lg text-center">
+                                    {{ $slide->button_text }}
+                                </a>
+                                <a href="{{ route('portfolio.index') }}"
+                                   class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors text-center">
+                                    Lihat Portofolio
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+            
+            <!-- Indicators -->
+            <div class="absolute bottom-8 left-0 right-0 flex justify-center gap-2 z-10 hidden md:flex">
+                <template x-for="i in slides" :key="i">
+                    <button @click="currentSlide = i - 1"
+                            class="w-3 h-3 rounded-full transition-colors duration-300"
+                            :class="currentSlide === i - 1 ? 'bg-amber-400' : 'bg-white/50 hover:bg-white/80'">
+                    </button>
+                </template>
+            </div>
+        </section>
+    @else
+        <!-- Fallback Hero Section -->
+        <section class="relative h-screen bg-cover bg-center bg-neutral-900"
+            style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ asset('images/hero-fallback.jpg') }}');">
+            <div class="absolute inset-0 flex items-center justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-left text-white max-w-2xl px-4">
+                    <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6">
+                        Selamat Datang di<br>
+                        <span class="text-amber-400">Swarattive</span><br>
+                        Photography
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 animate-slide-up text-gray-200">
+                        Mengabadikan momen terindah dalam hidup Anda dengan sentuhan seni dan keindahan abadi.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-start animate-slide-up">
+                        <a href="{{ route('portfolio.index') }}"
+                            class="bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors shadow-lg text-center">
+                            Lihat Portofolio
+                        </a>
+                        <a href="{{ route('booking.index') }}"
+                            class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors text-center">
+                            Pesan Sekarang
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     <!-- Services Preview -->
     <section class="py-20 bg-white">
