@@ -32,9 +32,9 @@
                 </div>
                 <div class="flex justify-center md:justify-end gap-3">
                     <a href="{{ route('booking.index') }}" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold uppercase tracking-widest transition-all">Pesan Lagi</a>
-                    <button onclick="window.print()" class="p-3 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all">
+                    <a href="{{ route('booking.invoice.download', $booking->booking_code) }}" class="p-3 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all" title="Download Invoice">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 00-2 2h2m2 4h10a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 00-2 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                    </button>
+                    </a>
                 </div>
             </div>
 

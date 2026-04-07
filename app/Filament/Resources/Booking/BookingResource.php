@@ -24,6 +24,10 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Filament\Actions\Action;
+use App\Models\SiteSetting;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 
 class BookingResource extends Resource
 {
@@ -185,6 +189,37 @@ class BookingResource extends Resource
                     }),
             ])
             ->actions([
+                Action::make('downloadInvoice')
+                    ->label('Invoice')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('warning')
+                    ->action(function (Booking $record) {
+                        $siteName = SiteSetting::getValue('site_name', 'Swarattive');
+                        $contactAddress = SiteSetting::getValue('contact_address', 'Jakarta, Indonesia');
+                        $contactPhone = SiteSetting::getValue('contact_phone', '+62 812 3456 7890');
+                        $contactEmail = SiteSetting::getValue('contact_email', 'hello@swarattive.com');
+                        
+                        $logoPath = public_path('images/logo-primary.png');
+                        $logoBase64 = null;
+                        if (file_exists($logoPath)) {
+                            $type = pathinfo($logoPath, PATHINFO_EXTENSION);
+                            $data = file_get_contents($logoPath);
+                            $logoBase64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                        }
+
+                        $pdf = Pdf::loadView('pdf.booking-invoice', [
+                            'booking' => $record,
+                            'logo' => $logoBase64,
+                            'siteName' => $siteName,
+                            'contactAddress' => $contactAddress,
+                            'contactPhone' => $contactPhone,
+                            'contactEmail' => $contactEmail,
+                        ]);
+
+                        return response()->streamDownload(function () use ($pdf) {
+                            echo $pdf->stream();
+                        }, "invoice-{$record->booking_code}.pdf");
+                    }),
                 EditAction::make(),
                 DeleteAction::make(),
             ])

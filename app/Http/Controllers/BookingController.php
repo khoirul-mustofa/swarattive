@@ -12,6 +12,8 @@ use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use App\Models\SiteSetting;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BookingController extends Controller
 {
@@ -43,5 +45,36 @@ class BookingController extends Controller
     public function checkStatus(Request $request)
     {
         return $this->show($request->booking_code);
+    }
+
+    public function downloadInvoice($booking_code)
+    {
+        $booking = Booking::with(['client', 'service', 'package', 'payments'])
+            ->where('booking_code', $booking_code)
+            ->firstOrFail();
+
+        $siteName = SiteSetting::getValue('site_name', 'Swarattive');
+        $contactAddress = SiteSetting::getValue('contact_address', 'Jakarta, Indonesia');
+        $contactPhone = SiteSetting::getValue('contact_phone', '+62 812 3456 7890');
+        $contactEmail = SiteSetting::getValue('contact_email', 'hello@swarattive.com');
+        
+        $logoPath = public_path('images/logo-primary.png');
+        $logoBase64 = null;
+        if (file_exists($logoPath)) {
+            $type = pathinfo($logoPath, PATHINFO_EXTENSION);
+            $data = file_get_contents($logoPath);
+            $logoBase64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        }
+
+        $pdf = Pdf::loadView('pdf.booking-invoice', [
+            'booking' => $booking,
+            'logo' => $logoBase64,
+            'siteName' => $siteName,
+            'contactAddress' => $contactAddress,
+            'contactPhone' => $contactPhone,
+            'contactEmail' => $contactEmail,
+        ]);
+
+        return $pdf->download("invoice-{$booking->booking_code}.pdf");
     }
 }
