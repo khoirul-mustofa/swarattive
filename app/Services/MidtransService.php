@@ -23,10 +23,12 @@ class MidtransService
      */
     public function createSnapToken(Booking $booking, Payment $payment)
     {
+        $grossAmount = (int) ($payment->amount + $payment->admin_fee);
+
         $params = [
             'transaction_details' => [
                 'order_id' => $payment->external_id,
-                'gross_amount' => (int) $payment->amount,
+                'gross_amount' => $grossAmount,
             ],
             'customer_details' => [
                 'first_name' => $booking->client->name,
@@ -35,17 +37,17 @@ class MidtransService
             ],
             'item_details' => [
                 [
-                    'id' => $booking->service_id,
+                    'id' => 'SERVICE-' . $booking->service_id,
                     'price' => (int) $payment->amount,
                     'quantity' => 1,
                     'name' => $booking->service->name . ($booking->package ? ' - ' . $booking->package->name : ''),
+                ],
+                [
+                    'id' => 'ADMIN-FEE',
+                    'price' => (int) $payment->admin_fee,
+                    'quantity' => 1,
+                    'name' => 'Biaya Layanan/Admin',
                 ]
-            ],
-            'enabled_payments' => [
-                'credit_card', 'mandiri_clickpay', 'cimb_clicks',
-                'bca_klikbca', 'bca_klikpay', 'bri_epay', 'echannel',
-                'permata_va', 'bca_va', 'bni_va', 'bri_va', 'other_va',
-                'gopay', 'indomaret', 'danamon_online', 'akulaku', 'shopeepay'
             ],
             'expiry' => [
                 'start_time' => date('Y-m-d H:i:s O'),
@@ -53,6 +55,12 @@ class MidtransService
                 'duration' => 60
             ]
         ];
+
+        // Map enabled payments if needed, but for now we let it be flexible or use simple logic
+        // If we want to be strict based on selection:
+        /*
+        $params['enabled_payments'] = match($payment->method) { ... };
+        */
 
         try {
             return Snap::getSnapToken($params);

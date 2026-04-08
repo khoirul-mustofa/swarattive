@@ -49,7 +49,13 @@ class PaymentResource extends Resource
                         \Filament\Forms\Components\TextInput::make('amount')
                             ->numeric()
                             ->required()
-                            ->prefix('Rp'),
+                            ->prefix('Rp')
+                            ->label('Base Amount'),
+                        \Filament\Forms\Components\TextInput::make('admin_fee')
+                            ->numeric()
+                            ->required()
+                            ->prefix('Rp')
+                            ->label('Admin Fee'),
                         \Filament\Forms\Components\DateTimePicker::make('payment_date')
     ->native(false)
     ->displayFormat('d M Y H:i')
@@ -94,7 +100,12 @@ class PaymentResource extends Resource
                     ->sortable(),
                 \Filament\Tables\Columns\TextColumn::make('amount')
                     ->money('IDR')
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Base Amount'),
+                \Filament\Tables\Columns\TextColumn::make('admin_fee')
+                    ->money('IDR')
+                    ->sortable()
+                    ->label('Admin Fee'),
                 \Filament\Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {

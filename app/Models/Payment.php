@@ -27,6 +27,7 @@ class Payment extends Model
         'snap_token',
         'payment_url',
         'amount',
+        'admin_fee',
         'payment_type',
         'status',
         'notes',
@@ -35,6 +36,7 @@ class Payment extends Model
 
     protected $casts = [
         'amount' => 'decimal:2',
+        'admin_fee' => 'decimal:2',
         'paid_at' => 'datetime',
     ];
 

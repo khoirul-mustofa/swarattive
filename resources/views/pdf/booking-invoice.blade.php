@@ -380,18 +380,27 @@
                 </div>
                 <div class="summary-totals">
                     <div class="total-row">
-                        <div class="total-label">Subtotal</div>
+                        <div class="total-label">Subtotal Pesanan</div>
                         <div class="total-value">Rp {{ number_format($booking->total_price, 0, ',', '.') }}</div>
                     </div>
-                    @php
-                        $paidAmount = $booking->payments()->where('status', 'paid')->sum('amount');
-                        $remaining = $booking->total_price - $paidAmount;
-                    @endphp
                     <div class="total-row">
-                        <div class="total-label">Total Terbayar</div>
-                        <div class="total-value" style="color: #38a169;">- Rp
-                            {{ number_format($paidAmount, 0, ',', '.') }}
-                        </div>
+                        <div class="total-label">Biaya Layanan/Admin</div>
+                        <div class="total-value">Rp {{ number_format($booking->admin_fee, 0, ',', '.') }}</div>
+                    </div>
+                    @php
+                        // Total payment needed including admin fee
+                        $totalToPay = $booking->total_price + $booking->admin_fee;
+                        // Sum of payments already settled (including their fees if any, but our model stores them separately)
+                        // Actually, Midtrans returns settlement for the whole gross_amount.
+                        // Our Payment model records 'amount' as base and 'admin_fee' as fee.
+                        $paidBase = $booking->payments()->where('status', 'settlement')->sum('amount');
+                        $paidFee = $booking->payments()->where('status', 'settlement')->sum('admin_fee');
+                        $totalPaid = $paidBase + $paidFee;
+                        $remaining = $totalToPay - $totalPaid;
+                    @endphp
+                    <div class="total-row" style="margin-top: 10px; border-top: 1px dotted #e2e8f0; padding-top: 10px;">
+                        <div class="total-label">Total Sudah Terbayar</div>
+                        <div class="total-value" style="color: #38a169;">Rp {{ number_format($totalPaid, 0, ',', '.') }}</div>
                     </div>
 
                     <div class="grand-total-row">

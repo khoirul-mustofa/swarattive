@@ -157,10 +157,7 @@
                     @endif
                 </div>
             </div>
-
-
-
-            {{-- 3. Data Diri --}}
+            {{-- 3. Informasi Kontak --}}
             <div class="bg-white rounded-2xl shadow-sm border border-[#ede8e3] overflow-hidden">
                 <div class="bg-[#3d2b1f] px-6 py-4">
                     <h3 class="text-white font-serif font-semibold text-lg flex items-center gap-2">
@@ -205,6 +202,73 @@
                     </div>
                 </div>
             </div>
+
+            {{-- 4. Metode Pembayaran --}}
+            <div class="bg-white rounded-2xl shadow-sm border border-[#ede8e3] overflow-hidden">
+                <div class="bg-[#3d2b1f] px-6 py-4">
+                    <h3 class="text-white font-serif font-semibold text-lg flex items-center gap-2">
+                        <span
+                            class="bg-[#f0c27f] text-[#3d2b1f] w-6 h-6 rounded-full flex items-center justify-center text-xs">4</span>
+                        Metode Pembayaran
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <p class="text-xs text-[#7a6b5d] mb-4">Pilih metode pembayaran untuk melihat biaya administrasi yang berlaku.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <label wire:key="pm-va" class="relative flex cursor-pointer rounded-xl border p-3 hover:bg-[#fdfaf8] transition-all {{ $paymentMethod === 'va' ? 'border-[#3d2b1f] bg-[#fdfaf8] ring-1 ring-[#3d2b1f]' : 'border-gray-200' }}">
+                            <input type="radio" name="paymentMethod" wire:model.live="paymentMethod" value="va" class="sr-only">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-blue-50 p-2 rounded-lg text-blue-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-[#3d2b1f]">Transfer Bank (VA)</p>
+                                    <p class="text-[10px] text-[#7a6b5d]">Biaya: Rp 4.000</p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label wire:key="pm-cc" class="relative flex cursor-pointer rounded-xl border p-3 hover:bg-[#fdfaf8] transition-all {{ $paymentMethod === 'credit_card' ? 'border-[#3d2b1f] bg-[#fdfaf8] ring-1 ring-[#3d2b1f]' : 'border-gray-200' }}">
+                            <input type="radio" name="paymentMethod" wire:model.live="paymentMethod" value="credit_card" class="sr-only">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-purple-50 p-2 rounded-lg text-purple-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-[#3d2b1f]">Kartu Kredit</p>
+                                    <p class="text-[10px] text-[#7a6b5d]">Biaya: 2.9% + Rp 2.000</p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label wire:key="pm-gopay" class="relative flex cursor-pointer rounded-xl border p-3 hover:bg-[#fdfaf8] transition-all {{ $paymentMethod === 'gopay' ? 'border-[#3d2b1f] bg-[#fdfaf8] ring-1 ring-[#3d2b1f]' : 'border-gray-200' }}">
+                            <input type="radio" name="paymentMethod" wire:model.live="paymentMethod" value="gopay" class="sr-only">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-cyan-50 p-2 rounded-lg text-cyan-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-[#3d2b1f]">GoPay / ShopeePay</p>
+                                    <p class="text-[10px] text-[#7a6b5d]">Biaya: 2%</p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label wire:key="pm-qris" class="relative flex cursor-pointer rounded-xl border p-3 hover:bg-[#fdfaf8] transition-all {{ $paymentMethod === 'qris' ? 'border-[#3d2b1f] bg-[#fdfaf8] ring-1 ring-[#3d2b1f]' : 'border-gray-200' }}">
+                            <input type="radio" name="paymentMethod" wire:model.live="paymentMethod" value="qris" class="sr-only">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-red-50 p-2 rounded-lg text-red-600">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-[#3d2b1f]">QRIS (All Bank/Wallet)</p>
+                                    <p class="text-[10px] text-[#7a6b5d]">Biaya: 0.7%</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {{-- Sidebar: Summary --}}
@@ -240,15 +304,27 @@
 
 
 
-                                <div class="border-t border-dashed border-gray-200 pt-4">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="text-xs text-[#7a6b5d]">Total Biaya</span>
+                                <div class="border-t border-dashed border-gray-200 pt-4 space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-xs text-[#7a6b5d]">Subtotal Pesanan</span>
                                         <span class="text-sm font-bold text-[#3d2b1f]">Rp {{ number_format($totalAmount, 0, ',', '.') }}</span>
                                     </div>
                                     <div class="flex justify-between items-center">
-                                        <span class="text-sm text-[#3d2b1f] font-bold">Harus Dibayar</span>
+                                        <div class="flex items-center gap-1">
+                                            <span class="text-xs text-[#7a6b5d]">Biaya Admin</span>
+                                            <div class="group relative">
+                                                <svg class="w-3 h-3 text-[#7a6b5d] cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                                <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-[#3d2b1f] text-white text-[10px] rounded shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20">
+                                                    Biaya transaksi layanan Midtrans sesuai metode yang dipilih.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="text-sm font-medium text-amber-600">+ Rp {{ number_format($adminFee, 0, ',', '.') }}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center pt-2 border-t border-gray-100">
+                                        <span class="text-sm text-[#3d2b1f] font-bold">Total Pembayaran</span>
                                         <span class="text-2xl font-serif font-bold text-[#3d2b1f]">
-                                            Rp {{ number_format($totalAmount, 0, ',', '.') }}
+                                            Rp {{ number_format($grossAmount, 0, ',', '.') }}
                                         </span>
                                     </div>
                                 </div>

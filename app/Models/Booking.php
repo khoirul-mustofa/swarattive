@@ -32,6 +32,7 @@ class Booking extends Model
         'location_type',
         'location_address',
         'total_price',
+        'admin_fee',
         'status',
         'payment_status',
         'notes',
@@ -43,6 +44,7 @@ class Booking extends Model
         'booking_date' => 'date',
         'booking_time' => 'datetime:H:i:s',
         'total_price' => 'decimal:2',
+        'admin_fee' => 'decimal:2',
         'confirmed_at' => 'datetime',
         'completed_at' => 'datetime',
     ];

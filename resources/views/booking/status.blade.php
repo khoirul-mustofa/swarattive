@@ -107,10 +107,18 @@
                             <span class="text-sm font-semibold text-[#3d2b1f]">{{ $booking->teamMember->name }}</span>
                         </div>
                         @endif
-                        <div class="pt-4 border-t border-dashed border-gray-200">
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm text-[#3d2b1f] font-bold">Total Biaya</span>
-                                <span class="text-2xl font-serif font-bold text-[#3d2b1f]">Rp {{ number_format($booking->total_price, 0, ',', '.') }}</span>
+                        <div class="pt-4 border-t border-dashed border-gray-200 space-y-2">
+                            <div class="flex justify-between items-center text-xs text-[#7a6b5d]">
+                                <span>Subtotal Pesanan</span>
+                                <span>Rp {{ number_format($booking->total_price, 0, ',', '.') }}</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs text-amber-600">
+                                <span>Biaya Layanan/Admin</span>
+                                <span>+ Rp {{ number_format($booking->admin_fee, 0, ',', '.') }}</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-2 border-t border-gray-100">
+                                <span class="text-sm text-[#3d2b1f] font-bold">Total Pembayaran</span>
+                                <span class="text-2xl font-serif font-bold text-[#3d2b1f]">Rp {{ number_format($booking->total_price + $booking->admin_fee, 0, ',', '.') }}</span>
                             </div>
                         </div>
                     </div>
@@ -152,7 +160,7 @@
                         
                         @if($pendingPayment)
                             <p class="text-xs text-amber-700 leading-relaxed">
-                                Harap selesaikan pembayaran sebesar **Rp {{ number_format($pendingPayment->amount, 0, ',', '.') }}** untuk mengunci jadwal pemotretan Anda.
+                                Harap selesaikan pembayaran sebesar **Rp {{ number_format($pendingPayment->amount + $pendingPayment->admin_fee, 0, ',', '.') }}** untuk mengunci jadwal pemotretan Anda.
                             </p>
                             <div class="pt-2">
                                 <button id="pay-button" data-snap="{{ $pendingPayment->snap_token }}"

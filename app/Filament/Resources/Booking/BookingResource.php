@@ -94,7 +94,13 @@ class BookingResource extends Resource
                         TextInput::make('total_price')
                             ->numeric()
                             ->prefix('Rp')
-                            ->required(),
+                            ->required()
+                            ->label('Base Price'),
+                        TextInput::make('admin_fee')
+                            ->numeric()
+                            ->prefix('Rp')
+                            ->required()
+                            ->label('Admin Fee (Midtrans)'),
                     ]),
                 Section::make('Schedule & Location')
                     ->columns(2)
@@ -167,7 +173,12 @@ class BookingResource extends Resource
                     ->sortable(),
                 TextColumn::make('total_price')
                     ->money('IDR')
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Base Price'),
+                TextColumn::make('admin_fee')
+                    ->money('IDR')
+                    ->sortable()
+                    ->label('Admin Fee'),
             ])
             ->filters([
                 SelectFilter::make('status')

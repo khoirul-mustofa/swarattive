@@ -6,17 +6,15 @@
 @section('content')
     <!-- Hero Slider Section -->
     @if(isset($heroSlides) && $heroSlides->count() > 0)
-        <section x-data="{ currentSlide: 0, slides: {{ $heroSlides->count() }}, init() { setInterval(() => { this.currentSlide = (this.currentSlide + 1) % this.slides }, 5000) } }" class="relative h-screen bg-neutral-900 overflow-hidden">
+        <section
+            x-data="{ currentSlide: 0, slides: {{ $heroSlides->count() }}, init() { setInterval(() => { this.currentSlide = (this.currentSlide + 1) % this.slides }, 5000) } }"
+            class="relative h-screen bg-neutral-900 overflow-hidden">
             @foreach($heroSlides as $index => $slide)
-                <div x-show="currentSlide === {{ $index }}"
-                     x-transition:enter="transition ease-out duration-1000"
-                     x-transition:enter-start="opacity-0 scale-105"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     x-transition:leave="transition ease-in duration-1000"
-                     x-transition:leave-start="opacity-100 scale-100"
-                     x-transition:leave-end="opacity-0 scale-105"
-                     class="absolute inset-0 bg-cover bg-center"
-                     style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ str_starts_with($slide->image, 'http') ? $slide->image : asset('storage/' . $slide->image) }}');">
+                <div x-show="currentSlide === {{ $index }}" x-transition:enter="transition ease-out duration-1000"
+                    x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 scale-100"
+                    x-transition:leave-end="opacity-0 scale-105" class="absolute inset-0 bg-cover bg-center"
+                    style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ str_starts_with($slide->image, 'http') ? $slide->image : asset('storage/' . $slide->image) }}');">
                     <div class="absolute inset-0 flex items-center justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-left text-white max-w-2xl px-4">
                             <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
@@ -27,11 +25,11 @@
                             </p>
                             <div class="flex flex-col sm:flex-row gap-4 justify-start">
                                 <a href="{{ $slide->button_url }}"
-                                   class="bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors shadow-lg text-center">
+                                    class="bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors shadow-lg text-center">
                                     {{ $slide->button_text }}
                                 </a>
                                 <a href="{{ route('portfolio.index') }}"
-                                   class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors text-center">
+                                    class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors text-center">
                                     Lihat Portofolio
                                 </a>
                             </div>
@@ -39,13 +37,12 @@
                     </div>
                 </div>
             @endforeach
-            
+
             <!-- Indicators -->
-            <div class="absolute bottom-8 left-0 right-0 flex justify-center gap-2 z-10 hidden md:flex">
+            <div class="absolute bottom-20 left-0 right-0 flex justify-center gap-2 z-10 hidden md:flex">
                 <template x-for="i in slides" :key="i">
-                    <button @click="currentSlide = i - 1"
-                            class="w-3 h-3 rounded-full transition-colors duration-300"
-                            :class="currentSlide === i - 1 ? 'bg-amber-400' : 'bg-white/50 hover:bg-white/80'">
+                    <button @click="currentSlide = i - 1" class="w-3 h-3 rounded-full transition-colors duration-300"
+                        :class="currentSlide === i - 1 ? 'bg-amber-400' : 'bg-white/50 hover:bg-white/80'">
                     </button>
                 </template>
             </div>
@@ -84,7 +81,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-serif font-bold text-gray-900 mb-4">Layanan Kami</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Layanan fotografi profesional yang disesuaikan dengan kebutuhan Anda
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Layanan fotografi profesional yang disesuaikan dengan
+                    kebutuhan Anda
                 </p>
             </div>
 
@@ -124,8 +122,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @forelse($portfolioItems as $item)
                     <div class="group relative overflow-hidden rounded-lg shadow-lg aspect-square">
-                        <img src="{{ $item->image_url }}" alt="{{ $item->title }}"
-                            loading="lazy" decoding="async"
+                        <img src="{{ $item->image_url }}" alt="{{ $item->title }}" loading="lazy" decoding="async"
                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -133,7 +130,8 @@
                                 class="absolute bottom-6 left-6 text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                 <h3 class="text-xl font-bold mb-1">{{ $item->title }}</h3>
                                 <p class="text-amber-400 text-sm font-semibold tracking-wider uppercase">
-                                    {{ $item->category->name ?? 'Photography' }}</p>
+                                    {{ $item->category->name ?? 'Photography' }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -172,8 +170,7 @@
                         <article
                             class="group relative bg-white border border-gray-100 rounded-2xl p-4 hover:shadow-2xl transition-all duration-300">
                             <div class="relative h-48 mb-6 overflow-hidden rounded-xl">
-                                <img src="{{ $post->image_url }}" alt="{{ $post->title }}"
-                                    loading="lazy" decoding="async"
+                                <img src="{{ $post->image_url }}" alt="{{ $post->title }}" loading="lazy" decoding="async"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
                             <div class="px-2">

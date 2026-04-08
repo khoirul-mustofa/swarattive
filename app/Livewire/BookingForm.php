@@ -30,17 +30,21 @@ class BookingForm extends Component
     public $clientEmail = '';
     public $clientPhone = '';
     public $notes = '';
+    public $paymentMethod = 'va'; // Default to Bank Transfer
 
     // Computed / Dynamic
     public $availablePackages = [];
     public $totalAmount = 0;
     public $selectedServiceName = '';
     public $selectedPackageName = '';
+    public $adminFee = 0;
+    public $grossAmount = 0;
 
     public function mount()
     {
         $this->services = Service::with(['category', 'packages'])->active()->ordered()->get();
         $this->teamMembers = TeamMember::active()->ordered()->get();
+        $this->calculateFees();
     }
 
     public function updatedSelectedService($value)
@@ -60,6 +64,7 @@ class BookingForm extends Component
         } else {
             $this->selectedServiceName = '';
         }
+        $this->calculateFees();
     }
 
     public function updatedSelectedPackage($value)
@@ -78,6 +83,50 @@ class BookingForm extends Component
                 $this->totalAmount = $service->base_price;
             }
         }
+        $this->calculateFees();
+    }
+
+    public function updatedPaymentMethod()
+    {
+        $this->calculateFees();
+    }
+
+    public function calculateFees()
+    {
+        $basePrice = $this->totalAmount ?: 0;
+        $fee = 0;
+
+        switch ($this->paymentMethod) {
+            case 'va':
+                $fee = 4000;
+                break;
+            case 'credit_card':
+                $fee = ($basePrice * 0.029) + 2000;
+                break;
+            case 'gopay':
+            case 'shopeepay':
+            case 'kredivo':
+                $fee = $basePrice * 0.02;
+                break;
+            case 'qris':
+                $fee = $basePrice * 0.007;
+                break;
+            case 'dana':
+                $fee = $basePrice * 0.015;
+                break;
+            case 'akulaku':
+                $fee = $basePrice * 0.017;
+                break;
+            case 'indomaret':
+            case 'alfamart':
+                $fee = 5000;
+                break;
+            default:
+                $fee = 0;
+        }
+
+        $this->adminFee = round($fee);
+        $this->grossAmount = $basePrice + $this->adminFee;
     }
 
     public function submit()
@@ -134,22 +183,24 @@ class BookingForm extends Component
                 'location_type' => $this->locationType,
                 'location_address' => $this->locationAddress ?: null,
                 'total_price' => $this->totalAmount,
+                'admin_fee' => $this->adminFee,
                 'status' => Booking::STATUS_PENDING,
                 'payment_status' => Booking::PAYMENT_UNPAID,
                 'notes' => $this->notes ?: null,
             ]);
 
-            // Calculate payment amount (Always full payment now)
-            $payableAmount = $this->totalAmount;
+            // Calculate payment amount (Base + Fee)
+            $payableAmount = $this->totalAmount + $this->adminFee;
 
             // Create Payment Record
             $paymentId = 'PAY-' . $bookingCode . '-FULL';
             $payment = Payment::create([
                 'booking_id' => $booking->id,
                 'external_id' => $paymentId,
-                'amount' => $payableAmount,
+                'amount' => $this->totalAmount,
+                'admin_fee' => $this->adminFee,
                 'payment_type' => 'full_payment', // Set to full_payment implicitly
-                'status' => 'pending', // We will update Payment model separately
+                'status' => 'pending', 
             ]);
 
             // Generate Snap Token
