@@ -12,12 +12,37 @@ class HeroSlideForm
             ->components([
                 \Filament\Schemas\Components\Section::make('Gambar & Detail')
                     ->schema([
-                        \Filament\Forms\Components\FileUpload::make('image')
+                        \Filament\Forms\Components\Select::make('image_source')
+                            ->label('Sumber Gambar')
+                            ->helperText('Pilih asal gambar hero slide.')
+                            ->options([
+                                'upload' => 'Upload Gambar (Produksi)',
+                                'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
+                            ])
+                            ->native(false)
+                            ->formatStateUsing(fn ($record) => $record?->image_path ? 'upload' : 'url')
+                            ->live()
+                            ->dehydrated(false)
+                            ->columnSpanFull(),
+
+                        \Filament\Forms\Components\FileUpload::make('image_path')
+                            ->label('Gambar Slide (Local)')
                             ->image()
+                            ->disk('public')
                             ->directory('hero-slides')
-                            ->required()
+                            ->visible(fn ($get) => $get('image_source') === 'upload')
+                            ->required(fn ($get) => $get('image_source') === 'upload')
                             ->columnSpanFull()
                             ->helperText('Gambar utama untuk slider. Direkomendasikan ukuran 1920x1080px.'),
+
+                        \Filament\Forms\Components\TextInput::make('image_url')
+                            ->label('Gambar Slide (External URL)')
+                            ->url()
+                            ->visible(fn ($get) => $get('image_source') === 'url')
+                            ->required(fn ($get) => $get('image_source') === 'url')
+                            ->columnSpanFull()
+                            ->helperText('Masukkan URL gambar eksternal.'),
+
                         \Filament\Forms\Components\TextInput::make('title')
                             ->maxLength(255),
                         \Filament\Forms\Components\Textarea::make('description')

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('hero_slides', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->comment('Bisa URL atau path upload');
+            $table->string('image_path')->nullable();
+            $table->string('image_url')->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('button_text')->nullable()->default('Pesan Sekarang');

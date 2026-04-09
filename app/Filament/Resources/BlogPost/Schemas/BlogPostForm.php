@@ -59,7 +59,7 @@ class BlogPostForm
                                 'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
                             ])
                             ->native(false)
-                            ->default(fn ($get) => $get('image_path') ? 'upload' : 'url')
+                            ->formatStateUsing(fn ($record) => $record?->image_path ? 'upload' : 'url')
                             ->live()
                             ->dehydrated(false),
                         FileUpload::make('image_path')

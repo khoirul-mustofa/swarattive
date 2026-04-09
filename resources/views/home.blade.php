@@ -14,7 +14,7 @@
                     x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100"
                     x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 scale-100"
                     x-transition:leave-end="opacity-0 scale-105" class="absolute inset-0 bg-cover bg-center"
-                    style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ str_starts_with($slide->image, 'http') ? $slide->image : asset('storage/' . $slide->image) }}');">
+                    style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ $slide->image_url }}');">
                     <div class="absolute inset-0 flex items-center justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-left text-white max-w-2xl px-4">
                             <h1 class="text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">

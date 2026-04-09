@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class HeroSlide extends Model
 {
     protected $fillable = [
-        'image',
+        'image_path',
+        'image_url',
         'title',
         'description',
         'button_text',
@@ -15,4 +16,12 @@ class HeroSlide extends Model
         'order',
         'is_active',
     ];
+
+    public function getImageUrlAttribute($value)
+    {
+        if ($this->image_path) {
+            return \Illuminate\Support\Facades\Storage::url($this->image_path);
+        }
+        return $value;
+    }
 }

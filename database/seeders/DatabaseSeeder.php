@@ -201,6 +201,7 @@ class DatabaseSeeder extends Seeder
             ContactSettingSeeder::class,
             BlogPostSeeder::class,
             PortfolioItemSeeder::class,
+            HeroSlideSeeder::class,
         ]);
 
         $this->command->info('Database telah diisi dengan data standar produksi!');
