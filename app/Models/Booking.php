@@ -17,7 +17,7 @@ class Booking extends Model
     const STATUS_CANCELLED = 'cancelled';
 
     const PAYMENT_UNPAID = 'unpaid';
-    const PAYMENT_SETTLEMENT = 'settlement';
+    const PAYMENT_SETTLEMENT = 'fully_paid';
     const PAYMENT_EXPIRED = 'expired';
     const PAYMENT_FAILED = 'failed';
 

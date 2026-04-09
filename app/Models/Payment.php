@@ -14,10 +14,10 @@ class Payment extends Model
     const TYPE_FULL = 'full_payment';
 
     const STATUS_PENDING = 'pending';
-    const STATUS_SETTLEMENT = 'settlement';
+    const STATUS_SETTLEMENT = 'paid';
     const STATUS_FAILED = 'failed';
-    const STATUS_EXPIRE = 'expire';
-    const STATUS_CANCEL = 'cancel';
+    const STATUS_EXPIRE = 'failed';
+    const STATUS_CANCEL = 'failed';
     const STATUS_REFUNDED = 'refunded';
 
     protected $fillable = [
