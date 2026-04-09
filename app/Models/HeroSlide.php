@@ -24,4 +24,15 @@ class HeroSlide extends Model
         }
         return $value;
     }
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('home_hero_slides');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('home_hero_slides');
+        });
+    }
 }

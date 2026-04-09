@@ -63,4 +63,15 @@ class BlogPost extends Model
         $wordCount = str_word_count(strip_tags($this->content));
         return ceil($wordCount / $wordsPerMinute);
     }
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('home_blog_posts');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('home_blog_posts');
+        });
+    }
 }

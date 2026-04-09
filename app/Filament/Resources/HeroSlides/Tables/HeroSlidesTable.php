@@ -13,7 +13,7 @@ class HeroSlidesTable
     {
         return $table
             ->columns([
-                \Filament\Tables\Columns\ImageColumn::make('image'),
+                \Filament\Tables\Columns\ImageColumn::make('image_url'),
                 \Filament\Tables\Columns\TextColumn::make('title')
                     ->searchable()
                     ->sortable(),

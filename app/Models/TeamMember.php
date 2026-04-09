@@ -49,4 +49,15 @@ class TeamMember extends Model
     {
         return $query->orderBy('sort_order');
     }
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('team_members');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('team_members');
+        });
+    }
 }

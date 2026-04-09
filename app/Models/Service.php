@@ -64,4 +64,17 @@ class Service extends Model
     {
         return $query->orderBy('sort_order');
     }
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('home_services');
+            \Illuminate\Support\Facades\Cache::forget('service_list');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('home_services');
+            \Illuminate\Support\Facades\Cache::forget('service_list');
+        });
+    }
 }

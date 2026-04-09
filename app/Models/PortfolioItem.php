@@ -76,4 +76,15 @@ class PortfolioItem extends Model
     {
         return $this->shoot_date->format('F d, Y');
     }
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('home_portfolio');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('home_portfolio');
+        });
+    }
 }

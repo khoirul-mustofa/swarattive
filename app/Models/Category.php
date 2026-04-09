@@ -14,8 +14,21 @@ class Category extends Model
 
     protected static function booted()
     {
-        static::saved(fn () => Cache::forget('footer_settings'));
-        static::deleted(fn () => Cache::forget('footer_settings'));
+        static::saved(function () {
+            Cache::forget('footer_settings');
+            Cache::forget('portfolio_categories');
+            Cache::forget('service_categories');
+            Cache::forget('service_list');
+            Cache::forget('home_portfolio');
+        });
+
+        static::deleted(function () {
+            Cache::forget('footer_settings');
+            Cache::forget('portfolio_categories');
+            Cache::forget('service_categories');
+            Cache::forget('service_list');
+            Cache::forget('home_portfolio');
+        });
     }
 
     protected $fillable = [
