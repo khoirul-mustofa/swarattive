@@ -7,13 +7,40 @@
     <!-- Hero Slider Section -->
     @if(isset($heroSlides) && $heroSlides->count() > 0)
         <section
-            x-data="{ currentSlide: 0, slides: {{ $heroSlides->count() }}, init() { setInterval(() => { this.currentSlide = (this.currentSlide + 1) % this.slides }, 5000) } }"
-            class="relative h-screen bg-neutral-900 overflow-hidden">
+            x-data="{ 
+                currentSlide: 0, 
+                slides: {{ $heroSlides->count() }},
+                timer: null,
+                init() {
+                    this.startInterval();
+                },
+                startInterval() {
+                    this.timer = setInterval(() => {
+                        this.next();
+                    }, 5000);
+                },
+                resetInterval() {
+                    clearInterval(this.timer);
+                    this.startInterval();
+                },
+                next() {
+                    this.currentSlide = (this.currentSlide + 1) % this.slides;
+                },
+                prev() {
+                    this.currentSlide = (this.currentSlide === 0) ? this.slides - 1 : this.currentSlide - 1;
+                }
+            }"
+            class="relative h-screen bg-neutral-900 overflow-hidden group">
             @foreach($heroSlides as $index => $slide)
-                <div x-show="currentSlide === {{ $index }}" x-transition:enter="transition ease-out duration-1000"
-                    x-transition:enter-start="opacity-0 scale-105" x-transition:enter-end="opacity-100 scale-100"
-                    x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 scale-100"
-                    x-transition:leave-end="opacity-0 scale-105" class="absolute inset-0 bg-cover bg-center"
+                <div x-cloak x-show="currentSlide === {{ $index }}" 
+                    x-transition:enter="transition ease-out duration-1000"
+                    x-transition:enter-start="opacity-0 scale-105" 
+                    x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-1000" 
+                    x-transition:leave-start="opacity-100 scale-100"
+                    x-transition:leave-end="opacity-0 scale-105" 
+                    class="absolute inset-0 bg-cover bg-center"
+                    :class="currentSlide === {{ $index }} ? 'z-10' : 'z-0'"
                     style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ $slide->image_url }}');">
                     <div class="absolute inset-0 flex items-center justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-left text-white max-w-2xl px-4">
@@ -38,10 +65,28 @@
                 </div>
             @endforeach
 
+            <!-- Navigation Arrows -->
+            <div class="absolute inset-y-0 left-4 right-4 flex items-center justify-between z-20 pointer-events-none">
+                <button 
+                    @click="prev(); resetInterval()" 
+                    class="p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-amber-600 transition-all pointer-events-auto group-hover:opacity-100 opacity-0 md:opacity-50">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <button 
+                    @click="next(); resetInterval()" 
+                    class="p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-amber-600 transition-all pointer-events-auto group-hover:opacity-100 opacity-0 md:opacity-50">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+
             <!-- Indicators -->
-            <div class="absolute bottom-20 left-0 right-0 flex justify-center gap-2 z-10 hidden md:flex">
+            <div class="absolute bottom-20 left-0 right-0 flex justify-center gap-2 z-20 hidden md:flex">
                 <template x-for="i in slides" :key="i">
-                    <button @click="currentSlide = i - 1" class="w-3 h-3 rounded-full transition-colors duration-300"
+                    <button @click="currentSlide = i - 1; resetInterval()" class="w-3 h-3 rounded-full transition-colors duration-300"
                         :class="currentSlide === i - 1 ? 'bg-amber-400' : 'bg-white/50 hover:bg-white/80'">
                     </button>
                 </template>
