@@ -23,11 +23,19 @@ class MidtransService
      */
     public function createSnapToken(Booking $booking, Payment $payment)
     {
+        // Bersihkan suffix acak sebelumnya jika ada (format: -XXXXX atau -FULL) untuk regenerasi
+        // Kode booking asli (SWR-...) harus tetap utuh.
+        $baseId = preg_replace('/-(FULL|[A-Z0-9]{5})$/', '', $payment->external_id);
+        $uniqueId = $baseId . '-' . \Illuminate\Support\Str::upper(\Illuminate\Support\Str::random(5));
+        
+        // Update di database agar Webhook bisa menemukan datanya nanti
+        $payment->update(['external_id' => $uniqueId]);
+
         $grossAmount = (int) ($payment->amount + $payment->admin_fee);
 
         $params = [
             'transaction_details' => [
-                'order_id' => $payment->external_id,
+                'order_id' => $uniqueId,
                 'gross_amount' => $grossAmount,
             ],
             'customer_details' => [

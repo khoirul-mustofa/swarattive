@@ -193,7 +193,7 @@ class BookingForm extends Component
             $payableAmount = $this->totalAmount + $this->adminFee;
 
             // Create Payment Record
-            $paymentId = 'PAY-' . $bookingCode . '-FULL';
+            $paymentId = 'PAY-' . $bookingCode;
             $payment = Payment::create([
                 'booking_id' => $booking->id,
                 'external_id' => $paymentId,

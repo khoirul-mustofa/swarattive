@@ -39,6 +39,20 @@ class BookingController extends Controller
         ->where('booking_code', $booking_code)
         ->firstOrFail();
 
+        // Auto-Regenerate Snap Token jika pending dan token kosong/hilang
+        $pendingPayment = $booking->payments()
+            ->where('status', 'pending')
+            ->whereNull('snap_token')
+            ->first();
+
+        if ($pendingPayment) {
+            $midtrans = new \App\Services\MidtransService();
+            $snapToken = $midtrans->createSnapToken($booking, $pendingPayment);
+            if ($snapToken) {
+                $pendingPayment->update(['snap_token' => $snapToken]);
+            }
+        }
+
         return view('booking.status', compact('booking'));
     }
 
