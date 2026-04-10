@@ -1,11 +1,11 @@
 @props(['teamMembers'])
 
-<section class="py-20 lg:py-32 bg-white">
+<section class="py-20 lg:py-32 bg-white dark:bg-neutral-900 transition-colors duration-500">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div class="max-w-2xl">
-                <h2 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 mb-4">Kenali Para <span class="text-amber-600 italic">Kreator</span> Kami</h2>
-                <p class="text-neutral-500 text-lg">Tim profesional kami siap mengabadikan setiap momen spesial Anda dengan perspektif unik dan penuh dedikasi.</p>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 dark:text-white mb-4">Kenali Para <span class="text-amber-600 dark:text-amber-500 italic">Kreator</span> Kami</h2>
+                <p class="text-neutral-500 dark:text-gray-400 text-lg transition-colors">Tim profesional kami siap mengabadikan setiap momen spesial Anda dengan perspektif unik dan penuh dedikasi.</p>
             </div>
             <div class="w-16 h-16 border-t-4 border-r-4 border-amber-500 rounded-tr-3xl hidden md:block opacity-30"></div>
         </div>
@@ -52,13 +52,13 @@
                         </div>
                     </div>
                     <div>
-                        <h4 class="text-xl font-bold text-neutral-900 mb-1 tracking-tight">{{ $member->name }}</h4>
-                        <p class="text-amber-600 font-bold text-xs uppercase tracking-widest">{{ $member->role }}</p>
+                        <h4 class="text-xl font-bold text-neutral-900 dark:text-white mb-1 tracking-tight transition-colors">{{ $member->name }}</h4>
+                        <p class="text-amber-600 dark:text-amber-500 font-bold text-xs uppercase tracking-widest transition-colors">{{ $member->role }}</p>
                     </div>
                 </div>
             @empty
-                <div class="col-span-full py-16 text-center bg-neutral-50 rounded-3xl border-2 border-dashed border-neutral-200">
-                    <p class="text-neutral-400">Belum ada anggota tim yang ditambahkan.</p>
+                <div class="col-span-full py-16 text-center bg-neutral-50 dark:bg-neutral-800 rounded-3xl border-2 border-dashed border-neutral-200 dark:border-neutral-700 transition-colors">
+                    <p class="text-neutral-400 dark:text-gray-500">Belum ada anggota tim yang ditambahkan.</p>
                 </div>
             @endforelse
         </div>

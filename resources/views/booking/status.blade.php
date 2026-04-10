@@ -3,12 +3,12 @@
 @section('title', 'Status Booking: ' . $booking->booking_code . ' - Swarattive Photography')
 
 @section('content')
-    <div class="bg-[#faf7f4] min-h-screen py-12 md:py-20">
+    <div class="bg-[#faf7f4] dark:bg-neutral-900 min-h-screen py-12 md:py-20 transition-colors">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             {{-- Header Status --}}
-            <div class="bg-white rounded-3xl shadow-sm border border-[#ede8e3] overflow-hidden mb-8">
+            <div class="bg-white dark:bg-neutral-800 rounded-3xl shadow-sm border border-[#ede8e3] dark:border-neutral-700 overflow-hidden mb-8 transition-colors">
                 <div
-                    class="bg-[#3d2b1f] px-6 py-10 md:px-10 text-center md:text-left flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    class="bg-[#3d2b1f] dark:bg-black px-6 py-10 md:px-10 text-center md:text-left flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
                         <div class="flex flex-col md:flex-row items-center gap-3 mb-2">
                             <h1 class="text-white font-serif font-bold text-2xl md:text-3xl">Status Pesanan</h1>
@@ -21,10 +21,10 @@
                                 {{ $booking->status }}
                             </span>
                             <span class="px-4 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest shadow-sm
-                                @if(in_array($booking->payment_status, ['unpaid', 'pending'])) bg-gray-200 text-gray-700
-                                @elseif(in_array($booking->payment_status, ['settlement', 'fully_paid'])) bg-green-100 text-green-700
-                                @elseif(in_array($booking->payment_status, ['expire', 'failed', 'cancel', 'expired'])) bg-red-100 text-red-700
-                                @else bg-blue-100 text-blue-700
+                                @if(in_array($booking->payment_status, ['unpaid', 'pending'])) bg-gray-200 dark:bg-neutral-700 text-gray-700 dark:text-gray-300
+                                @elseif(in_array($booking->payment_status, ['settlement', 'fully_paid'])) bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400
+                                @elseif(in_array($booking->payment_status, ['expire', 'failed', 'cancel', 'expired'])) bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400
+                                @else bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400
                                 @endif">
                                 Pembayaran:
                                 @if(in_array($booking->payment_status, ['unpaid', 'pending'])) Belum Dibayar
@@ -57,11 +57,11 @@
                 </div>
 
                 {{-- Progress Stepper --}}
-                <div class="p-8 md:p-10 border-b border-[#f0ece7]">
+                <div class="p-8 md:p-10 border-b border-[#f0ece7] dark:border-neutral-700">
                     <div class="relative">
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none"
                             aria-hidden="true">
-                            <div class="w-full h-0.5 bg-gray-100"></div>
+                            <div class="w-full h-0.5 bg-gray-100 dark:bg-neutral-700"></div>
                         </div>
                         <div class="relative flex justify-between">
                             @php
@@ -90,14 +90,14 @@
                                 <div class="flex flex-col items-center">
                                     <div
                                         class="w-10 h-10 rounded-full flex items-center justify-center z-10 shadow-sm transition-all duration-500
-                                            @if($idx <= $currentStatusIdx) bg-[#3d2b1f] text-[#f0c27f] @else bg-white text-gray-300 border @endif">
+                                            @if($idx <= $currentStatusIdx) bg-[#3d2b1f] dark:bg-amber-600 text-[#f0c27f] dark:text-white @else bg-white dark:bg-neutral-700 text-gray-300 dark:text-neutral-500 border dark:border-neutral-600 @endif">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="{{ $step['icon'] }}" />
                                         </svg>
                                     </div>
                                     <span
-                                        class="mt-2 text-[8px] md:text-[10px] font-bold uppercase tracking-wider @if($idx <= $currentStatusIdx) text-[#3d2b1f] @else text-gray-400 @endif text-center">{{ $step['label'] }}</span>
+                                        class="mt-2 text-[8px] md:text-[10px] font-bold uppercase tracking-wider @if($idx <= $currentStatusIdx) text-[#3d2b1f] dark:text-amber-500 @else text-gray-400 @endif text-center">{{ $step['label'] }}</span>
                                 </div>
                             @endforeach
                         </div>
@@ -107,33 +107,33 @@
                 <div class="p-8 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-10">
                     {{-- Info Booking --}}
                     <div class="space-y-6">
-                        <h3 class="text-lg font-serif font-bold text-[#3d2b1f] border-b border-[#f0ece7] pb-3">Detail
+                        <h3 class="text-lg font-serif font-bold text-[#3d2b1f] dark:text-white border-b border-[#f0ece7] dark:border-neutral-700 pb-3">Detail
                             Pesanan</h3>
                         <div class="space-y-4">
                             <div class="flex justify-between items-start">
-                                <span class="text-xs text-[#7a6b5d] uppercase tracking-widest font-medium">Layanan &
+                                <span class="text-xs text-[#7a6b5d] dark:text-gray-400 uppercase tracking-widest font-medium">Layanan &
                                     Paket</span>
                                 <div class="text-right">
-                                    <p class="text-sm font-bold text-[#3d2b1f]">{{ $booking->service->name }}</p>
+                                    <p class="text-sm font-bold text-[#3d2b1f] dark:text-white">{{ $booking->service->name }}</p>
                                     @if($booking->package)
-                                        <p class="text-xs text-[#3d2b1f] italic">{{ $booking->package->name }}</p>
+                                        <p class="text-xs text-[#3d2b1f] dark:text-gray-300 italic">{{ $booking->package->name }}</p>
                                     @endif
                                 </div>
                             </div>
                             <div class="flex justify-between items-center">
-                                <span class="text-xs text-[#7a6b5d] uppercase tracking-widest font-medium">Jadwal
+                                <span class="text-xs text-[#7a6b5d] dark:text-gray-400 uppercase tracking-widest font-medium">Jadwal
                                     Sesi</span>
                                 <span
-                                    class="text-sm font-semibold text-[#3d2b1f]">{{ $booking->booking_date->translatedFormat('d F Y') }}
+                                    class="text-sm font-semibold text-[#3d2b1f] dark:text-gray-200">{{ $booking->booking_date->translatedFormat('d F Y') }}
                                     | {{ $booking->booking_time->format('H:i') }} WIB</span>
                             </div>
                             <div class="flex justify-between items-start">
-                                <span class="text-xs text-[#7a6b5d] uppercase tracking-widest font-medium">Lokasi</span>
+                                <span class="text-xs text-[#7a6b5d] dark:text-gray-400 uppercase tracking-widest font-medium">Lokasi</span>
                                 <div class="text-right">
-                                    <p class="text-sm font-semibold text-[#3d2b1f] capitalize">{{ $booking->location_type }}
+                                    <p class="text-sm font-semibold text-[#3d2b1f] dark:text-white capitalize">{{ $booking->location_type }}
                                     </p>
                                     @if($booking->location_address)
-                                        <p class="text-xs text-[#7a6b5d] max-w-[200px] leading-tight mt-1">
+                                        <p class="text-xs text-[#7a6b5d] dark:text-gray-500 max-w-[200px] leading-tight mt-1">
                                             {{ $booking->location_address }}</p>
                                     @endif
                                 </div>
@@ -144,18 +144,18 @@
                                     <span class="text-sm font-semibold text-[#3d2b1f]">{{ $booking->teamMember->name }}</span>
                                 </div>
                             @endif
-                            <div class="pt-4 border-t border-dashed border-gray-200 space-y-2">
-                                <div class="flex justify-between items-center text-xs text-[#7a6b5d]">
+                            <div class="pt-4 border-t border-dashed border-gray-200 dark:border-neutral-700 space-y-2">
+                                <div class="flex justify-between items-center text-xs text-[#7a6b5d] dark:text-gray-400">
                                     <span>Subtotal Pesanan</span>
                                     <span>Rp {{ number_format($booking->total_price, 0, ',', '.') }}</span>
                                 </div>
-                                <div class="flex justify-between items-center text-xs text-amber-600">
+                                <div class="flex justify-between items-center text-xs text-amber-600 dark:text-amber-500">
                                     <span>Biaya Layanan/Admin</span>
                                     <span>+ Rp {{ number_format($booking->admin_fee, 0, ',', '.') }}</span>
                                 </div>
-                                <div class="flex justify-between items-center pt-2 border-t border-gray-100">
-                                    <span class="text-sm text-[#3d2b1f] font-bold">Total Pembayaran</span>
-                                    <span class="text-2xl font-serif font-bold text-[#3d2b1f]">Rp
+                                <div class="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-neutral-700">
+                                    <span class="text-sm text-[#3d2b1f] dark:text-gray-400 font-bold">Total Pembayaran</span>
+                                    <span class="text-2xl font-serif font-bold text-[#3d2b1f] dark:text-white">Rp
                                         {{ number_format($booking->total_price + $booking->admin_fee, 0, ',', '.') }}</span>
                                 </div>
                             </div>
@@ -164,38 +164,38 @@
 
                     {{-- Info Klien & Pembayaran --}}
                     <div class="space-y-6">
-                        <h3 class="text-lg font-serif font-bold text-[#3d2b1f] border-b border-[#f0ece7] pb-3">Informasi
+                        <h3 class="text-lg font-serif font-bold text-[#3d2b1f] dark:text-white border-b border-[#f0ece7] dark:border-neutral-700 pb-3">Informasi
                             Pelanggan</h3>
-                        <div class="bg-[#fdfaf8] rounded-2xl p-6 border border-[#f0ece7] space-y-3">
+                        <div class="bg-[#fdfaf8] dark:bg-neutral-900 rounded-2xl p-6 border border-[#f0ece7] dark:border-neutral-700 space-y-3">
                             <div class="flex items-center gap-3">
                                 <div
-                                    class="w-8 h-8 rounded-lg bg-[#3d2b1f] flex items-center justify-center text-[#f0c27f]">
+                                    class="w-8 h-8 rounded-lg bg-[#3d2b1f] dark:bg-amber-600 flex items-center justify-center text-[#f0c27f] dark:text-white">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                     </svg>
                                 </div>
-                                <span class="text-sm font-semibold text-[#3d2b1f]">{{ $booking->client->name }}</span>
+                                <span class="text-sm font-semibold text-[#3d2b1f] dark:text-white">{{ $booking->client->name }}</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div
-                                    class="w-8 h-8 rounded-lg bg-white border border-gray-100 flex items-center justify-center text-[#9a8b7d]">
+                                    class="w-8 h-8 rounded-lg bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 flex items-center justify-center text-[#9a8b7d] dark:text-gray-400">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
                                 </div>
-                                <span class="text-sm text-[#7a6b5d]">{{ $booking->client->email }}</span>
+                                <span class="text-sm text-[#7a6b5d] dark:text-gray-400">{{ $booking->client->email }}</span>
                             </div>
                             <div class="flex items-center gap-3">
                                 <div
-                                    class="w-8 h-8 rounded-lg bg-white border border-gray-100 flex items-center justify-center text-[#9a8b7d]">
+                                    class="w-8 h-8 rounded-lg bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 flex items-center justify-center text-[#9a8b7d] dark:text-gray-400">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                     </svg>
                                 </div>
-                                <span class="text-sm text-[#7a6b5d]">{{ $booking->client->phone }}</span>
+                                <span class="text-sm text-[#7a6b5d] dark:text-gray-400">{{ $booking->client->phone }}</span>
                             </div>
                         </div>
 
@@ -249,8 +249,8 @@
                                     Ulang</a>
                             </div>
                         @endif
-                        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 italic text-center">
-                            <p class="text-xs text-[#9a8b7d]">Terima kasih telah mempercayakan momen Anda kepada Swarattive!
+                        <div class="bg-gray-50 dark:bg-neutral-900 rounded-2xl p-6 border border-gray-100 dark:border-neutral-700 italic text-center">
+                            <p class="text-xs text-[#9a8b7d] dark:text-gray-500">Terima kasih telah mempercayakan momen Anda kepada Swarattive!
                             </p>
                         </div>
                     </div>

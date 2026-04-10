@@ -24,7 +24,7 @@
     </div>
 
     <!-- BLOG POSTS -->
-    <section class="py-16 md:py-24">
+    <section class="py-16 md:py-24 bg-[#faf7f4] dark:bg-neutral-900 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Blog Grid -->
@@ -32,7 +32,7 @@
                 @forelse($blogPosts as $post)
                     <!-- Blog Card -->
                     <article
-                        class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
+                        class="group bg-white dark:bg-neutral-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-transparent dark:border-neutral-700/50">
                         <div class="relative h-56 overflow-hidden">
                             <img src="{{ $post->image_url }}"
                                 alt="{{ $post->title }}"
@@ -40,14 +40,14 @@
                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         </div>
                         <div class="p-6 flex flex-col flex-grow">
-                                <div class="text-[10px] font-bold text-amber-600 tracking-widest uppercase mb-3">
+                                <div class="text-[10px] font-bold text-amber-600 dark:text-amber-500 tracking-widest uppercase mb-3">
                                     {{ $post->tags[0] ?? 'Fotografi' }} &bull; {{ $post->published_at->translatedFormat('d F Y') }}
                                 </div>
                            
                             <h3
-                                class="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-amber-600 transition-colors">
+                                class="text-xl font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors">
                                 {{ $post->title }}</h3>
-                            <p class="text-gray-600 mb-6 flex-grow line-clamp-3">
+                            <p class="text-gray-600 dark:text-gray-400 mb-6 flex-grow line-clamp-3">
                                 {{ $post->excerpt }}</p>
                             <a href="{{ route('blog.show', $post->slug) }}"
                                 class="inline-flex items-center text-sm font-semibold text-amber-600 hover:text-amber-800 transition-colors mt-auto">
@@ -62,7 +62,7 @@
                     </article>
                 @empty
                     <div class="col-span-full text-center py-12">
-                        <p class="text-gray-500 text-lg">Belum ada artikel yang dipublikasikan.</p>
+                        <p class="text-gray-500 dark:text-gray-400 text-lg">Belum ada artikel yang dipublikasikan.</p>
                     </div>
                 @endforelse
             </div>

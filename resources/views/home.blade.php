@@ -122,11 +122,11 @@
     @endif
 
     <!-- Services Preview -->
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-white dark:bg-neutral-900 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-4">Layanan Kami</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Layanan fotografi profesional yang disesuaikan dengan
+                <h2 class="text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">Layanan Kami</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Layanan fotografi profesional yang disesuaikan dengan
                     kebutuhan Anda
                 </p>
             </div>
@@ -135,18 +135,18 @@
                 @forelse($services as $service)
                     <a href="{{ route('services.index') }}#{{ $service->slug }}" class="text-center group block">
                         <div
-                            class="bg-amber-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-600 transition-colors">
+                            class="bg-amber-100 dark:bg-amber-900/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-600 transition-colors">
                             @if($service->icon && !str_contains($service->icon, '<path'))
                                 <img src="{{ \Illuminate\Support\Facades\Storage::url($service->icon) }}" alt="{{ $service->name }}" class="w-10 h-10 object-contain group-hover:invert group-hover:brightness-0 transition-all">
                             @else
-                                <svg class="w-10 h-10 text-amber-600 group-hover:text-white" fill="none" stroke="currentColor"
+                                <svg class="w-10 h-10 text-amber-600 dark:text-amber-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $service->icon ?: 'M12 4v16m8-8H4' }}"></path>
                                 </svg>
                             @endif
                         </div>
-                        <h3 class="text-xl font-semibold mb-2 group-hover:text-amber-600 transition-colors">{{ $service->name }}</h3>
-                        <p class="text-gray-600">{{ Str::limit($service->description, 70) }}</p>
+                        <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white group-hover:text-amber-600 transition-colors">{{ $service->name }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400">{{ Str::limit($service->description, 70) }}</p>
                     </a>
                 @empty
                     <div class="col-span-full text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
@@ -158,11 +158,11 @@
     </section>
 
     <!-- Portfolio Preview -->
-    <section class="py-20 bg-gray-50">
+    <section class="py-20 bg-gray-50 dark:bg-neutral-800/50 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-serif font-bold text-gray-900 mb-4">Karya Terbaru</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Jelajahi proyek fotografi terbaru kami</p>
+                <h2 class="text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">Karya Terbaru</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Jelajahi proyek fotografi terbaru kami</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -204,17 +204,17 @@
 
     <!-- Latest From Blog -->
     @if($latestBlogPosts->count() > 0)
-        <section class="py-20 bg-white">
+        <section class="py-20 bg-white dark:bg-neutral-900 transition-colors duration-500">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-serif font-bold text-gray-900 mb-4">Artikel Terbaru</h2>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Inspirasi dan tips seputar dunia fotografi</p>
+                    <h2 class="text-4xl font-serif font-bold text-gray-900 dark:text-white mb-4">Artikel Terbaru</h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Inspirasi dan tips seputar dunia fotografi</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     @foreach($latestBlogPosts as $post)
                         <article
-                            class="group relative bg-white border border-gray-100 rounded-2xl p-4 hover:shadow-2xl transition-all duration-300">
+                            class="group relative bg-white dark:bg-neutral-800 border border-gray-100 dark:border-neutral-700 rounded-2xl p-4 hover:shadow-2xl transition-all duration-300">
                             <div class="relative h-48 mb-6 overflow-hidden rounded-xl">
                                 <img src="{{ $post->image_url }}" alt="{{ $post->title }}" loading="lazy" decoding="async"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
@@ -224,7 +224,7 @@
                                     {{ $post->tags[0] ?? 'Inspiration' }}
                                 </div>
                                 <h3
-                                    class="text-xl font-bold text-gray-900 mb-4 line-clamp-2 h-14 group-hover:text-amber-600 transition-colors">
+                                    class="text-xl font-bold text-gray-900 dark:text-white mb-4 line-clamp-2 h-14 group-hover:text-amber-600 transition-colors">
                                     {{ $post->title }}
                                 </h3>
                                 <a href="{{ route('blog.show', $post->slug) }}"

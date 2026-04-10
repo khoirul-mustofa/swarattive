@@ -26,19 +26,19 @@
     </div>
 
     {{-- ===================== MAIN SECTION ===================== --}}
-    <section class="py-16 bg-[#faf7f4]">
+    <section class="py-16 bg-[#faf7f4] dark:bg-neutral-900 transition-colors duration-500">
         <div class="max-w-[1200px] mx-auto px-4 sm:px-6">
 
             {{-- FILTER KATEGORI --}}
             <div class="flex flex-wrap justify-center gap-2 mb-12 portfolio__filters">
                 <button
-                    class="filter-btn active px-5 py-2 text-xs font-semibold uppercase tracking-widest rounded-full border transition-all duration-300"
+                    class="filter-btn active px-5 py-2 text-xs font-semibold uppercase tracking-widest rounded-full border transition-all duration-300 dark:bg-amber-600 dark:border-amber-600 dark:text-white"
                     data-filter="all">
                     Semua
                 </button>
                 @foreach($categories as $cat)
                     <button
-                        class="filter-btn px-5 py-2 text-xs font-semibold uppercase tracking-widest rounded-full border transition-all duration-300"
+                        class="filter-btn px-5 py-2 text-xs font-semibold uppercase tracking-widest rounded-full border transition-all duration-300 dark:border-neutral-700 dark:text-gray-400 dark:hover:bg-neutral-800 dark:hover:text-white"
                         data-filter="{{ $cat->slug }}">
                         {{ $cat->name }}
                     </button>
@@ -49,7 +49,7 @@
             @if($portfolioItems->isNotEmpty())
                 <div class="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5" id="portfolioGallery">
                     @foreach($portfolioItems as $item)
-                        <article class="portfolio__item break-inside-avoid group relative overflow-hidden rounded-2xl shadow-sm bg-white animate-fadein"
+                        <article class="portfolio__item break-inside-avoid group relative overflow-hidden rounded-2xl shadow-sm bg-white dark:bg-neutral-800 border border-transparent dark:border-neutral-700/50 animate-fadein transition-colors"
                                  data-category="{{ $item->category->slug }}">
 
                             <a href="{{ route('portfolio.show', $item->slug) }}" class="block">
@@ -118,11 +118,11 @@
                 </div>
             @else
                 <div class="text-center py-24">
-                    <svg class="w-20 h-20 mx-auto text-[#d4c9bb] mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-20 h-20 mx-auto text-[#d4c9bb] dark:text-neutral-700 mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                     </svg>
-                    <p class="text-[#9a8b7d] text-lg font-medium">Belum ada karya yang ditampilkan.</p>
-                    <p class="text-[#b5a99a] text-sm mt-1">Tambahkan portfolio melalui dashboard admin.</p>
+                    <p class="text-[#9a8b7d] dark:text-gray-400 text-lg font-medium">Belum ada karya yang ditampilkan.</p>
+                    <p class="text-[#b5a99a] dark:text-gray-600 text-sm mt-1">Tambahkan portfolio melalui dashboard admin.</p>
                 </div>
             @endif
 
@@ -151,6 +151,22 @@
         color: #f9f5ef;
         border-color: #3d2b1f;
     }
+
+    /* Dark mode overrides for manual styles */
+    .dark .filter-btn {
+        color: #9ca3af;
+        border-color: #374151;
+    }
+    .dark .filter-btn:hover {
+        background: #1f2937;
+        color: white;
+    }
+    .dark .filter-btn.active {
+        background: #d97706; /* amber-600 */
+        border-color: #d97706;
+        color: white;
+    }
+
     .animate-fadein {
         animation: fadein 0.4s ease both;
     }

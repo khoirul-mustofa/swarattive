@@ -30,7 +30,7 @@
 </section>
 
 <!-- Our Story Section -->
-<section class="py-20 lg:py-32 bg-white overflow-hidden">
+<section class="py-20 lg:py-32 bg-white dark:bg-neutral-900 overflow-hidden transition-colors duration-500">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div class="relative" x-data x-intersect="$el.classList.add('animate-fade-in-left')">
@@ -51,13 +51,13 @@
             </div>
             
             <div class="space-y-8" x-data x-intersect="$el.classList.add('animate-fade-in-right')">
-                <div class="inline-block px-4 py-1.5 bg-amber-100 text-amber-700 rounded-full text-sm font-bold tracking-widest uppercase mb-4">
+                <div class="inline-block px-4 py-1.5 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded-full text-sm font-bold tracking-widest uppercase mb-4 transition-colors">
                     Cerita Kami
                 </div>
-                <h2 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 leading-tight">
-                    Mengabadikan <span class="text-amber-600 italic">Momen</span> Abadi Melalui Lensa
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 dark:text-white leading-tight">
+                    Mengabadikan <span class="text-amber-600 dark:text-amber-500 italic">Momen</span> Abadi Melalui Lensa
                 </h2>
-                <div class="prose prose-lg text-neutral-600 max-w-none leading-relaxed">
+                <div class="prose prose-lg text-neutral-600 dark:text-gray-400 max-w-none leading-relaxed transition-colors">
                     {!! $about->story_content !!}
                 </div>
             </div>
@@ -66,12 +66,12 @@
 </section>
 
 <!-- Behind The Scenes -->
-<section class="py-20 lg:py-32 bg-neutral-50 relative overflow-hidden">
+<section class="py-20 lg:py-32 bg-neutral-50 dark:bg-neutral-800 relative overflow-hidden transition-colors duration-500">
     <div class="absolute top-0 right-0 w-1/3 h-full bg-linear-to-l from-amber-500/5 to-transparent pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-16 lg:mb-24">
-            <h2 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 mb-4">{{ $about->bts_title }}</h2>
-            <p class="text-neutral-500 max-w-2xl mx-auto text-lg italic">{{ $about->bts_subtitle }}</p>
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 dark:text-white mb-4">{{ $about->bts_title }}</h2>
+            <p class="text-neutral-500 dark:text-gray-400 max-w-2xl mx-auto text-lg italic transition-colors">{{ $about->bts_subtitle }}</p>
             <div class="w-24 h-1 bg-amber-500 mx-auto mt-8 rounded-full"></div>
         </div>
 
@@ -79,7 +79,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 xl:gap-12">
             @foreach($about->bts_items as $index => $item)
                 <div class="group h-full" x-data x-intersect="$el.classList.add('scale-100 opacity-100')" class="scale-95 opacity-0 transition-all duration-700 delay-{{ $index * 100 }}">
-                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-neutral-200 h-full flex flex-col hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
+                    <div class="bg-white dark:bg-neutral-900 rounded-2xl overflow-hidden shadow-sm border border-neutral-200 dark:border-neutral-700 h-full flex flex-col hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
                         <div class="relative h-64 overflow-hidden">
                             @if(isset($item['image_url']))
                                 <img src="{{ $item['image_url'] }}" alt="{{ $item['stage'] ?? $item['title'] ?? 'Tahapan' }}" 
@@ -93,10 +93,10 @@
                             </div>
                         </div>
                         <div class="p-8 flex-1 flex flex-col">
-                            <h4 class="text-xl font-bold text-neutral-900 mb-3 capitalize">
+                            <h4 class="text-xl font-bold text-neutral-900 dark:text-white mb-3 capitalize">
                                 {{ str_replace('_', ' ', $item['stage'] ?? $item['title'] ?? 'Tahapan') }}
                             </h4>
-                            <p class="text-neutral-600 leading-relaxed italic">
+                            <p class="text-neutral-600 dark:text-gray-400 leading-relaxed italic transition-colors">
                                 "{{ $item['description'] }}"
                             </p>
                         </div>

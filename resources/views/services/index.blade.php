@@ -24,7 +24,7 @@
 </section>
 
 <!-- Services Collection Section -->
-<section class="py-20 bg-[#faf7f4]">
+<section class="py-20 bg-[#faf7f4] dark:bg-neutral-900 transition-colors duration-500">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         @if($categories->count() > 0)
             @foreach($categories as $category)
@@ -35,16 +35,16 @@
 
                 @if($categoryServices->count() > 0)
                     <div class="mb-20">
-                        <div class="mb-10 text-center md:text-left border-b-2 border-[#e8ddd2] pb-6">
-                            <h2 class="text-3xl font-serif font-bold text-[#3d2b1f] uppercase tracking-wide">{{ $category->name }}</h2>
+                        <div class="mb-10 text-center md:text-left border-b-2 border-[#e8ddd2] dark:border-neutral-700 pb-6">
+                            <h2 class="text-3xl font-serif font-bold text-[#3d2b1f] dark:text-white uppercase tracking-wide">{{ $category->name }}</h2>
                             @if($category->description)
-                                <p class="text-[#7a6b5d] mt-3 max-w-3xl">{{ $category->description }}</p>
+                                <p class="text-[#7a6b5d] dark:text-gray-400 mt-3 max-w-3xl">{{ $category->description }}</p>
                             @endif
                         </div>
 
                         <div class="space-y-8 xl:space-y-12">
                             @foreach($categoryServices as $service)
-                                <div id="{{ $service->slug }}" class="bg-white rounded-2xl shadow-sm border border-[#ede8e3] overflow-hidden flex flex-col lg:flex-row transition-all hover:shadow-xl group">
+                                <div id="{{ $service->slug }}" class="bg-white dark:bg-neutral-800 rounded-2xl shadow-sm border border-[#ede8e3] dark:border-neutral-700 overflow-hidden flex flex-col lg:flex-row transition-all hover:shadow-xl group">
                                     <div class="relative w-full lg:w-5/12 aspect-[4/3] lg:aspect-auto lg:h-auto overflow-hidden flex-shrink-0">
                                         @if($service->image_url)
                                             <img src="{{ $service->image_url }}" 
@@ -54,39 +54,39 @@
                                         @else
                                             <x-image-placeholder class="w-full h-full lg:absolute lg:inset-0" />
                                         @endif
-                                        <div class="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-[#3d2b1f] shadow-sm">
+                                        <div class="absolute top-4 right-4 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-[#3d2b1f] dark:text-white shadow-sm transition-colors">
                                             {{ $service->duration_minutes }} Menit
                                         </div>
                                     </div>
                                     
                                     <div class="p-6 xl:p-10 flex-1 flex flex-col w-full">
-                                        <h3 class="text-xl lg:text-3xl font-bold text-[#3d2b1f] mb-3 group-hover:text-amber-700 transition-colors">{{ $service->name }}</h3>
-                                        <p class="text-sm lg:text-base text-[#7a6b5d] leading-relaxed mb-6">{{ $service->description }}</p>
+                                        <h3 class="text-xl lg:text-3xl font-bold text-[#3d2b1f] dark:text-white mb-3 group-hover:text-amber-700 dark:group-hover:text-amber-500 transition-colors">{{ $service->name }}</h3>
+                                        <p class="text-sm lg:text-base text-[#7a6b5d] dark:text-gray-400 leading-relaxed mb-6">{{ $service->description }}</p>
                                         
-                                        <div class="mt-auto border-t border-gray-100 pt-6">
+                                        <div class="mt-auto border-t border-gray-100 dark:border-neutral-700 pt-6">
                                             <div class="{{ $service->packages->count() > 0 ? 'mb-6' : '' }}">
-                                                <div class="text-xs text-[#9a8b7d] uppercase tracking-wider font-bold mb-1">Harga Dasar Mulai</div>
-                                                <div class="text-2xl lg:text-3xl font-extrabold text-[#d28e46]">Rp {{ number_format($service->base_price, 0, ',', '.') }}</div>
+                                                <div class="text-xs text-[#9a8b7d] dark:text-gray-500 uppercase tracking-wider font-bold mb-1">Harga Dasar Mulai</div>
+                                                <div class="text-2xl lg:text-3xl font-extrabold text-[#d28e46] dark:text-amber-500 transition-colors">Rp {{ number_format($service->base_price, 0, ',', '.') }}</div>
                                             </div>
 
                                             @if($service->packages->count() > 0)
-                                                <div class="border-t border-dashed border-[#e8ddd2] pt-6">
-                                                    <h4 class="text-sm lg:text-base font-bold text-[#3d2b1f] mb-4 flex items-center">
+                                                <div class="border-t border-dashed border-[#e8ddd2] dark:border-neutral-700 pt-6">
+                                                    <h4 class="text-sm lg:text-base font-bold text-[#3d2b1f] dark:text-gray-200 mb-4 flex items-center">
                                                         <svg class="w-5 h-5 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
                                                         Pilihan Paket
                                                     </h4>
                                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                         @foreach($service->packages as $package)
-                                                            <div class="text-sm p-4 bg-[#fdfaf8] hover:bg-[#faf5ef] transition-colors border border-[#e8ddd2] rounded-xl flex flex-col">
-                                                                <div class="flex justify-between items-start font-bold text-[#3d2b1f] gap-3 mb-4">
+                                                            <div class="text-sm p-4 bg-[#fdfaf8] dark:bg-neutral-900 hover:bg-[#faf5ef] dark:hover:bg-neutral-800 transition-colors border border-[#e8ddd2] dark:border-neutral-700 rounded-xl flex flex-col">
+                                                                <div class="flex justify-between items-start font-bold text-[#3d2b1f] dark:text-white gap-3 mb-4">
                                                                     <span class="leading-tight">{{ $package->name }}</span>
-                                                                    <span class="text-amber-700 whitespace-nowrap text-right">Rp {{ number_format($package->price, 0, ',', '.') }}</span>
+                                                                    <span class="text-amber-700 dark:text-amber-400 whitespace-nowrap text-right">Rp {{ number_format($package->price, 0, ',', '.') }}</span>
                                                                 </div>
 
-                                                                @if(is_array($package->features) && count($package->features) > 0)
+                                                                 @if(is_array($package->features) && count($package->features) > 0)
                                                                     <ul class="mb-4 space-y-2">
                                                                         @foreach($package->features as $feature)
-                                                                            <li class="flex items-start text-[11px] text-[#7a6b5d] leading-tight">
+                                                                            <li class="flex items-start text-[11px] text-[#7a6b5d] dark:text-gray-400 leading-tight">
                                                                                 <svg class="w-3.5 h-3.5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                                                                 </svg>
@@ -96,7 +96,7 @@
                                                                     </ul>
                                                                 @endif
                                                                 @if($package->description)
-                                                                    <p class="text-xs text-[#8a7b6d] leading-relaxed mt-auto border-t border-gray-100 pt-2">{{ $package->description }}</p>
+                                                                    <p class="text-xs text-[#8a7b6d] dark:text-gray-500 leading-relaxed mt-auto border-t border-gray-100 dark:border-neutral-700 pt-2 transition-colors">{{ $package->description }}</p>
                                                                 @endif
                                                             </div>
                                                         @endforeach
@@ -113,7 +113,7 @@
             @endforeach
         @else
             <div class="text-center py-20">
-                <p class="text-[#7a6b5d] text-lg">Belum ada layanan yang tersedia saat ini.</p>
+                <p class="text-[#7a6b5d] dark:text-gray-400 text-lg">Belum ada layanan yang tersedia saat ini.</p>
             </div>
         @endif
     </div>

@@ -47,10 +47,10 @@
     </div>
 
     <!-- ARTICLE CONTENT -->
-    <article class="py-16 md:py-24 bg-white">
+    <article class="py-16 md:py-24 bg-white dark:bg-neutral-900 transition-colors duration-500">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Back to Blog -->
-            <a href="{{ route('blog.index') }}" class="inline-flex items-center text-amber-600 hover:text-amber-700 font-semibold mb-12 transition-colors">
+            <a href="{{ route('blog.index') }}" class="inline-flex items-center text-amber-600 dark:text-amber-500 hover:text-amber-700 dark:hover:text-amber-400 font-semibold mb-12 transition-colors">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
@@ -66,34 +66,34 @@
 
     <!-- RELATED POSTS -->
     @if($relatedPosts->count() > 0)
-        <section class="py-16 md:py-24 bg-gray-50 border-t">
+        <section class="py-16 md:py-24 bg-gray-50 dark:bg-neutral-800 border-t dark:border-neutral-700 transition-colors duration-500">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-end mb-12">
                     <div>
-                        <h2 class="text-3xl font-bold text-gray-900 mb-2">Artikel Terkait</h2>
-                        <p class="text-gray-600">Lebih banyak cerita dan tips untuk Anda</p>
+                        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Artikel Terkait</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Lebih banyak cerita dan tips untuk Anda</p>
                     </div>
-                    <a href="{{ route('blog.index') }}" class="hidden md:block text-amber-600 hover:text-amber-700 font-semibold">
+                    <a href="{{ route('blog.index') }}" class="hidden md:block text-amber-600 dark:text-amber-500 hover:text-amber-700 dark:hover:text-amber-400 font-semibold">
                         Lihat Semua Artikel &rarr;
                     </a>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach($relatedPosts as $post)
-                        <article class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col">
+                        <article class="group bg-white dark:bg-neutral-900 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col border border-transparent dark:border-neutral-700/50">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="{{ $post->image_url }}" alt="{{ $post->title }}" 
                                     loading="lazy" decoding="async"
                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                             </div>
                             <div class="p-6 flex flex-col flex-grow">
-                                <div class="text-xs font-semibold text-amber-600 tracking-wide uppercase mb-2">
+                                <div class="text-xs font-semibold text-amber-600 dark:text-amber-500 tracking-wide uppercase mb-2">
                                     {{ $post->tags[0] ?? 'Photography' }} &bull; {{ $post->published_at->format('d M Y') }}
                                 </div>
-                                <h3 class="text-lg font-bold text-gray-900 mb-3 leading-tight group-hover:text-amber-600 transition-colors">
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3 leading-tight group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors">
                                     {{ $post->title }}
                                 </h3>
-                                <a href="{{ route('blog.show', $post->slug) }}" class="inline-flex items-center text-sm font-semibold text-amber-600 hover:text-amber-700 transition-colors mt-auto">
+                                <a href="{{ route('blog.show', $post->slug) }}" class="inline-flex items-center text-sm font-semibold text-amber-600 dark:text-amber-500 hover:text-amber-700 dark:hover:text-amber-400 transition-colors mt-auto">
                                     Baca Selengkapnya &rarr;
                                 </a>
                             </div>
@@ -106,16 +106,16 @@
 
     <style>
         .rich-text-content {
-            @apply text-gray-800 leading-relaxed text-lg;
+            @apply text-gray-800 dark:text-gray-300 leading-relaxed text-lg transition-colors;
         }
         .rich-text-content p {
             @apply mb-6;
         }
         .rich-text-content h2 {
-            @apply text-2xl md:text-3xl font-bold text-gray-900 mt-12 mb-6;
+            @apply text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mt-12 mb-6;
         }
         .rich-text-content h3 {
-            @apply text-xl md:text-2xl font-bold text-gray-900 mt-8 mb-4;
+            @apply text-xl md:text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4;
         }
         .rich-text-content ul {
             @apply list-disc list-inside mb-6 space-y-2;
@@ -124,7 +124,7 @@
             @apply list-decimal list-inside mb-6 space-y-2;
         }
         .rich-text-content blockquote {
-            @apply border-l-4 border-amber-600 pl-6 italic text-gray-600 my-8 py-2;
+            @apply border-l-4 border-amber-600 dark:border-amber-500 pl-6 italic text-gray-600 dark:text-gray-400 my-8 py-2 bg-gray-50/50 dark:bg-neutral-800/50 transition-colors;
         }
     </style>
 @endsection

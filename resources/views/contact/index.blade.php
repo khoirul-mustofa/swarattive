@@ -30,14 +30,14 @@
         </div>
     </section>
 
-    <section class="relative z-20 -mt-24 md:-mt-40 lg:-mt-48 pb-20 md:pb-32">
+    <section class="relative z-20 -mt-24 md:-mt-40 lg:-mt-48 pb-20 md:pb-32 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white rounded-[2rem] md:rounded-[3rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-neutral-100 flex flex-col lg:flex-row"
+            <div class="bg-white dark:bg-neutral-800 rounded-[2rem] md:rounded-[3rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] overflow-hidden border border-neutral-100 dark:border-neutral-700 flex flex-col lg:flex-row transition-all duration-500"
                 x-data x-intersect="$el.classList.add('animate-fade-in')">
 
                 <div class="w-full lg:w-3/5 p-8 sm:p-12 lg:p-20">
                     <div class="mb-10 lg:mb-12">
-                        <h2 class="text-3xl lg:text-4xl font-serif font-bold text-neutral-900 mb-4">Kirim Pesan</h2>
+                        <h2 class="text-3xl lg:text-4xl font-serif font-bold text-neutral-900 dark:text-white mb-4">Kirim Pesan</h2>
                         <div class="w-16 h-1.5 bg-amber-500 rounded-full"></div>
                     </div>
 
@@ -48,21 +48,21 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label
-                                        class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Nama
+                                        class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-gray-400 mb-2 ml-1 transition-colors">Nama
                                         Lengkap</label>
                                     <input type="text" name="name" value="{{ old('name') }}" placeholder="John Doe" required
-                                        class="w-full px-5 py-4 bg-neutral-50/50 border {{ $errors->has('name') ? 'border-red-500' : 'border-neutral-200' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 placeholder:text-neutral-300">
+                                        class="w-full px-5 py-4 bg-neutral-50/50 dark:bg-neutral-900/50 border {{ $errors->has('name') ? 'border-red-500' : 'border-neutral-200 dark:border-neutral-700' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 dark:text-white placeholder:text-neutral-300 dark:placeholder:text-gray-600 font-medium">
                                     @error('name')
                                         <p class="text-red-500 text-xs mt-1 ml-1">{{ $message }}</p>
                                     @enderror
                                 </div>
                                 <div>
                                     <label
-                                        class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Alamat
+                                        class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-gray-400 mb-2 ml-1 transition-colors">Alamat
                                         Email</label>
                                     <input type="email" name="email" value="{{ old('email') }}"
                                         placeholder="john@example.com" required
-                                        class="w-full px-5 py-4 bg-neutral-50/50 border {{ $errors->has('email') ? 'border-red-500' : 'border-neutral-200' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 placeholder:text-neutral-300">
+                                        class="w-full px-5 py-4 bg-neutral-50/50 dark:bg-neutral-900/50 border {{ $errors->has('email') ? 'border-red-500' : 'border-neutral-200 dark:border-neutral-700' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 dark:text-white placeholder:text-neutral-300 dark:placeholder:text-gray-600 font-medium">
                                     @error('email')
                                         <p class="text-red-500 text-xs mt-1 ml-1">{{ $message }}</p>
                                     @enderror
@@ -71,11 +71,11 @@
 
                             <div>
                                 <label
-                                    class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Tertarik
+                                    class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-gray-400 mb-2 ml-1 transition-colors">Tertarik
                                     Pada</label>
                                 <div class="relative">
                                     <select name="interest"
-                                        class="w-full px-5 py-4 bg-neutral-50/50 border {{ $errors->has('interest') ? 'border-red-500' : 'border-neutral-200' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 appearance-none cursor-pointer">
+                                        class="w-full px-5 py-4 bg-neutral-50/50 dark:bg-neutral-900/50 border {{ $errors->has('interest') ? 'border-red-500' : 'border-neutral-200 dark:border-neutral-700' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 dark:text-white appearance-none cursor-pointer font-medium">
                                         <option value="Wedding & Engagement" {{ old('interest') == 'Wedding & Engagement' ? 'selected' : '' }}>Pernikahan & Tunangan</option>
                                         <option value="Portrait & Lifestyle" {{ old('interest') == 'Portrait & Lifestyle' ? 'selected' : '' }}>Potret & Gaya Hidup</option>
                                         <option value="Commercial & Branding" {{ old('interest') == 'Commercial & Branding' ? 'selected' : '' }}>Komersial & Branding</option>
@@ -96,9 +96,9 @@
 
                             <div>
                                 <label
-                                    class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 mb-2 ml-1">Pesan</label>
+                                    class="block text-[11px] font-bold uppercase tracking-widest text-neutral-500 dark:text-gray-400 mb-2 ml-1 transition-colors">Pesan</label>
                                 <textarea name="message" rows="4" placeholder="Ceritakan ide atau keinginan Anda..." required
-                                    class="w-full px-5 py-4 bg-neutral-50/50 border {{ $errors->has('message') ? 'border-red-500' : 'border-neutral-200' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 resize-none placeholder:text-neutral-300">{{ old('message') }}</textarea>
+                                    class="w-full px-5 py-4 bg-neutral-50/50 dark:bg-neutral-900/50 border {{ $errors->has('message') ? 'border-red-500' : 'border-neutral-200 dark:border-neutral-700' }} rounded-xl focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all duration-300 outline-none text-neutral-900 dark:text-white resize-none placeholder:text-neutral-300 dark:placeholder:text-gray-600 font-medium">{{ old('message') }}</textarea>
                                 @error('message')
                                     <p class="text-red-500 text-xs mt-1 ml-1">{{ $message }}</p>
                                 @enderror
@@ -106,19 +106,19 @@
                         </div>
 
                         <button type="submit" :disabled="loading"
-                            class="group relative w-full sm:w-auto px-10 py-4 bg-neutral-900 text-white rounded-full font-bold tracking-widest uppercase text-[11px] overflow-hidden transition-all hover:pr-14 active:scale-[0.98] shadow-lg hover:shadow-neutral-900/30 inline-flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed">
+                            class="group relative w-full sm:w-auto px-10 py-4 bg-neutral-900 dark:bg-amber-600 text-white dark:text-neutral-900 rounded-full font-bold tracking-widest uppercase text-[11px] overflow-hidden transition-all hover:pr-14 active:scale-[0.98] shadow-lg hover:shadow-neutral-900/30 dark:hover:shadow-amber-900/30 inline-flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed transition-colors">
                             <span class="relative z-10 transition-transform"
                                 x-text="loading ? 'Mengalihkan ke WhatsApp...' : 'Kirim via WhatsApp'">Kirim via WhatsApp</span>
                             <div class="absolute inset-0 bg-amber-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 -z-0"
                                 :class="loading ? 'scale-x-100' : ''">
                             </div>
                             <svg x-show="!loading"
-                                class="absolute right-5 w-4 h-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-2 group-hover:translate-x-0"
+                                class="absolute right-5 w-4 h-4 text-white dark:text-neutral-900 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-2 group-hover:translate-x-0"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
                                     d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                             </svg>
-                            <svg x-show="loading" class="animate-spin absolute right-5 h-4 w-4 text-white"
+                            <svg x-show="loading" class="animate-spin absolute right-5 h-4 w-4 text-white dark:text-neutral-900"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
                                 </circle>
@@ -216,7 +216,7 @@
 
             <!-- Overlay -->
             <div
-                class="absolute inset-0 bg-neutral-900/40 group-hover:bg-neutral-900/10 transition-colors duration-1000 pointer-events-none">
+                class="absolute inset-0 bg-neutral-900/40 dark:bg-neutral-900/60 group-hover:bg-neutral-900/10 transition-colors duration-1000 pointer-events-none">
             </div>
 
             <!-- Button -->

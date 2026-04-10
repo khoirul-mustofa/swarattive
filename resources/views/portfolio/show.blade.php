@@ -39,7 +39,7 @@
     </div>
 
     {{-- ===================== KONTEN ===================== --}}
-    <div class="bg-[#faf7f4] py-14 md:py-20">
+    <div class="bg-[#faf7f4] dark:bg-neutral-900 py-14 md:py-20 transition-colors duration-500">
         <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
             <div class="flex flex-col lg:flex-row gap-10 xl:gap-14">
 
@@ -55,16 +55,16 @@
 
                     {{-- Deskripsi --}}
                     <div class="mb-10">
-                        <h2 class="text-[#3d2b1f] font-serif font-bold text-xl mb-3">Tentang Karya Ini</h2>
-                        <p class="text-[#7a6b5d] leading-relaxed text-[0.95rem]">{{ $portfolioItem->description }}</p>
+                        <h2 class="text-[#3d2b1f] dark:text-white font-serif font-bold text-xl mb-3">Tentang Karya Ini</h2>
+                        <p class="text-[#7a6b5d] dark:text-gray-400 leading-relaxed text-[0.95rem]">{{ $portfolioItem->description }}</p>
                     </div>
 
                     {{-- Galeri --}}
                     @if($portfolioItem->gallery_images && count($portfolioItem->gallery_images) > 0)
                         <div>
-                            <h2 class="text-[#3d2b1f] font-serif font-bold text-xl mb-4">
+                            <h2 class="text-[#3d2b1f] dark:text-white font-serif font-bold text-xl mb-4">
                                 Galeri Foto
-                                <span class="text-[#9a8b7d] font-sans font-normal text-sm ml-2">({{ count($portfolioItem->gallery_images) }} foto)</span>
+                                <span class="text-[#9a8b7d] dark:text-gray-500 font-sans font-normal text-sm ml-2">({{ count($portfolioItem->gallery_images) }} foto)</span>
                             </h2>
                             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                                 @foreach($portfolioItem->gallery_images as $gImg)
@@ -92,31 +92,31 @@
                     <div class="sticky top-24 space-y-5">
 
                         {{-- Detail Card --}}
-                        <div class="bg-white rounded-2xl shadow-sm border border-[#ede8e3] overflow-hidden">
-                            <div class="bg-[#3d2b1f] px-5 py-4">
+                        <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-sm border border-[#ede8e3] dark:border-neutral-700 overflow-hidden transition-colors">
+                            <div class="bg-[#3d2b1f] dark:bg-black px-5 py-4">
                                 <h3 class="text-white font-serif font-semibold text-base">Detail Karya</h3>
                             </div>
-                            <ul class="divide-y divide-[#f0ece7]">
+                            <ul class="divide-y divide-[#f0ece7] dark:divide-neutral-700 transition-colors">
                                 {{-- Kategori --}}
                                 <li class="flex items-center gap-3 px-5 py-4">
-                                    <div class="w-8 h-8 rounded-lg bg-[#f5f0eb] flex items-center justify-center shrink-0">
-                                        <svg class="w-4 h-4 text-[#3d2b1f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+                                    <div class="w-8 h-8 rounded-lg bg-[#f5f0eb] dark:bg-neutral-900 flex items-center justify-center shrink-0">
+                                        <svg class="w-4 h-4 text-[#3d2b1f] dark:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-[10px] text-[#a89880] uppercase tracking-widest font-medium">Kategori</p>
-                                        <p class="text-[#3d2b1f] font-semibold text-sm truncate">{{ $portfolioItem->category->name }}</p>
+                                        <p class="text-[10px] text-[#a89880] dark:text-gray-500 uppercase tracking-widest font-medium">Kategori</p>
+                                        <p class="text-[#3d2b1f] dark:text-white font-semibold text-sm truncate">{{ $portfolioItem->category->name }}</p>
                                     </div>
                                 </li>
 
                                 {{-- Klien --}}
                                 @if($portfolioItem->client_name)
                                 <li class="flex items-center gap-3 px-5 py-4">
-                                    <div class="w-8 h-8 rounded-lg bg-[#f5f0eb] flex items-center justify-center shrink-0">
-                                        <svg class="w-4 h-4 text-[#3d2b1f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                    <div class="w-8 h-8 rounded-lg bg-[#f5f0eb] dark:bg-neutral-900 flex items-center justify-center shrink-0">
+                                        <svg class="w-4 h-4 text-[#3d2b1f] dark:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-[10px] text-[#a89880] uppercase tracking-widest font-medium">Klien</p>
-                                        <p class="text-[#3d2b1f] font-semibold text-sm truncate">{{ $portfolioItem->client_name }}</p>
+                                        <p class="text-[10px] text-[#a89880] dark:text-gray-500 uppercase tracking-widest font-medium">Klien</p>
+                                        <p class="text-[#3d2b1f] dark:text-white font-semibold text-sm truncate">{{ $portfolioItem->client_name }}</p>
                                     </div>
                                 </li>
                                 @endif
@@ -124,12 +124,12 @@
                                 {{-- Tanggal --}}
                                 @if($portfolioItem->shoot_date)
                                 <li class="flex items-center gap-3 px-5 py-4">
-                                    <div class="w-8 h-8 rounded-lg bg-[#f5f0eb] flex items-center justify-center shrink-0">
-                                        <svg class="w-4 h-4 text-[#3d2b1f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M3 11h18M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                    <div class="w-8 h-8 rounded-lg bg-[#f5f0eb] dark:bg-neutral-900 flex items-center justify-center shrink-0">
+                                        <svg class="w-4 h-4 text-[#3d2b1f] dark:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3M3 11h18M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-[10px] text-[#a89880] uppercase tracking-widest font-medium">Tanggal Pemotretan</p>
-                                        <p class="text-[#3d2b1f] font-semibold text-sm">{{ $portfolioItem->shoot_date->translatedFormat('d F Y') }}</p>
+                                        <p class="text-[10px] text-[#a89880] dark:text-gray-500 uppercase tracking-widest font-medium">Tanggal Pemotretan</p>
+                                        <p class="text-[#3d2b1f] dark:text-white font-semibold text-sm">{{ $portfolioItem->shoot_date->translatedFormat('d F Y') }}</p>
                                     </div>
                                 </li>
                                 @endif
@@ -137,12 +137,12 @@
                                 {{-- Jumlah galeri --}}
                                 @if($portfolioItem->gallery_images && count($portfolioItem->gallery_images) > 0)
                                 <li class="flex items-center gap-3 px-5 py-4">
-                                    <div class="w-8 h-8 rounded-lg bg-[#f5f0eb] flex items-center justify-center shrink-0">
-                                        <svg class="w-4 h-4 text-[#3d2b1f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                    <div class="w-8 h-8 rounded-lg bg-[#f5f0eb] dark:bg-neutral-900 flex items-center justify-center shrink-0">
+                                        <svg class="w-4 h-4 text-[#3d2b1f] dark:text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                     </div>
                                     <div class="min-w-0">
-                                        <p class="text-[10px] text-[#a89880] uppercase tracking-widest font-medium">Galeri</p>
-                                        <p class="text-[#3d2b1f] font-semibold text-sm">{{ count($portfolioItem->gallery_images) }} foto</p>
+                                        <p class="text-[10px] text-[#a89880] dark:text-gray-500 uppercase tracking-widest font-medium">Galeri</p>
+                                        <p class="text-[#3d2b1f] dark:text-white font-semibold text-sm">{{ count($portfolioItem->gallery_images) }} foto</p>
                                     </div>
                                 </li>
                                 @endif
@@ -151,11 +151,11 @@
 
                         {{-- Tags --}}
                         @if($portfolioItem->tags && count($portfolioItem->tags) > 0)
-                        <div class="bg-white rounded-2xl shadow-sm border border-[#ede8e3] px-5 py-4">
-                            <p class="text-[10px] text-[#a89880] uppercase tracking-widest font-medium mb-3">Tags</p>
+                        <div class="bg-white dark:bg-neutral-800 rounded-2xl shadow-sm border border-[#ede8e3] dark:border-neutral-700 px-5 py-4 transition-colors">
+                            <p class="text-[10px] text-[#a89880] dark:text-gray-500 uppercase tracking-widest font-medium mb-3">Tags</p>
                             <div class="flex flex-wrap gap-2">
                                 @foreach($portfolioItem->tags as $tag)
-                                    <span class="text-[11px] text-[#3d2b1f] bg-[#f5f0eb] border border-[#e0d5c9] px-3 py-1 rounded-full font-medium">
+                                    <span class="text-[11px] text-[#3d2b1f] dark:text-gray-300 bg-[#f5f0eb] dark:bg-neutral-900 border border-[#e0d5c9] dark:border-neutral-700 px-3 py-1 rounded-full font-medium transition-colors">
                                         #{{ $tag }}
                                     </span>
                                 @endforeach
@@ -175,7 +175,7 @@
 
                         {{-- Kembali --}}
                         <a href="{{ route('portfolio.index') }}"
-                           class="flex items-center justify-center gap-2 text-[#9a8b7d] hover:text-[#3d2b1f] transition-colors text-xs font-medium py-1">
+                           class="flex items-center justify-center gap-2 text-[#9a8b7d] dark:text-gray-400 hover:text-[#3d2b1f] dark:hover:text-white transition-colors text-xs font-medium py-1">
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                             Kembali ke Karya
                         </a>
@@ -186,10 +186,10 @@
 
             {{-- ========= KARYA TERKAIT ========= --}}
             @if($relatedItems->isNotEmpty())
-            <div class="mt-20 pt-12 border-t border-[#e8ddd2]">
+            <div class="mt-20 pt-12 border-t border-[#e8ddd2] dark:border-neutral-700 transition-colors">
                 <div class="text-center mb-8">
-                    <p class="text-[#9a8b7d] text-xs uppercase tracking-widest mb-1">Kategori yang sama</p>
-                    <h2 class="text-[#3d2b1f] font-serif font-bold text-2xl">Karya Terkait</h2>
+                    <p class="text-[#9a8b7d] dark:text-gray-500 text-xs uppercase tracking-widest mb-1">Kategori yang sama</p>
+                    <h2 class="text-[#3d2b1f] dark:text-white font-serif font-bold text-2xl">Karya Terkait</h2>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     @foreach($relatedItems->take(3) as $related)
