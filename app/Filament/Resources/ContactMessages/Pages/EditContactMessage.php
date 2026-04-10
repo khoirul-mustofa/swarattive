@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\ContactMessages\Pages;
 
 use App\Filament\Resources\ContactMessages\ContactMessageResource;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\ViewAction;
+use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 
 class EditContactMessage extends EditRecord
@@ -14,9 +14,19 @@ class EditContactMessage extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            ViewAction::make(),
-            DeleteAction::make(),
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-m-arrow-left')
+                ->color('gray')
+                ->url(static::getResource()::getUrl('index')),
+            Actions\ViewAction::make(),
+            Actions\DeleteAction::make(),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 
     public function mount(int|string $record): void

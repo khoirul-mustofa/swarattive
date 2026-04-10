@@ -3,7 +3,8 @@
 namespace App\Filament\Resources\BlogPost\Pages;
 
 use App\Filament\Resources\BlogPost\BlogPostResource;
-use Filament\Actions\EditAction;
+use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewBlogPost extends ViewRecord
@@ -13,7 +14,12 @@ class ViewBlogPost extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-m-arrow-left')
+                ->color('gray')
+                ->url(static::getResource()::getUrl('index')),
+            Actions\EditAction::make(),
         ];
     }
 }

@@ -3,7 +3,8 @@
 namespace App\Filament\Resources\ContactMessages\Pages;
 
 use App\Filament\Resources\ContactMessages\ContactMessageResource;
-use Filament\Actions\EditAction;
+use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewContactMessage extends ViewRecord
@@ -13,7 +14,12 @@ class ViewContactMessage extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            // EditAction::make(),
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-m-arrow-left')
+                ->color('gray')
+                ->url(static::getResource()::getUrl('index')),
+            // Actions\EditAction::make(),
         ];
     }
 

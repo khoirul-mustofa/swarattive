@@ -3,7 +3,8 @@
 namespace App\Filament\Resources\PortfolioItems\Pages;
 
 use App\Filament\Resources\PortfolioItems\PortfolioItemResource;
-use Filament\Actions\DeleteAction;
+use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 
 class EditPortfolioItem extends EditRecord
@@ -18,7 +19,12 @@ class EditPortfolioItem extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-m-arrow-left')
+                ->color('gray')
+                ->url(static::getResource()::getUrl('index')),
+            Actions\DeleteAction::make(),
         ];
     }
 }

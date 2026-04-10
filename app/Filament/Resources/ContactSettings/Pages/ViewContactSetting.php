@@ -3,7 +3,8 @@
 namespace App\Filament\Resources\ContactSettings\Pages;
 
 use App\Filament\Resources\ContactSettings\ContactSettingResource;
-use Filament\Actions\EditAction;
+use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewContactSetting extends ViewRecord
@@ -13,7 +14,12 @@ class ViewContactSetting extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-m-arrow-left')
+                ->color('gray')
+                ->url(static::getResource()::getUrl('index')),
+            Actions\EditAction::make(),
         ];
     }
 }

@@ -17,6 +17,11 @@ class EditBooking extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-m-arrow-left')
+                ->color('gray')
+                ->url(static::getResource()::getUrl('index')),
             Action::make('downloadInvoice')
                 ->label('Download Invoice')
                 ->icon('heroicon-o-document-arrow-down')
