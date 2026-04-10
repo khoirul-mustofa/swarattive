@@ -22,37 +22,47 @@
 
 <body class="bg-gray-50">
     <!-- Navigation -->
-    <nav x-data="{ open: false }" @click.outside="open = false" class="bg-white shadow-lg sticky top-0 z-50">
+    <nav x-data="{ open: false, scrolled: false }" 
+        @scroll.window="scrolled = (window.pageYOffset > 20)"
+        @click.outside="open = false" 
+        :class="{ 'bg-white shadow-xl py-0': scrolled || open, 'bg-transparent py-2': !scrolled && !open }"
+        class="fixed w-full top-0 z-50 transition-all duration-500 ease-in-out">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center h-16 transition-all duration-500" :class="scrolled || open ? 'h-16' : 'h-20'">
                 <div class="flex items-center">
-                    <a href="{{ route('home') }}" class="flex items-center gap-2">
-                        {{-- @if(file_exists(public_path('images/logo-primary.png')))
-                        <img src="{{ asset('images/logo-primary.png') }}" alt="Swarattive" class="h-8 w-auto">
-                        @endif --}}
-                        <span class="text-2xl font-bold text-amber-600">Swarattive</span>
+                    <a href="{{ route('home') }}" class="flex items-center gap-2 group">
+                        <span class="text-2xl font-bold transition-colors duration-500" 
+                            :class="scrolled || open ? 'text-amber-600' : 'text-white'">Swarattive</span>
                     </a>
                 </div>
 
                 {{-- Desktop Navigation (Layar Lebar) --}}
                 <div class="hidden lg:flex items-center space-x-8">
-                    <a href="{{ route('home') }}" wire:navigate
-                        class="{{ request()->routeIs('home') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Beranda</a>
-                    <a href="{{ route('portfolio.index') }}" wire:navigate
-                        class="{{ request()->routeIs('portfolio.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Karya</a>
-                    <a href="{{ route('services.index') }}" wire:navigate
-                        class="{{ request()->routeIs('services.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Layanan</a>
-                    <a href="{{ route('about.index') }}" wire:navigate
-                        class="{{ request()->routeIs('about.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Tentang</a>
-                    <a href="{{ route('blog.index') }}" wire:navigate
-                        class="{{ request()->routeIs('blog.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Artikel</a>
-                    <a href="{{ route('contact.index') }}" wire:navigate
-                        class="{{ request()->routeIs('contact.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Kontak</a>
-                    <a href="{{ route('booking.check') }}" wire:navigate
-                        class="{{ request()->routeIs('booking.check') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Cek
-                        Pesanan</a>
+                    @php
+                        $navLinks = [
+                            ['route' => 'home', 'label' => 'Beranda', 'activePattern' => 'home'],
+                            ['route' => 'portfolio.index', 'label' => 'Karya', 'activePattern' => 'portfolio.*'],
+                            ['route' => 'services.index', 'label' => 'Layanan', 'activePattern' => 'services.*'],
+                            ['route' => 'about.index', 'label' => 'Tentang', 'activePattern' => 'about.*'],
+                            ['route' => 'blog.index', 'label' => 'Artikel', 'activePattern' => 'blog.*'],
+                            ['route' => 'contact.index', 'label' => 'Kontak', 'activePattern' => 'contact.*'],
+                            ['route' => 'booking.check', 'label' => 'Cek Pesanan', 'activePattern' => 'booking.check'],
+                        ];
+                    @endphp
+
+                    @foreach($navLinks as $link)
+                        <a href="{{ route($link['route']) }}" wire:navigate
+                            class="transition-all duration-300 py-1 border-b-2"
+                            :class="{ 
+                                '{{ request()->routeIs($link['activePattern']) ? 'text-amber-600 border-amber-600 font-semibold' : 'text-gray-700 border-transparent' }} hover:text-amber-600': scrolled || open,
+                                '{{ request()->routeIs($link['activePattern']) ? 'text-white border-white font-semibold' : 'text-white/80 border-transparent' }} hover:text-white': !scrolled && !open 
+                            }">
+                            {{ $link['label'] }}
+                        </a>
+                    @endforeach
+
                     <a href="{{ route('booking.index') }}" wire:navigate
-                        class="bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition-colors {{ request()->routeIs('booking.*') ? 'ring-2 ring-amber-600 ring-offset-2' : '' }}">
+                        class="bg-amber-600 text-white px-6 py-2.5 rounded-full font-bold tracking-wider uppercase text-[10px] hover:bg-amber-700 transition-all shadow-lg hover:shadow-amber-600/20 active:scale-95 {{ request()->routeIs('booking.*') ? 'ring-2 ring-amber-600 ring-offset-2' : '' }}">
                         Pemesanan
                     </a>
                 </div>
@@ -60,20 +70,23 @@
                 {{-- Tablet Navigation (Hanya Menu Penting) --}}
                 <div class="hidden md:flex lg:hidden items-center space-x-6">
                     <a href="{{ route('home') }}" wire:navigate
-                        class="{{ request()->routeIs('home') ? 'text-amber-600 font-semibold' : 'text-gray-700' }} hover:text-amber-600 transition-all text-sm">Beranda</a>
+                        class="transition-all duration-300 text-sm font-medium"
+                        :class="scrolled || open ? 'text-gray-700' : 'text-white'">Beranda</a>
                     <a href="{{ route('services.index') }}" wire:navigate
-                        class="{{ request()->routeIs('services.*') ? 'text-amber-600 font-semibold' : 'text-gray-700' }} hover:text-amber-600 transition-all text-sm">Layanan</a>
+                        class="transition-all duration-300 text-sm font-medium"
+                        :class="scrolled || open ? 'text-gray-700' : 'text-white'">Layanan</a>
                     <a href="{{ route('booking.index') }}" wire:navigate
-                        class="bg-amber-600 text-white px-3 py-1.5 rounded-lg hover:bg-amber-700 transition-colors text-sm">
+                        class="bg-amber-600 text-white px-4 py-2 rounded-full hover:bg-amber-700 transition-colors text-xs font-bold uppercase tracking-widest">
                         Pemesanan
                     </a>
                 </div>
 
-                <div class="lg:hidden text-gray-700">
-                    <button @click="open = !open" class="hover:text-amber-600 p-2">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
+                <div class="lg:hidden">
+                    <button @click="open = !open" class="p-2 transition-colors duration-300" 
+                        :class="scrolled || open ? 'text-gray-700' : 'text-white'">
+                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
