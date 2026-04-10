@@ -35,19 +35,11 @@ class Category extends Model
         'name',
         'slug',
         'description',
-        'image_url',
-        'image_path',
         'is_active',
         'sort_order',
     ];
 
-    public function getImageUrlAttribute($value)
-    {
-        if ($this->image_path) {
-            return \Illuminate\Support\Facades\Storage::url($this->image_path);
-        }
-        return $value;
-    }
+
 
     protected $casts = [
         'is_active' => 'boolean',

@@ -52,31 +52,7 @@ class CategoryResource extends Resource
                         \Filament\Forms\Components\TextInput::make('sort_order')
                             ->numeric()
                             ->default(0),
-                        \Filament\Forms\Components\Select::make('image_source')
-                            ->label('Sumber Gambar')
-                            ->helperText('Pilih asal gambar untuk kategori ini.')
-                            ->options([
-                                'upload' => 'Upload Gambar (Produksi)',
-                                'url' => 'URL Foto Eksternal (Seeded/Unsplash)',
-                            ])
-                            ->native(false)
-                            ->default(fn ($get) => $get('image_path') ? 'upload' : 'url')
-                            ->live()
-                            ->dehydrated(false),
-                        \Filament\Forms\Components\FileUpload::make('image_path')
-                            ->label('Foto Kategori (Local)')
-                            ->image()
-                            ->imageEditor()
-                            ->optimize('webp')
-                            ->disk('public')
-                            ->directory('categories')
-                            ->visible(fn ($get) => $get('image_source') === 'upload')
-                            ->required(fn ($get) => $get('image_source') === 'upload'),
-                        \Filament\Forms\Components\TextInput::make('image_url')
-                            ->label('Foto Kategori (External URL)')
-                            ->url()
-                            ->visible(fn ($get) => $get('image_source') === 'url')
-                            ->required(fn ($get) => $get('image_source') === 'url'),
+
                         \Filament\Forms\Components\Textarea::make('description')
                             ->label('Deskripsi')
                             ->helperText('Penjelasan singkat mengenai kategori ini.')
@@ -89,8 +65,7 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                \Filament\Tables\Columns\ImageColumn::make('image_url')
-                    ->label('Foto Kategori'),
+
                 \Filament\Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
