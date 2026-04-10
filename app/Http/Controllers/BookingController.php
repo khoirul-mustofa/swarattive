@@ -47,7 +47,22 @@ class BookingController extends Controller
         return $this->show($request->booking_code);
     }
 
+    public function previewInvoice($booking_code)
+    {
+        $data = $this->getInvoiceData($booking_code);
+        return view('booking.invoice-preview', $data);
+    }
+
     public function downloadInvoice($booking_code)
+    {
+        $data = $this->getInvoiceData($booking_code);
+
+        $pdf = Pdf::loadView('pdf.booking-invoice', $data);
+
+        return $pdf->download("invoice-{$data['booking']->booking_code}.pdf");
+    }
+
+    private function getInvoiceData($booking_code)
     {
         $booking = Booking::with(['client', 'service', 'package', 'payments'])
             ->where('booking_code', $booking_code)
@@ -66,15 +81,13 @@ class BookingController extends Controller
             $logoBase64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         }
 
-        $pdf = Pdf::loadView('pdf.booking-invoice', [
+        return [
             'booking' => $booking,
             'logo' => $logoBase64,
             'siteName' => $siteName,
             'contactAddress' => $contactAddress,
             'contactPhone' => $contactPhone,
             'contactEmail' => $contactEmail,
-        ]);
-
-        return $pdf->download("invoice-{$booking->booking_code}.pdf");
+        ];
     }
 }

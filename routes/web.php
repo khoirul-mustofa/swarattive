@@ -26,7 +26,8 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 // Booking routes
 Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 Route::get('/booking/status/{booking_code}', [BookingController::class, 'show'])->name('booking.status');
-Route::get('/booking/invoice/{booking_code}', [BookingController::class, 'downloadInvoice'])->name('booking.invoice.download');
+Route::get('/booking/invoice/{booking_code}/preview', [BookingController::class, 'previewInvoice'])->name('booking.invoice.preview');
+Route::get('/booking/invoice/{booking_code}/download', [BookingController::class, 'downloadInvoice'])->name('booking.invoice.download');
 Route::get('/check-booking', [BookingController::class, 'check'])->name('booking.check');
 Route::post('/check-booking', [BookingController::class, 'checkStatus'])->name('booking.check.status');
 
