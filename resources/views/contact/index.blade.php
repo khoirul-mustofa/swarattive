@@ -108,7 +108,7 @@
                         <button type="submit" :disabled="loading"
                             class="group relative w-full sm:w-auto px-10 py-4 bg-neutral-900 text-white rounded-full font-bold tracking-widest uppercase text-[11px] overflow-hidden transition-all hover:pr-14 active:scale-[0.98] shadow-lg hover:shadow-neutral-900/30 inline-flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed">
                             <span class="relative z-10 transition-transform"
-                                x-text="loading ? 'Mengirim...' : 'Kirim Pesan Sekarang'">Kirim Pesan Sekarang</span>
+                                x-text="loading ? 'Mengalihkan ke WhatsApp...' : 'Kirim via WhatsApp'">Kirim via WhatsApp</span>
                             <div class="absolute inset-0 bg-amber-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 -z-0"
                                 :class="loading ? 'scale-x-100' : ''">
                             </div>
@@ -162,6 +162,23 @@
                                 </div>
                             </div>
 
+                            {{-- Blok Telepon --}}
+                            <div class="flex gap-5">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-amber-400 shrink-0 shadow-inner">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs mb-1.5 uppercase tracking-widest">Telepon / WhatsApp</h4>
+                                    <p class="text-neutral-400 font-light leading-relaxed text-sm hover:text-amber-400 transition-colors cursor-pointer">
+                                        {{ $settings->phone ?? '+62 812 3456 7890' }}
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            {{-- Blok Email --}}
                             <div class="flex gap-5">
                                 <div
                                     class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-amber-400 shrink-0 shadow-inner">
@@ -172,14 +189,11 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-white text-xs mb-1.5 uppercase tracking-widest">Pertanyaan Email
+                                    <h4 class="font-bold text-white text-xs mb-1.5 uppercase tracking-widest">Surat Elektronik
                                     </h4>
                                     <p
                                         class="text-neutral-400 font-light leading-relaxed text-sm hover:text-amber-400 transition-colors cursor-pointer">
                                         {{ $settings->email ?? 'hello@swarattive.com' }}</p>
-                                    <p class="text-neutral-400 font-light leading-relaxed text-sm">
-                                        {{ $settings->phone ?? '+62 812 3456 7890' }}
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -216,20 +230,7 @@
         </div>
     </section>
 
-    <div x-data="{ show: @json(session('success') ? true : false) }" x-init="if (show) setTimeout(() => show = false, 5000)"
-        x-show="show" x-transition:enter="transition ease-out duration-500"
-        x-transition:enter-start="opacity-0 translate-y-10" x-transition:enter-end="opacity-100 translate-y-0"
-        x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0"
-        x-transition:leave-end="opacity-0 translate-y-10"
-        class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] bg-neutral-900/90 backdrop-blur-md text-white px-8 py-4 rounded-full shadow-2xl flex items-center gap-4 border border-white/10"
-        style="display: none;">
-        <div class="bg-amber-500 text-neutral-900 rounded-full p-1">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-            </svg>
-        </div>
-        <span class="font-bold tracking-widest uppercase text-[11px]">Pesan Terkirim. Kami akan segera menghubungi Anda!</span>
-    </div>
+
 @endsection
 
 @push('scripts')
