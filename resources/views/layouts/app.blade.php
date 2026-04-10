@@ -16,7 +16,7 @@
 
 <body class="bg-gray-50">
     <!-- Navigation -->
-    <nav x-data="{ open: false }" class="bg-white shadow-lg sticky top-0 z-50">
+    <nav x-data="{ open: false }" @click.outside="open = false" class="bg-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
@@ -28,29 +28,42 @@
                     </a>
                 </div>
 
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('home') }}"
+                {{-- Desktop Navigation (Layar Lebar) --}}
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="{{ route('home') }}" wire:navigate
                         class="{{ request()->routeIs('home') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Beranda</a>
-                    <a href="{{ route('portfolio.index') }}"
+                    <a href="{{ route('portfolio.index') }}" wire:navigate
                         class="{{ request()->routeIs('portfolio.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Karya</a>
-                    <a href="{{ route('services.index') }}"
+                    <a href="{{ route('services.index') }}" wire:navigate
                         class="{{ request()->routeIs('services.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Layanan</a>
-                    <a href="{{ route('about.index') }}"
+                    <a href="{{ route('about.index') }}" wire:navigate
                         class="{{ request()->routeIs('about.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Tentang</a>
-                    <a href="{{ route('blog.index') }}"
+                    <a href="{{ route('blog.index') }}" wire:navigate
                         class="{{ request()->routeIs('blog.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Artikel</a>
-                    <a href="{{ route('contact.index') }}"
+                    <a href="{{ route('contact.index') }}" wire:navigate
                         class="{{ request()->routeIs('contact.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Kontak</a>
-                    <a href="{{ route('booking.check') }}"
+                    <a href="{{ route('booking.check') }}" wire:navigate
                         class="{{ request()->routeIs('booking.check') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Cek Pesanan</a>
-                    <a href="{{ route('booking.index') }}"
+                    <a href="{{ route('booking.index') }}" wire:navigate
                         class="bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition-colors {{ request()->routeIs('booking.*') ? 'ring-2 ring-amber-600 ring-offset-2' : '' }}">
                         Pemesanan
                     </a>
                 </div>
 
-                <div class="md:hidden">
-                    <button @click="open = !open" class="text-gray-700 hover:text-amber-600">
+                {{-- Tablet Navigation (Hanya Menu Penting) --}}
+                <div class="hidden md:flex lg:hidden items-center space-x-6">
+                    <a href="{{ route('home') }}" wire:navigate
+                        class="{{ request()->routeIs('home') ? 'text-amber-600 font-semibold' : 'text-gray-700' }} hover:text-amber-600 transition-all text-sm">Beranda</a>
+                    <a href="{{ route('services.index') }}" wire:navigate
+                        class="{{ request()->routeIs('services.*') ? 'text-amber-600 font-semibold' : 'text-gray-700' }} hover:text-amber-600 transition-all text-sm">Layanan</a>
+                    <a href="{{ route('booking.index') }}" wire:navigate
+                        class="bg-amber-600 text-white px-3 py-1.5 rounded-lg hover:bg-amber-700 transition-colors text-sm">
+                        Pemesanan
+                    </a>
+                </div>
+
+                <div class="lg:hidden text-gray-700">
+                    <button @click="open = !open" class="hover:text-amber-600 p-2">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16M4 18h16"></path>
@@ -61,23 +74,23 @@
         </div>
 
         <!-- Mobile menu -->
-        <div x-show="open" x-transition class="md:hidden bg-white border-t">
+        <div x-show="open" x-transition class="lg:hidden bg-white border-t">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="{{ route('home') }}"
+                <a href="{{ route('home') }}" wire:navigate
                     class="block px-3 py-2 {{ request()->routeIs('home') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Beranda</a>
-                <a href="{{ route('portfolio.index') }}"
+                <a href="{{ route('portfolio.index') }}" wire:navigate
                     class="block px-3 py-2 {{ request()->routeIs('portfolio.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Karya</a>
-                <a href="{{ route('services.index') }}"
+                <a href="{{ route('services.index') }}" wire:navigate
                     class="block px-3 py-2 {{ request()->routeIs('services.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Layanan</a>
-                <a href="{{ route('about.index') }}"
+                <a href="{{ route('about.index') }}" wire:navigate
                     class="block px-3 py-2 {{ request()->routeIs('about.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Tentang</a>
-                <a href="{{ route('blog.index') }}"
+                <a href="{{ route('blog.index') }}" wire:navigate
                     class="block px-3 py-2 {{ request()->routeIs('blog.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Artikel</a>
-                <a href="{{ route('contact.index') }}"
+                <a href="{{ route('contact.index') }}" wire:navigate
                     class="block px-3 py-2 {{ request()->routeIs('contact.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Kontak</a>
-                <a href="{{ route('booking.check') }}"
+                <a href="{{ route('booking.check') }}" wire:navigate
                     class="block px-3 py-2 {{ request()->routeIs('booking.check') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Cek Pesanan</a>
-                <a href="{{ route('booking.index') }}"
+                <a href="{{ route('booking.index') }}" wire:navigate
                     class="block px-3 py-2 {{ request()->routeIs('booking.*') ? 'bg-amber-600 text-white' : 'bg-amber-500 text-white' }} rounded-lg font-bold text-center">Pemesanan</a>
             </div>
         </div>
@@ -102,7 +115,7 @@
                     <h4 class="text-lg font-semibold mb-4">Layanan</h4>
                     <ul class="space-y-2 text-gray-300">
                         @foreach($footerSettings['categories'] as $cat)
-                            <li><a href="{{ route('services.index') }}#{{ $cat->slug }}" class="hover:text-amber-400">{{ $cat->name }}</a></li>
+                            <li><a href="{{ route('services.index') }}#{{ $cat->slug }}" wire:navigate class="hover:text-amber-400">{{ $cat->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -111,10 +124,10 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Tautan Cepat</h4>
                     <ul class="space-y-2 text-gray-300">
-                        <li><a href="{{ route('portfolio.index') }}" class="hover:text-amber-400">Karya</a></li>
-                        <li><a href="{{ route('about.index') }}" class="hover:text-amber-400">Tentang Kami</a></li>
-                        <li><a href="{{ route('blog.index') }}" class="hover:text-amber-400">Artikel</a></li>
-                        <li><a href="{{ route('booking.index') }}" class="hover:text-amber-400">Pemesanan</a></li>
+                        <li><a href="{{ route('portfolio.index') }}" wire:navigate class="hover:text-amber-400">Karya</a></li>
+                        <li><a href="{{ route('about.index') }}" wire:navigate class="hover:text-amber-400">Tentang Kami</a></li>
+                        <li><a href="{{ route('blog.index') }}" wire:navigate class="hover:text-amber-400">Artikel</a></li>
+                        <li><a href="{{ route('booking.index') }}" wire:navigate class="hover:text-amber-400">Pemesanan</a></li>
                     </ul>
                 </div>
 
