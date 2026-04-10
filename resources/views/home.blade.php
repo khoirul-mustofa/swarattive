@@ -87,6 +87,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                @forelse($services as $service)
                     <a href="{{ route('services.index') }}#{{ $service->slug }}" class="text-center group block">
                         <div
                             class="bg-amber-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-600 transition-colors">
