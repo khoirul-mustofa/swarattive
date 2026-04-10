@@ -43,7 +43,8 @@
                     <a href="{{ route('contact.index') }}" wire:navigate
                         class="{{ request()->routeIs('contact.*') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Kontak</a>
                     <a href="{{ route('booking.check') }}" wire:navigate
-                        class="{{ request()->routeIs('booking.check') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Cek Pesanan</a>
+                        class="{{ request()->routeIs('booking.check') ? 'text-amber-600 font-semibold border-b-2 border-amber-600' : 'text-gray-700' }} hover:text-amber-600 transition-all py-1">Cek
+                        Pesanan</a>
                     <a href="{{ route('booking.index') }}" wire:navigate
                         class="bg-amber-600 text-white px-4 py-2 rounded-lg hover:bg-amber-700 transition-colors {{ request()->routeIs('booking.*') ? 'ring-2 ring-amber-600 ring-offset-2' : '' }}">
                         Pemesanan
@@ -89,7 +90,8 @@
                 <a href="{{ route('contact.index') }}" wire:navigate
                     class="block px-3 py-2 {{ request()->routeIs('contact.*') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Kontak</a>
                 <a href="{{ route('booking.check') }}" wire:navigate
-                    class="block px-3 py-2 {{ request()->routeIs('booking.check') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Cek Pesanan</a>
+                    class="block px-3 py-2 {{ request()->routeIs('booking.check') ? 'text-amber-600 bg-amber-50 font-bold' : 'text-gray-700' }} hover:text-amber-600 rounded-lg">Cek
+                    Pesanan</a>
                 <a href="{{ route('booking.index') }}" wire:navigate
                     class="block px-3 py-2 {{ request()->routeIs('booking.*') ? 'bg-amber-600 text-white' : 'bg-amber-500 text-white' }} rounded-lg font-bold text-center">Pemesanan</a>
             </div>
@@ -106,7 +108,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-4 text-amber-400">{{ config('app.name', 'Swarattive') }}</h3>
+                    <h3 class="text-xl font-bold mb-4 text-amber-400">{{ config('app.name', 'Laravel') }}</h3>
                     <p class="text-gray-300">{{ $footerSettings['description'] }}</p>
                 </div>
 
@@ -115,7 +117,8 @@
                     <h4 class="text-lg font-semibold mb-4">Layanan</h4>
                     <ul class="space-y-2 text-gray-300">
                         @foreach($footerSettings['categories'] as $cat)
-                            <li><a href="{{ route('services.index') }}#{{ $cat->slug }}" wire:navigate class="hover:text-amber-400">{{ $cat->name }}</a></li>
+                            <li><a href="{{ route('services.index') }}#{{ $cat->slug }}" wire:navigate
+                                    class="hover:text-amber-400">{{ $cat->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -124,10 +127,14 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Tautan Cepat</h4>
                     <ul class="space-y-2 text-gray-300">
-                        <li><a href="{{ route('portfolio.index') }}" wire:navigate class="hover:text-amber-400">Karya</a></li>
-                        <li><a href="{{ route('about.index') }}" wire:navigate class="hover:text-amber-400">Tentang Kami</a></li>
-                        <li><a href="{{ route('blog.index') }}" wire:navigate class="hover:text-amber-400">Artikel</a></li>
-                        <li><a href="{{ route('booking.index') }}" wire:navigate class="hover:text-amber-400">Pemesanan</a></li>
+                        <li><a href="{{ route('portfolio.index') }}" wire:navigate
+                                class="hover:text-amber-400">Karya</a></li>
+                        <li><a href="{{ route('about.index') }}" wire:navigate class="hover:text-amber-400">Tentang
+                                Kami</a></li>
+                        <li><a href="{{ route('blog.index') }}" wire:navigate class="hover:text-amber-400">Artikel</a>
+                        </li>
+                        <li><a href="{{ route('booking.index') }}" wire:navigate
+                                class="hover:text-amber-400">Pemesanan</a></li>
                     </ul>
                 </div>
 
