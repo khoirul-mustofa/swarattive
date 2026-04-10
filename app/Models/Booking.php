@@ -35,6 +35,7 @@ class Booking extends Model
         'admin_fee',
         'status',
         'payment_status',
+        'production_progress',
         'notes',
         'confirmed_at',
         'completed_at',

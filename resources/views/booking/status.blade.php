@@ -54,11 +54,24 @@
                     <div class="relative flex justify-between">
                         @php
                             $steps = [
-                                ['id' => 'pending', 'label' => 'Pesanan Dibuat', 'icon' => 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2'],
-                                ['id' => 'confirmed', 'label' => 'Dikonfirmasi', 'icon' => 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'],
-                                ['id' => 'completed', 'label' => 'Sesi Selesai', 'icon' => 'M5 13l4 4L19 7']
+                                ['id' => 'menunggu_pembayaran', 'label' => 'Pembayaran', 'icon' => 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z'],
+                                ['id' => 'menunggu_jadwal', 'label' => 'Jadwal', 'icon' => 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'],
+                                ['id' => 'pelaksanaan', 'label' => 'Sesi Foto', 'icon' => 'M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z'],
+                                ['id' => 'editing', 'label' => 'Editing', 'icon' => 'M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'],
+                                ['id' => 'siap_dikirim', 'label' => 'Hasil Siap', 'icon' => 'M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4'],
+                                ['id' => 'selesai', 'label' => 'Selesai', 'icon' => 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z']
                             ];
-                            $currentStatusIdx = ['pending' => 0, 'confirmed' => 1, 'completed' => 2][$booking->status] ?? -1;
+
+                            // Map status to index for coloring
+                            $statusMap = array_column($steps, 'id');
+                            $currentStatus = $booking->production_progress;
+
+                            // Automated check: if fully paid, at least we are in 'menunggu_jadwal' (index 1)
+                            if (in_array($booking->payment_status, ['settlement', 'fully_paid']) && $currentStatus == 'menunggu_pembayaran') {
+                                $currentStatus = 'menunggu_jadwal';
+                            }
+
+                            $currentStatusIdx = array_search($currentStatus, $statusMap);
                         @endphp
 
                         @foreach($steps as $idx => $step)
@@ -67,7 +80,7 @@
                                     @if($idx <= $currentStatusIdx) bg-[#3d2b1f] text-[#f0c27f] @else bg-white text-gray-300 border @endif">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $step['icon'] }}"/></svg>
                                 </div>
-                                <span class="mt-2 text-[10px] font-bold uppercase tracking-wider @if($idx <= $currentStatusIdx) text-[#3d2b1f] @else text-gray-400 @endif">{{ $step['label'] }}</span>
+                                <span class="mt-2 text-[8px] md:text-[10px] font-bold uppercase tracking-wider @if($idx <= $currentStatusIdx) text-[#3d2b1f] @else text-gray-400 @endif text-center">{{ $step['label'] }}</span>
                             </div>
                         @endforeach
                     </div>

@@ -138,6 +138,20 @@ class BookingResource extends Resource
                             ])
                             ->required()
                             ->default('pending'),
+                        Select::make('production_progress')
+                            ->label('Progres Produksi')
+                            ->native(false)
+                            ->disablePlaceholderSelection()
+                            ->options([
+                                'menunggu_pembayaran' => '1. Menunggu Pembayaran',
+                                'menunggu_jadwal' => '2. Menunggu Jadwal',
+                                'pelaksanaan' => '3. Pelaksanaan / Sesi',
+                                'editing' => '4. Proses Editing',
+                                'siap_dikirim' => '5. Hasil Siap Dikirim',
+                                'selesai' => '6. Selesai',
+                            ])
+                            ->required()
+                            ->default('menunggu_pembayaran'),
                         Textarea::make('notes')
                             ->columnSpanFull(),
                     ]),
@@ -169,6 +183,19 @@ class BookingResource extends Resource
                         'confirmed' => 'Confirmed',
                         'cancelled' => 'Cancelled',
                         'completed' => 'Completed',
+                    ])
+                    ->sortable(),
+                SelectColumn::make('production_progress')
+                    ->label('Progres')
+                    ->native(false)
+                    ->disablePlaceholderSelection()
+                    ->options([
+                        'menunggu_pembayaran' => '1. Menunggu Pembayaran',
+                        'menunggu_jadwal' => '2. Menunggu Jadwal',
+                        'pelaksanaan' => '3. Pelaksanaan / Sesi',
+                        'editing' => '4. Proses Editing',
+                        'siap_dikirim' => '5. Hasil Siap Dikirim',
+                        'selesai' => '6. Selesai',
                     ])
                     ->sortable(),
                 TextColumn::make('total_price')
