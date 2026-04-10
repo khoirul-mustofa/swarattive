@@ -78,10 +78,23 @@
                                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                         @foreach($service->packages as $package)
                                                             <div class="text-sm p-4 bg-[#fdfaf8] hover:bg-[#faf5ef] transition-colors border border-[#e8ddd2] rounded-xl flex flex-col">
-                                                                <div class="flex justify-between items-start font-bold text-[#3d2b1f] gap-3 mb-2">
+                                                                <div class="flex justify-between items-start font-bold text-[#3d2b1f] gap-3 mb-4">
                                                                     <span class="leading-tight">{{ $package->name }}</span>
                                                                     <span class="text-amber-700 whitespace-nowrap text-right">Rp {{ number_format($package->price, 0, ',', '.') }}</span>
                                                                 </div>
+
+                                                                @if(is_array($package->features) && count($package->features) > 0)
+                                                                    <ul class="mb-4 space-y-2">
+                                                                        @foreach($package->features as $feature)
+                                                                            <li class="flex items-start text-[11px] text-[#7a6b5d] leading-tight">
+                                                                                <svg class="w-3.5 h-3.5 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                                                </svg>
+                                                                                <span>{{ $feature }}</span>
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
                                                                 @if($package->description)
                                                                     <p class="text-xs text-[#8a7b6d] leading-relaxed mt-auto border-t border-gray-100 pt-2">{{ $package->description }}</p>
                                                                 @endif

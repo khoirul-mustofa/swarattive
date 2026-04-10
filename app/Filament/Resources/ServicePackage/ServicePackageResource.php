@@ -51,6 +51,9 @@ class ServicePackageResource extends Resource
                         \Filament\Forms\Components\Toggle::make('is_featured')
                             ->default(false),
                         \Filament\Forms\Components\TagsInput::make('features')
+                            ->label('Rincian / Fasilitas Paket')
+                            ->placeholder('Input fasilitas lalu tekan Enter...')
+                            ->helperText('Contoh: 1 Fotografer, Sesi 4 Jam, 50 Foto Edit, Cetak Album, dll.')
                             ->columnSpanFull(),
                         \Filament\Forms\Components\Textarea::make('description')
                             ->columnSpanFull(),
