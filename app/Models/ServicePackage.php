@@ -6,10 +6,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Cache;
 
 class ServicePackage extends Model
 {
     use HasFactory;
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            Cache::forget('home_services');
+            Cache::forget('service_list');
+        });
+
+        static::deleted(function () {
+            Cache::forget('home_services');
+            Cache::forget('service_list');
+        });
+    }
 
     protected $fillable = [
         'service_id',
