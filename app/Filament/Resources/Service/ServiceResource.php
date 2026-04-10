@@ -103,6 +103,7 @@ class ServiceResource extends Resource
                             ->default(true),
                         \Filament\Forms\Components\Textarea::make('description')
                             ->label('Deskripsi')
+                            ->required()
                             ->columnSpanFull(),
                         \Filament\Forms\Components\FileUpload::make('icon')
                             ->label('Ikon Layanan (PNG/JPG)')
