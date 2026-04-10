@@ -44,7 +44,7 @@
 
                         <div class="space-y-8 xl:space-y-12">
                             @foreach($categoryServices as $service)
-                                <div class="bg-white rounded-2xl shadow-sm border border-[#ede8e3] overflow-hidden flex flex-col lg:flex-row transition-all hover:shadow-xl group">
+                                <div id="{{ $service->slug }}" class="bg-white rounded-2xl shadow-sm border border-[#ede8e3] overflow-hidden flex flex-col lg:flex-row transition-all hover:shadow-xl group">
                                     <div class="relative w-full lg:w-5/12 aspect-[4/3] lg:aspect-auto lg:h-auto overflow-hidden flex-shrink-0">
                                         @if($service->image_url)
                                             <img src="{{ $service->image_url }}" 

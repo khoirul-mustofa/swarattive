@@ -87,21 +87,21 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                @forelse($services as $service)
-                    @php
-                        $icon = $service->icon ?: 'M12 4v16m8-8H4'; // fallback default icon
-                    @endphp
-                    <div class="text-center group">
+                    <a href="{{ route('services.index') }}#{{ $service->slug }}" class="text-center group block">
                         <div
                             class="bg-amber-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-600 transition-colors">
-                            <svg class="w-10 h-10 text-amber-600 group-hover:text-white" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $icon }}"></path>
-                            </svg>
+                            @if($service->icon && !str_contains($service->icon, '<path'))
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url($service->icon) }}" alt="{{ $service->name }}" class="w-10 h-10 object-contain group-hover:invert group-hover:brightness-0 transition-all">
+                            @else
+                                <svg class="w-10 h-10 text-amber-600 group-hover:text-white" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $service->icon ?: 'M12 4v16m8-8H4' }}"></path>
+                                </svg>
+                            @endif
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">{{ $service->name }}</h3>
+                        <h3 class="text-xl font-semibold mb-2 group-hover:text-amber-600 transition-colors">{{ $service->name }}</h3>
                         <p class="text-gray-600">{{ Str::limit($service->description, 70) }}</p>
-                    </div>
+                    </a>
                 @empty
                     <div class="col-span-full text-center py-12 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
                         <p class="text-gray-500">Belum ada layanan yang tersedia.</p>

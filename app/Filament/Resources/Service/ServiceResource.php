@@ -104,9 +104,12 @@ class ServiceResource extends Resource
                         \Filament\Forms\Components\Textarea::make('description')
                             ->label('Deskripsi')
                             ->columnSpanFull(),
-                        \Filament\Forms\Components\TextInput::make('icon')
-                            ->label('Ikon (SVG Path)')
-                            ->helperText('Masukkan kode path SVG untuk ikon layanan (tanpa tag <svg>).')
+                        \Filament\Forms\Components\FileUpload::make('icon')
+                            ->label('Ikon Layanan (PNG/JPG)')
+                            ->helperText('Unggah ikon layanan dalam format gambar (PNG/JPG/WebP). Disarankan menggunakan latar belakang transparan.')
+                            ->image()
+                            ->disk('public')
+                            ->directory('icons')
                             ->columnSpanFull(),
                     ]),
             ]);
