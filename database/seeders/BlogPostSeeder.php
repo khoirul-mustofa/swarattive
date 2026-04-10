@@ -80,7 +80,87 @@ class BlogPostSeeder extends Seeder
                 'tags' => ['Potret', 'Bisnis', 'Personal Branding'],
             ],
             [
-                'title' => 'Filosofi Black & White dalam Fotografi Momen',
+                'title' => 'Filosofi Black & White dalam Fotografi Momen 1',
+                'excerpt' => 'Menghilangkan warna terkadang justru membuat foto menjadi lebih "berwarna" secara emosi.',
+                'content' => '
+                    <p>Foto hitam putih memiliki keajaiban tersendiri. Dengan menghilangkan distraksi warna, kita dipaksa untuk fokus pada bentuk, kontras, bayangan, dan yang terpenting: emosi.</p>
+                    <p>Sering kali, momen-momen yang paling emosional di pernikahan terlihat jauh lebih kuat dalam format monokrom. Ini adalah teknik klasik yang takkan pernah terlihat kuno.</p>
+                ',
+                'image_url' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1200',
+                'tags' => ['Inspirasi', 'Seni', 'Teknik'],
+            ],
+            [
+                'title' => 'Filosofi Black & White dalam Fotografi Momen 2',
+                'excerpt' => 'Menghilangkan warna terkadang justru membuat foto menjadi lebih "berwarna" secara emosi.',
+                'content' => '
+                    <p>Foto hitam putih memiliki keajaiban tersendiri. Dengan menghilangkan distraksi warna, kita dipaksa untuk fokus pada bentuk, kontras, bayangan, dan yang terpenting: emosi.</p>
+                    <p>Sering kali, momen-momen yang paling emosional di pernikahan terlihat jauh lebih kuat dalam format monokrom. Ini adalah teknik klasik yang takkan pernah terlihat kuno.</p>
+                ',
+                'image_url' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1200',
+                'tags' => ['Inspirasi', 'Seni', 'Teknik'],
+            ],
+            [
+                'title' => 'Filosofi Black & White dalam Fotografi Momen 3',
+                'excerpt' => 'Menghilangkan warna terkadang justru membuat foto menjadi lebih "berwarna" secara emosi.',
+                'content' => '
+                    <p>Foto hitam putih memiliki keajaiban tersendiri. Dengan menghilangkan distraksi warna, kita dipaksa untuk fokus pada bentuk, kontras, bayangan, dan yang terpenting: emosi.</p>
+                    <p>Sering kali, momen-momen yang paling emosional di pernikahan terlihat jauh lebih kuat dalam format monokrom. Ini adalah teknik klasik yang takkan pernah terlihat kuno.</p>
+                ',
+                'image_url' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1200',
+                'tags' => ['Inspirasi', 'Seni', 'Teknik'],
+            ],
+            [
+                'title' => 'Filosofi Black & White dalam Fotografi Momen 4',
+                'excerpt' => 'Menghilangkan warna terkadang justru membuat foto menjadi lebih "berwarna" secara emosi.',
+                'content' => '
+                    <p>Foto hitam putih memiliki keajaiban tersendiri. Dengan menghilangkan distraksi warna, kita dipaksa untuk fokus pada bentuk, kontras, bayangan, dan yang terpenting: emosi.</p>
+                    <p>Sering kali, momen-momen yang paling emosional di pernikahan terlihat jauh lebih kuat dalam format monokrom. Ini adalah teknik klasik yang takkan pernah terlihat kuno.</p>
+                ',
+                'image_url' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1200',
+                'tags' => ['Inspirasi', 'Seni', 'Teknik'],
+            ],
+            [
+                'title' => 'Filosofi Black & White dalam Fotografi Momen 5',
+                'excerpt' => 'Menghilangkan warna terkadang justru membuat foto menjadi lebih "berwarna" secara emosi.',
+                'content' => '
+                    <p>Foto hitam putih memiliki keajaiban tersendiri. Dengan menghilangkan distraksi warna, kita dipaksa untuk fokus pada bentuk, kontras, bayangan, dan yang terpenting: emosi.</p>
+                    <p>Sering kali, momen-momen yang paling emosional di pernikahan terlihat jauh lebih kuat dalam format monokrom. Ini adalah teknik klasik yang takkan pernah terlihat kuno.</p>
+                ',
+                'image_url' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1200',
+                'tags' => ['Inspirasi', 'Seni', 'Teknik'],
+            ],
+            [
+                'title' => 'Filosofi Black & White dalam Fotografi Momen 6',
+                'excerpt' => 'Menghilangkan warna terkadang justru membuat foto menjadi lebih "berwarna" secara emosi.',
+                'content' => '
+                    <p>Foto hitam putih memiliki keajaiban tersendiri. Dengan menghilangkan distraksi warna, kita dipaksa untuk fokus pada bentuk, kontras, bayangan, dan yang terpenting: emosi.</p>
+                    <p>Sering kali, momen-momen yang paling emosional di pernikahan terlihat jauh lebih kuat dalam format monokrom. Ini adalah teknik klasik yang takkan pernah terlihat kuno.</p>
+                ',
+                'image_url' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1200',
+                'tags' => ['Inspirasi', 'Seni', 'Teknik'],
+            ],
+            [
+                'title' => 'Filosofi Black & White dalam Fotografi Momen 7',
+                'excerpt' => 'Menghilangkan warna terkadang justru membuat foto menjadi lebih "berwarna" secara emosi.',
+                'content' => '
+                    <p>Foto hitam putih memiliki keajaiban tersendiri. Dengan menghilangkan distraksi warna, kita dipaksa untuk fokus pada bentuk, kontras, bayangan, dan yang terpenting: emosi.</p>
+                    <p>Sering kali, momen-momen yang paling emosional di pernikahan terlihat jauh lebih kuat dalam format monokrom. Ini adalah teknik klasik yang takkan pernah terlihat kuno.</p>
+                ',
+                'image_url' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1200',
+                'tags' => ['Inspirasi', 'Seni', 'Teknik'],
+            ],
+            [
+                'title' => 'Filosofi Black & White dalam Fotografi Momen 8',
+                'excerpt' => 'Menghilangkan warna terkadang justru membuat foto menjadi lebih "berwarna" secara emosi.',
+                'content' => '
+                    <p>Foto hitam putih memiliki keajaiban tersendiri. Dengan menghilangkan distraksi warna, kita dipaksa untuk fokus pada bentuk, kontras, bayangan, dan yang terpenting: emosi.</p>
+                    <p>Sering kali, momen-momen yang paling emosional di pernikahan terlihat jauh lebih kuat dalam format monokrom. Ini adalah teknik klasik yang takkan pernah terlihat kuno.</p>
+                ',
+                'image_url' => 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=1200',
+                'tags' => ['Inspirasi', 'Seni', 'Teknik'],
+            ],
+            [
+                'title' => 'Filosofi Black & White dalam Fotografi Momen 9',
                 'excerpt' => 'Menghilangkan warna terkadang justru membuat foto menjadi lebih "berwarna" secara emosi.',
                 'content' => '
                     <p>Foto hitam putih memiliki keajaiban tersendiri. Dengan menghilangkan distraksi warna, kita dipaksa untuk fokus pada bentuk, kontras, bayangan, dan yang terpenting: emosi.</p>
