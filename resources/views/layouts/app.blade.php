@@ -54,7 +54,7 @@
                 }
             }
         }" @scroll.window="scrolled = (window.pageYOffset > 20)" @click.outside="open = false"
-        :class="{ 'bg-white dark:bg-neutral-900 shadow-xl py-0': scrolled || open, 'bg-black/10 backdrop-blur-md py-2': !scrolled && !open }"
+        :class="{ 'bg-white dark:bg-neutral-900 shadow-xl py-0': scrolled || open, 'bg-black/20 backdrop-blur-xl py-2': !scrolled && !open }"
         class="fixed w-full top-0 z-50 transition-all duration-500 ease-in-out">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 transition-all duration-500"
