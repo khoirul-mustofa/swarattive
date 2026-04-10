@@ -140,8 +140,8 @@
                             </div>
                             @if($booking->teamMember)
                                 <div class="flex justify-between items-center">
-                                    <span class="text-xs text-[#7a6b5d] uppercase tracking-widest font-medium">Fotografer</span>
-                                    <span class="text-sm font-semibold text-[#3d2b1f]">{{ $booking->teamMember->name }}</span>
+                                    <span class="text-xs text-[#7a6b5d] dark:text-gray-400 uppercase tracking-widest font-medium">Fotografer</span>
+                                    <span class="text-sm font-semibold text-[#3d2b1f] dark:text-white">{{ $booking->teamMember->name }}</span>
                                 </div>
                             @endif
                             <div class="pt-4 border-t border-dashed border-gray-200 dark:border-neutral-700 space-y-2">
@@ -200,8 +200,8 @@
                         </div>
 
                         @if(in_array($booking->payment_status, ['unpaid', 'pending']))
-                            <div class="bg-amber-50 rounded-2xl p-6 border border-amber-100 space-y-4">
-                                <h4 class="text-sm font-bold text-amber-800 flex items-center gap-2">
+                            <div class="bg-amber-50 dark:bg-amber-900/20 rounded-2xl p-6 border border-amber-100 dark:border-amber-700/50 space-y-4 transition-colors">
+                                <h4 class="text-sm font-bold text-amber-800 dark:text-amber-400 flex items-center gap-2">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -213,14 +213,14 @@
                                 @endphp
 
                                 @if($pendingPayment)
-                                    <p class="text-xs text-amber-700 leading-relaxed">
+                                    <p class="text-xs text-amber-700 dark:text-amber-300/80 leading-relaxed">
                                         Harap selesaikan pembayaran sebesar **Rp
                                         {{ number_format($pendingPayment->amount + $pendingPayment->admin_fee, 0, ',', '.') }}**
                                         untuk mengunci jadwal pemotretan Anda.
                                     </p>
                                     <div class="pt-2">
                                         <button id="pay-button" data-snap="{{ $pendingPayment->snap_token }}"
-                                            class="w-full bg-[#3d2b1f] text-white py-3 rounded-xl text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform duration-300 shadow-md flex items-center justify-center gap-2 group">
+                                            class="w-full bg-[#3d2b1f] dark:bg-amber-600 text-white py-3 rounded-xl text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform duration-300 shadow-md flex items-center justify-center gap-2 group transition-colors">
                                             <svg class="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" fill="none"
                                                 stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -235,17 +235,17 @@
                                 @endif
                             </div>
                         @elseif(in_array($booking->payment_status, ['settlement', 'fully_paid']))
-                            <div class="bg-green-50 rounded-2xl p-6 border border-green-100 text-center">
-                                <p class="text-xs text-green-700 font-bold mb-1 italic">Pembayaran Lunas!</p>
-                                <p class="text-[10px] text-green-600">Terima kasih. Sampai jumpa di hari sesi pemotretan.</p>
+                            <div class="bg-green-50 dark:bg-green-900/20 rounded-2xl p-6 border border-green-100 dark:border-green-800/50 text-center transition-colors">
+                                <p class="text-xs text-green-700 dark:text-green-400 font-bold mb-1 italic">Pembayaran Lunas!</p>
+                                <p class="text-[10px] text-green-600 dark:text-green-500/80">Terima kasih. Sampai jumpa di hari sesi pemotretan.</p>
                             </div>
                         @elseif(in_array($booking->payment_status, ['expire', 'failed', 'cancel', 'expired']))
-                            <div class="bg-red-50 rounded-2xl p-6 border border-red-100 text-center">
-                                <p class="text-xs text-red-700 font-bold mb-1 italic">Booking Kedaluwarsa</p>
-                                <p class="text-[10px] text-red-600">Waktu pembayaran telah habis atau transaksi gagal. Silakan
+                            <div class="bg-red-50 dark:bg-red-900/20 rounded-2xl p-6 border border-red-100 dark:border-red-800/50 text-center transition-colors">
+                                <p class="text-xs text-red-700 dark:text-red-400 font-bold mb-1 italic">Booking Kedaluwarsa</p>
+                                <p class="text-[10px] text-red-600 dark:text-red-500/80">Waktu pembayaran telah habis atau transaksi gagal. Silakan
                                     buat pesanan baru.</p>
                                 <a href="{{ route('booking.index') }}"
-                                    class="mt-3 inline-block text-xs font-bold text-[#3d2b1f] border-b border-[#3d2b1f]">Pesan
+                                    class="mt-3 inline-block text-xs font-bold text-[#3d2b1f] dark:text-amber-500 border-b border-[#3d2b1f] dark:border-amber-500/30">Pesan
                                     Ulang</a>
                             </div>
                         @endif
