@@ -199,23 +199,51 @@
 
 @push('scripts')
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     const payButton = document.getElementById('pay-button');
     if (payButton) {
         payButton.onclick = function() {
             snap.pay(payButton.dataset.snap, {
                 onSuccess: function(result) {
-                    window.location.reload();
+                    Swal.fire({
+                        title: 'Pembayaran Berhasil!',
+                        text: 'Terima kasih, pembayaran Anda telah kami terima.',
+                        icon: 'success',
+                        confirmButtonText: 'Lihat Invoice',
+                        confirmButtonColor: '#3d2b1f',
+                    }).then((result) => {
+                        window.location.href = "{{ route('booking.invoice.preview', $booking->booking_code) }}";
+                    });
                 },
                 onPending: function(result) {
-                    window.location.reload();
+                    Swal.fire({
+                        title: 'Pembayaran Pending',
+                        text: 'Harap selesaikan pembayaran sesuai instruksi di Midtrans.',
+                        icon: 'info',
+                        confirmButtonText: 'Oke',
+                        confirmButtonColor: '#3d2b1f',
+                    }).then(() => {
+                        window.location.reload();
+                    });
                 },
                 onError: function(result) {
-                    alert("Pembayaran gagal!");
-                    console.log(result);
+                    Swal.fire({
+                        title: 'Pembayaran Gagal',
+                        text: 'Terjadi kesalahan saat memproses pembayaran Anda. Silakan coba lagi.',
+                        icon: 'error',
+                        confirmButtonText: 'Tutup',
+                        confirmButtonColor: '#3d2b1f',
+                    });
                 },
                 onClose: function() {
-                    console.log('customer closed the popup without finishing the payment');
+                    Swal.fire({
+                        title: 'Pembayaran Dibatalkan',
+                        text: 'Anda menutup jendela pembayaran sebelum selesai.',
+                        icon: 'warning',
+                        confirmButtonText: 'Oke',
+                        confirmButtonColor: '#3d2b1f',
+                    });
                 }
             });
         };
